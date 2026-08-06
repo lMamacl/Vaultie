@@ -1,21 +1,20 @@
-{
-  "name": "Inbox Triage & Clips",
-  "folder": "00_Inbox",
-  "views": [
-    {
-      "name": "Clips Triage",
-      "type": "table",
-      "sort": [
-        { "field": "relevance", "direction": "desc" },
-        { "field": "retrieved", "direction": "desc" }
-      ],
-      "columns": ["title", "topic", "relevance", "source", "retrieved"]
-    },
-    {
-      "name": "High Relevance Clips",
-      "type": "table",
-      "filter": "relevance >= 4",
-      "columns": ["title", "topic", "relevance", "source"]
-    }
-  ]
-}
+name: Inbox Triage & Clips
+folder: 00_Inbox
+views:
+  - type: table
+    name: Clips Triage
+    sort: []
+    columns:
+      - title
+      - topic
+      - relevance
+      - source
+      - retrieved
+  - type: table
+    name: High Relevance Clips
+    filter: relevance >= 4
+    columns:
+      - title
+      - topic
+      - relevance
+      - source

@@ -1,91 +1,16 @@
 {
-  "nodes": [
-    {
-      "id": "node-react-flow",
-      "type": "file",
-      "file": "10_Libraries/react-flow.md",
-      "x": -350,
-      "y": 0,
-      "width": 320,
-      "height": 220
-    },
-    {
-      "id": "node-jointjs",
-      "type": "file",
-      "file": "10_Libraries/jointjs.md",
-      "x": 150,
-      "y": 0,
-      "width": 320,
-      "height": 220
-    },
-    {
-      "id": "node-pattern",
-      "type": "file",
-      "file": "20_Patterns/infinite-canvas-architecture.md",
-      "x": -100,
-      "y": -300,
-      "width": 360,
-      "height": 200
-    },
-    {
-      "id": "node-adr",
-      "type": "file",
-      "file": "30_Decisions/2026-08-06-diagramming-engine-react-flow-vs-jointjs.md",
-      "x": -100,
-      "y": 300,
-      "width": 360,
-      "height": 220
-    },
-    {
-      "id": "node-summary",
-      "type": "text",
-      "text": "## Strategia Wyboru Silnika Canvas\n- **React Flow:** Szybki DX, edytory do 2k obiektów, natywne komponenty JSX\n- **JointJS:** Model MVC, wyższa stabilność przy skali 10k obiektów\n- **Canvas 2D (Konva):** Docelowy silnik przy masowej skali (>10k)",
-      "x": -100,
-      "y": 0,
-      "width": 320,
-      "height": 220
-    }
-  ],
-  "edges": [
-    {
-      "id": "edge1",
-      "fromNode": "node-pattern",
-      "fromSide": "bottom",
-      "toNode": "node-react-flow",
-      "toSide": "top",
-      "label": "implementuje wzorzec (DOM)"
-    },
-    {
-      "id": "edge2",
-      "fromNode": "node-pattern",
-      "fromSide": "bottom",
-      "toNode": "node-jointjs",
-      "toSide": "top",
-      "label": "implementuje wzorzec (SVG Engine)"
-    },
-    {
-      "id": "edge3",
-      "fromNode": "node-react-flow",
-      "fromSide": "right",
-      "toNode": "node-jointjs",
-      "toSide": "left",
-      "label": "alternatywa"
-    },
-    {
-      "id": "edge4",
-      "fromNode": "node-react-flow",
-      "fromSide": "bottom",
-      "toNode": "node-adr",
-      "toSide": "top",
-      "label": "wybór Faza 1"
-    },
-    {
-      "id": "edge5",
-      "fromNode": "node-jointjs",
-      "fromSide": "bottom",
-      "toNode": "node-adr",
-      "toSide": "top",
-      "label": "opcja Faza 2"
-    }
-  ]
+	"nodes":[
+		{"id":"node-jointjs","type":"file","file":"10_Libraries/jointjs.md","x":760,"y":-2000,"width":1160,"height":2080},
+		{"id":"node-react-flow","type":"file","file":"10_Libraries/react-flow.md","x":-1480,"y":-2040,"width":1280,"height":2200},
+		{"id":"node-pattern","type":"file","file":"20_Patterns/infinite-canvas-architecture.md","x":-600,"y":-4800,"width":1670,"height":2560},
+		{"id":"node-adr","type":"file","file":"30_Decisions/2026-08-06-diagramming-engine-react-flow-vs-jointjs.md","x":-400,"y":400,"width":1240,"height":3000},
+		{"id":"node-summary","type":"text","text":"## Strategia Wyboru Silnika Canvas\n- **React Flow:** Szybki DX, edytory do 2k obiektów, natywne komponenty JSX\n- **JointJS:** Model MVC, wyższa stabilność przy skali 10k obiektów\n- **Canvas 2D (Konva):** Docelowy silnik przy masowej skali (>10k)","x":-100,"y":-600,"width":740,"height":160}
+	],
+	"edges":[
+		{"id":"edge1","fromNode":"node-pattern","fromSide":"bottom","toNode":"node-react-flow","toSide":"top","label":"implementuje wzorzec (DOM)"},
+		{"id":"edge2","fromNode":"node-pattern","fromSide":"bottom","toNode":"node-jointjs","toSide":"top","label":"implementuje wzorzec (SVG Engine)"},
+		{"id":"edge3","fromNode":"node-react-flow","fromSide":"right","toNode":"node-jointjs","toSide":"left","label":"alternatywa"},
+		{"id":"edge4","fromNode":"node-react-flow","fromSide":"bottom","toNode":"node-adr","toSide":"top","label":"wybór Faza 1"},
+		{"id":"edge5","fromNode":"node-jointjs","fromSide":"bottom","toNode":"node-adr","toSide":"top","label":"opcja Faza 2"}
+	]
 }

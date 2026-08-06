@@ -1,20 +1,19 @@
-{
-  "name": "Architecture Decisions Log",
-  "folder": "30_Decisions",
-  "views": [
-    {
-      "name": "All Decisions",
-      "type": "table",
-      "sort": [
-        { "field": "created", "direction": "desc" }
-      ],
-      "columns": ["title", "status", "affects", "supersedes", "created"]
-    },
-    {
-      "name": "Proposed",
-      "type": "table",
-      "filter": "status == 'proposed'",
-      "columns": ["title", "affects", "created"]
-    }
-  ]
-}
+name: Architecture Decisions Log
+folder: 30_Decisions
+views:
+  - type: table
+    name: All Decisions
+    sort: []
+    columns:
+      - title
+      - status
+      - affects
+      - supersedes
+      - created
+  - type: table
+    name: Proposed
+    filter: status == 'proposed'
+    columns:
+      - title
+      - affects
+      - created

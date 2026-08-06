@@ -1,21 +1,20 @@
-{
-  "name": "Code Snippets",
-  "folder": "40_Snippets",
-  "views": [
-    {
-      "name": "All Snippets",
-      "type": "table",
-      "sort": [
-        { "field": "verified", "direction": "asc" },
-        { "field": "title", "direction": "asc" }
-      ],
-      "columns": ["title", "lib", "language", "version", "verified"]
-    },
-    {
-      "name": "Unverified Snippets",
-      "type": "table",
-      "filter": "verified == false",
-      "columns": ["title", "lib", "language", "created"]
-    }
-  ]
-}
+name: Code Snippets
+folder: 40_Snippets
+views:
+  - type: table
+    name: All Snippets
+    sort: []
+    columns:
+      - title
+      - lib
+      - language
+      - version
+      - verified
+  - type: table
+    name: Unverified Snippets
+    filter: verified == false
+    columns:
+      - title
+      - lib
+      - language
+      - created
