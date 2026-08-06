@@ -20,4 +20,6 @@ SORT file.name ASC
 
 ## Spis bibliotek
 
+- [[react-flow]] — Niezależna biblioteka React do tworzenia edytorów grafów i nieskończonych pól (`adopt`)
+- [[jointjs]] — Zaawansowany silnik diagramowania i wizualizacji SVG z wrapperem React (`trial`)
 - [[tanstack-query]] — Standard zarządzania stanem serwerowym w React (`adopt`)

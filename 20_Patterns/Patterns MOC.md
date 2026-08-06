@@ -20,4 +20,5 @@ SORT file.name ASC
 
 ## Spis wzorców
 
+- [[infinite-canvas-architecture]] — Architektura edytora nieskończonego pola (DOM vs Canvas vs WebGL, Spatial Indexing, Quadtree)
 - [[optimistic-ui-updates]] — Wzorzec natychmiastowej aktualizacji stanu interfejsu

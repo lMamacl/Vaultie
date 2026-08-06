@@ -17,9 +17,9 @@ up: ""
 
 | Warstwa / Katalog | Przeznaczenie | Notatek | Punkt wejścia |
 |---|---|---|---|
-| `10_Libraries/` | Analizy bibliotek i narzędzi (verdict, gotchas) | 1 | [[Libraries MOC]] |
-| `20_Patterns/` | Wzorce projektowe i architektoniczne | 1 | [[Patterns MOC]] |
-| `30_Decisions/` | Decyzje architektoniczne (ADR) | 1 | [[Decisions MOC]] |
+| `10_Libraries/` | Analizy bibliotek i narzędzi (verdict, gotchas) | 3 | [[Libraries MOC]] |
+| `20_Patterns/` | Wzorce projektowe i architektoniczne | 2 | [[Patterns MOC]] |
+| `30_Decisions/` | Decyzje architektoniczne (ADR) | 2 | [[Decisions MOC]] |
 | `40_Snippets/` | Sprawdzony, przetestowany kod (verified) | 1 | [[Snippets MOC]] |
 | `50_Concepts/` | Teoria, edukacja i pojęcia domenowe | 1 | [[Concepts MOC]] |
 | `00_Inbox/` | Surowiec, klipy, propozycje draftów | — | `00_Inbox/` |
@@ -38,13 +38,14 @@ up: ""
 
 ## 🎯 Ostatnie Decyzje (ADR)
 
+- [[2026-08-06-diagramming-engine-react-flow-vs-jointjs]] — Wybór silnika dla edytora diagramów UML na nieskończonym polu (`accepted`)
 - [[2026-08-06-state-management-tanstack-query]] — Wybór TanStack Query v5 jako standardu dla stanu serwerowego (`accepted`)
 
 ---
 
 ## 📌 Wybrane Notatki Produkcyjne
 
-- **Biblioteki:** [[tanstack-query]]
-- **Wzorce:** [[optimistic-ui-updates]]
+- **Biblioteki:** [[react-flow]], [[jointjs]], [[tanstack-query]]
+- **Wzorce:** [[infinite-canvas-architecture]], [[optimistic-ui-updates]]
 - **Snippety:** [[use-tanstack-query-optimistic]]
 - **Koncepcje:** [[optimistic-updates]]
