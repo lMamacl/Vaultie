@@ -1,0 +1,21 @@
+{
+  "name": "Code Snippets",
+  "folder": "40_Snippets",
+  "views": [
+    {
+      "name": "All Snippets",
+      "type": "table",
+      "sort": [
+        { "field": "verified", "direction": "asc" },
+        { "field": "title", "direction": "asc" }
+      ],
+      "columns": ["title", "lib", "language", "version", "verified"]
+    },
+    {
+      "name": "Unverified Snippets",
+      "type": "table",
+      "filter": "verified == false",
+      "columns": ["title", "lib", "language", "created"]
+    }
+  ]
+}

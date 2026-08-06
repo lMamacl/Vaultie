@@ -1,0 +1,27 @@
+{
+  "name": "Technology Radar",
+  "folder": "10_Libraries",
+  "views": [
+    {
+      "name": "All Libraries",
+      "type": "table",
+      "sort": [
+        { "field": "verdict", "direction": "asc" },
+        { "field": "lib", "direction": "asc" }
+      ],
+      "columns": ["lib", "ecosystem", "version", "verdict", "confidence", "used_in"]
+    },
+    {
+      "name": "Adopted Stack",
+      "type": "table",
+      "filter": "verdict == 'adopt'",
+      "columns": ["lib", "ecosystem", "version", "confidence", "used_in"]
+    },
+    {
+      "name": "To Assess",
+      "type": "table",
+      "filter": "verdict == 'assess' || verdict == 'trial'",
+      "columns": ["lib", "ecosystem", "verdict", "confidence", "created"]
+    }
+  ]
+}
