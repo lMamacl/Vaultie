@@ -1,0 +1,13 @@
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/obsidian-git/data.json
+.obsidian/plugins/recent-files-obsidian/data.json
+.trash/
+.DS_Store
+.qmd/
+.env
+
+# Duże extrakty (odkomentuj jeśli raw extracts zajmują zbyt dużo miejsca)
+# 00_Inbox/_raw/docs-*/
