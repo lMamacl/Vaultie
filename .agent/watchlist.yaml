@@ -1,0 +1,64 @@
+# Konfiguracja listy śledzenia (Watchlist) dla kb-scout
+version: 1
+
+topics:
+  - id: react-state
+    label: Zarządzanie stanem w React
+    keywords: [tanstack query, zustand, jotai, react 19 use]
+    priority: high
+    last_checked: ""
+
+  - id: edge-runtime
+    label: Edge / Worker runtime
+    keywords: [cloudflare workers, nodejs_compat, wasm edge, hono]
+    priority: medium
+    last_checked: ""
+
+  - id: ai-sdk
+    label: AI SDK, narzędzia i agenci
+    keywords: [vercel ai sdk, tool calling, structured output, mcp, model context protocol]
+    priority: high
+    last_checked: ""
+
+  - id: devops-infra
+    label: Infrastruktura i narzędzia kontenerowe
+    keywords: [docker, terraform, open-telemetry, biome]
+    priority: low
+    last_checked: ""
+
+docs_sources:
+  - name: React Docs
+    url: https://react.dev/reference/react
+  - name: Cloudflare Workers Docs
+    url: https://developers.cloudflare.com/workers/
+  - name: TanStack Query Docs
+    url: https://tanstack.com/query/latest/docs/framework/react/overview
+
+changelogs:
+  - repo: TanStack/query
+    path: CHANGELOG.md
+  - repo: pmndrs/zustand
+    path: RELEASES
+
+sources:
+  releases:
+    - TanStack/query
+    - pmndrs/zustand
+    - vercel/ai
+  feeds:
+    - https://react.dev/rss.xml
+    - https://blog.cloudflare.com/rss/
+  search:
+    - "tanstack query v6 migration"
+    - "cloudflare workers nodejs_compat gotchas"
+    - "model context protocol mcp best practices"
+  discussions:
+    hackernews:
+      min_points: 100
+
+rules:
+  max_clips_per_run: 12
+  min_relevance: 3
+  dedupe_by: [url, title]
+  write_to: 00_Inbox/_clips
+  digest_to: 90_Meta/digests
