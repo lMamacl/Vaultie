@@ -3,31 +3,21 @@ type: moc
 title: "Concepts MOC"
 created: 2026-08-06
 updated: 2026-08-06
-tags: []
-aliases: []
+tags: [moc, concepts]
 up: "[[90_Meta/_index]]"
 ---
 
-# Concepts MOC
+# Map of Content — Pojęcia i Koncepcje
 
-Map of Content dla notatek edukacyjnych i konceptualnych.
-
-## Opis obszaru
-Fundamentalne pojęcia i mechanizmy inżynierii oprogramowania (np. event loop, garbage collection, CAP theorem, konsensus raft).
-
-## Kluczowe notatki
-- 
-
-## Podobszary i domeny
-- **Frontend:** 
-- **Backend:** 
-- **DevOps & Architecture:** 
-- **Data & Security:** 
-
-## Widoki dynamiczne
+Edukacyjna baza wiedzy teoretycznej, domenowej i inżynieryjnej.
 
 ```dataview
-TABLE domain, difficulty, prerequisite
+TABLE domain, prerequisite, difficulty
 FROM "50_Concepts"
-SORT domain ASC, title ASC
+WHERE type = "concept"
+SORT file.name ASC
 ```
+
+## Spis pojęć
+
+- [[optimistic-updates]] — Koncepcja Optymistycznego Interfejsu (Optimistic UI)

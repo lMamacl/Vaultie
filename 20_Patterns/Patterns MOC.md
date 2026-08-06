@@ -3,31 +3,21 @@ type: moc
 title: "Patterns MOC"
 created: 2026-08-06
 updated: 2026-08-06
-tags: []
-aliases: []
+tags: [moc, patterns]
 up: "[[90_Meta/_index]]"
 ---
 
-# Patterns MOC
+# Map of Content — Wzorce
 
-Map of Content dla wzorców projektowych i architektonicznych.
-
-## Opis obszaru
-Wzorce niezależne od konkretnej biblioteki. Analizują powtarzalne problemy inżynieryjne, sposoby ich rozwiązywania, pułapki oraz kontrwskazania do stosowania.
-
-## Kluczowe notatki
-- 
-
-## Podobszary i kategorie
-- **Backend & Architecture:** 
-- **Frontend & UI Patterns:** 
-- **Concurrency & Async:** 
-- **Data & Persistence:** 
-
-## Widoki dynamiczne
+Katalog powtarzalnych wzorców architektonicznych i projektowych.
 
 ```dataview
-TABLE complexity, maturity, related_libs
+TABLE tags
 FROM "20_Patterns"
-SORT title ASC
+WHERE type = "pattern"
+SORT file.name ASC
 ```
+
+## Spis wzorców
+
+- [[optimistic-ui-updates]] — Wzorzec natychmiastowej aktualizacji stanu interfejsu

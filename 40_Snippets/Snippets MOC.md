@@ -3,32 +3,21 @@ type: moc
 title: "Snippets MOC"
 created: 2026-08-06
 updated: 2026-08-06
-tags: []
-aliases: []
+tags: [moc, snippets]
 up: "[[90_Meta/_index]]"
 ---
 
-# Snippets MOC
+# Map of Content — Snippety
 
-Map of Content dla produkcyjnych i zweryfikowanych fragmentów kodu.
-
-## Opis obszaru
-Sprawdzone snipety gotowe do wklejenia w projekcie. Każdy z nich zawiera flagę `verified` określającą, czy został przetestowany w działającym środowisku.
-
-## Kluczowe notatki
-- 
-
-## Podobszary i języki
-- **TypeScript / JavaScript:** 
-- **Python:** 
-- **Rust / Go:** 
-- **SQL / Bash / DevOps:** 
-
-## Widoki dynamiczne
-- Widok tabelaryczny Bases: [[90_Meta/bases/snippets.base]]
+Baza przetestowanych i zweryfikowanych fragmentów kodu.
 
 ```dataview
-TABLE lib, language, version, verified
+TABLE lib, language, verified
 FROM "40_Snippets"
-SORT verified ASC, title ASC
+WHERE type = "snippet"
+SORT file.name ASC
 ```
+
+## Spis snippetów
+
+- [[use-tanstack-query-optimistic]] — Optymistyczna mutacja w TanStack Query v5 (`verified: true`)
