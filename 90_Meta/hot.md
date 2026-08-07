@@ -13,16 +13,16 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## 🎯 Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Masterclass — **Lekcja 1.1** pełna de-buzzwordyzacja i głęboka taksonomia.
-- **Ostatnie Zadanie:** Przebudowa Sekcji 4.2 i 5.2 — wprowadzenie 3-poziomowej taksonomii NFR w MVP (Bezpieczeństwo & Dane, Wydajność & UX, Infrastruktura & Ops) z przykładowymi implementacjami w kodzie.
+- **Aktywny Wątek:** Masterclass — **Lekcja 1.1** kompletny audyt inżynierski i de-buzzwordyzacja.
+- **Ostatnie Zadanie:** Przegląd całej notatki pod kątem niejasnych pojęć: dodanie algorytmu MoSCoW z limitami budżetu (60/20/10), Mnożników Ryzyka w estymacji (x1.2, x1.5, x2.0), praktycznego pomiaru Latency Budget (DevTools/Server-Timing) oraz realnego przelicznika dziewiątek availability.
 
 ## 📌 Ostatnio Modyfikowane Notatki
-- [[1.1-ideation-fr-nfr]] — rozbudowana taksonomia decyzji MVP (Co, Jak, Dlaczego i w jakiej kategorii)
+- [[1.1-ideation-fr-nfr]] — pełna wersja inżynierska z konkretami "Jak, Co, Dlaczego i czym zmierzyć"
 - [[lesson-1.1-ideation-fr-nfr.canvas]] — wizualizacja 7 stref
 - `90_Meta/lessons/1.1/` — spec-fr-nfr-template, latency-budget, worked-example
 - [[web-engineering-roadmap]] — v3.0.0
 
 ## 📝 Otwarte Kwestie / Następne Kroki
 - [x] **Blackbox quiz 1.1** — zaliczony i omówiony
-- [x] **De-buzzwordyzacja NFR & MVP** — głęboka kategoryzacja ukończona
+- [x] **Audyt i eliminacja AI-isms w Lekcji 1.1** — zakończony
 - [ ] Przejdź do **Lekcji 1.2 (WBS, Metodyki i RACI)** w [[web-engineering-roadmap#1.2 — WBS, Metodyki i RACI]]
