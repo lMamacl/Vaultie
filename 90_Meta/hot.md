@@ -13,15 +13,15 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## 🎯 Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Masterclass — Lekcja 1.1 zakończona. Odpowiedź na pytanie o SHA-256 vs bcrypt/Argon2id oraz ekstrakcja Notatek z Egzaminu IO.
-- **Ostatnie Zadanie:** Przeanalizowanie `Kompendium_Egzaminacyjne_IO.md` i wyciągnięcie kluczowych 25% treści do `00_Inbox/_raw/kompendium-io-extract.md`.
+- **Aktywny Wątek:** Masterclass — **Lekcja 1.1 & Roadmapa** wzbogacona o kluczowe pojęcia akademicko-inżynierskie z kompendium (SRS, COTS, CRC cards, Groupthink, Chief Programmer Team, SHA vs bcrypt).
+- **Ostatnie Zadanie:** Wyciągnięcie i wdrożenie 25% najbardziej przydatnych pojęć z `Kompendium_Egzaminacyjne_IO.md` do lekcji 1.1 oraz roadmapy.
 
 ## 📌 Ostatnio Modyfikowane Notatki
-- `00_Inbox/_raw/kompendium-io-extract.md` — wyciąg 25% wiedzy z egzaminu IO (SRS, COCOMO II, Groupthink, Legacy, CRC)
-- [[1.1-ideation-fr-nfr]] — pełna wersja inżynierska z konkretami "Jak, Co, Dlaczego i czym zmierzyć"
+- [[1.1-ideation-fr-nfr]] — dodano 8 Cech Dobrej Specyfikacji SRS, próbkowanie dokumentów, karty CRC oraz analizę ryzyka COTS
+- [[web-engineering-roadmap]] — rozbudowano plan Lekcji 1.2 o struktury zespołów (Chief Programmer Team), Groupthink oraz Egoless Programming
 - [[lesson-1.1-ideation-fr-nfr.canvas]] — wizualizacja 7 stref
-- [[web-engineering-roadmap]] — v3.0.0
+- `90_Meta/lessons/1.1/` — spec-fr-nfr-template, latency-budget, worked-example
 
 ## 📝 Otwarte Kwestie / Następne Kroki
-- [x] **Ekstrakcja Kompendium IO** — zapisana w `00_Inbox/_raw/kompendium-io-extract.md`
+- [x] **Integracja kompendium egzaminacyjnego IO** — zakończona (SRS, COTS, CRC, zespoły)
 - [ ] Przejdź do **Lekcji 1.2 (WBS, Metodyki i RACI)** w [[web-engineering-roadmap#1.2 — WBS, Metodyki i RACI]]

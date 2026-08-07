@@ -193,8 +193,9 @@ Każde ID poniżej wypełnia te pola:
   - **Scrum:** sprinty (zwykle 2 tyg.), ceremonie (standup, planning, review, retro). Silny rytm, duży narzut przy małym zespole.
   - **Kanban:** ciągły przepływ, WIP limit, brak fixed-length sprintów. Dobry przy nieregularnym czasie studentów.
   - **Shape Up (Basecamp):** cykle ~6 tyg. + cooldown; etap *Shaping* przed budową ogranicza scope creep.
-  - **WBS:** drzewo deliverables → work packages → zadania; estymacja effort (nie „story points magiczne” bez kalibracji).
+  - **WBS:** drzewo deliverables → work packages → zadania; estymacja effort (z uwzględnieniem Mnożników Ryzyka).
   - **RACI:** Responsible, Accountable (jedna osoba), Consulted, Informed — per epik/moduł.
+  - **Struktury Zespołowe i Psychologia:** Zespół Programisty Wiodącego (*Chief Programmer Team*), Zespół Demokratyczny vs Macierzowy; zjawisko Myślenia Grupowego (*Groupthink*) oraz obrona przed nim (*Egoless Programming*, Adwokat Diabła, sesje krytyki).
 - **Analiza Vs:**
 
   | Kryterium | Scrum | Kanban | Shape Up |
