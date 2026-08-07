@@ -234,6 +234,7 @@ Każde ID poniżej wypełnia te pola:
   - **GitFlow:** develop + release + hotfix — dużo długożyjących gałęzi, konflikty przy merge.
   - **Trunk-Based Development:** krótkie gałęzie do `main`, feature flags dla niedokończonych funkcji.
   - **Feature Branch + PR:** praktyczny kompromis uczelniany (branch → PR → review → main).
+  - **Git Submodules / External Projects:** podpinanie niezależnego repozytorium projektu wewnątrz bazy wiedzy/vaulta (`git submodule add labs/web-engineering/<project>`). Daje agentowi AI dostęp do notatek i kodu naraz, podczas gdy dla reszty zespołu projekt jest w 100% niezależnym repozytorium.
   - **Tooling:** Husky + lint-staged; Conventional Commits; Biome lub ESLint+Prettier; lockfile (pnpm-lock / package-lock).
 - **Analiza Vs:**
 

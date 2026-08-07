@@ -5,11 +5,12 @@ created: 2026-08-07
 updated: 2026-08-07
 tags: [proposal, concept, fr, nfr, requirements]
 up: "[[1.1-ideation-fr-nfr]]"
-status: pending-acceptance
+status: accepted
+accepted: 2026-08-07
 promote_to: "50_Concepts/project-initiation-fr-nfr.md"
 ---
 
-# Propozycja notatki koncepcyjnej (po zaliczeniu Blackbox)
+# Propozycja ACCEPTED → [[project-initiation-fr-nfr]]
 
 Pełna lekcja: [[1.1-ideation-fr-nfr]]
 

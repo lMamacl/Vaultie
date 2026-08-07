@@ -5,10 +5,11 @@ created: 2026-08-06
 updated: 2026-08-06
 tags: [proposal, labs, sandbox, masterclass, web-engineering]
 up: "[[web-engineering-roadmap]]"
-status: pending-acceptance
+status: accepted
+accepted: 2026-08-07
 ---
 
-# Propozycja: `labs/web-engineering/`
+# Propozycja ACCEPTED → `labs/web-engineering/`
 
 ## Cel
 Sandbox z kodem do odpalenia przy każdej lekcji masterclass (ID z roadmapy v3). Część pakietu MD + Canvas + labs.

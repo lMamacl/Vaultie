@@ -5,10 +5,11 @@ created: 2026-08-06
 updated: 2026-08-06
 tags: [proposal, skill, blackbox, guardrail, masterclass]
 up: "[[web-engineering-roadmap]]"
-status: pending-acceptance
+status: accepted
+accepted: 2026-08-07
 ---
 
-# Propozycja: skill `kb-blackbox`
+# Propozycja ACCEPTED → `.agent/skills/kb-blackbox.md`
 
 ## Cel
 Ustandaryzować Guard-Rail Verification Protocol z [[web-engineering-roadmap]]: brief → **nowa instancja czata** → draft ze źródeł → quiz otwarty → brama zaliczenia → propozycja do `10_`–`50_`.

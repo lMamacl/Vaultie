@@ -11,7 +11,8 @@ Inżynierska baza wiedzy: nauka i analiza bibliotek oraz rozwiązań, które wł
 
 1. `.agent/` — zarządcza. Reguły, skille, szablony, skrypty transakcyjne, adaptery. Modyfikacja tylko na wyraźne polecenie.
 2. `00_Inbox/`, `10_Libraries/`, `20_Patterns/`, `30_Decisions/`, `40_Snippets/`, `50_Concepts/`, `99_Archive/` — treść.
-3. `90_Meta/` — kompilaty, bufor kontekstu (`hot.md`), wizualne kanwy (`canvases/`). Generowane, w pełni odtwarzalne z warstwy 2.
+3. `labs/` — sandbox ćwiczeń masterclass (`labs/web-engineering/<lesson-id>/`). Źródła commitowane; artefakty build w `.gitignore`.
+4. `90_Meta/` — kompilaty, bufor kontekstu (`hot.md`), wizualne kanwy (`canvases/`), lekcje (`lessons/`). Generowane, w pełni odtwarzalne z warstwy 2.
 
 ## Prawa zapisu
 
@@ -19,6 +20,7 @@ Inżynierska baza wiedzy: nauka i analiza bibliotek oraz rozwiązań, które wł
 |---|---|
 | `00_Inbox/` (`_raw/`, `_clips/`, `_batch/`) | zapis swobodny |
 | `90_Meta/` | zapis swobodny (to kompilaty i bufor `hot.md`) |
+| `labs/` | zapis po akceptacji struktury; laby przy realizacji lekcji |
 | `10_`–`50_` | propozycja w `00_Inbox/_proposals/` + akceptacja właściciela |
 | `99_Archive/` | archiwizacja za akceptacją |
 | `.agent/` | tylko na wyraźne polecenie |
@@ -61,7 +63,7 @@ up: "[[nadrzędna notatka]]"      # breadcrumb, wymagany poza MOC
 
 ## Skille i Narzędzia
 
-W katalogu `.agent/skills/` znajdują się pełne definicje skilli (`kb-query`, `kb-ingest`, `kb-extract`, `kb-lint`, `kb-compile`, `kb-lib-analyze`, `kb-compare`, `kb-scout`, `kb-update`, `kb-archive`, `kb-merge`, `kb-review`, `kb-pattern-extract`, `kb-canvas`).
+W katalogu `.agent/skills/` znajdują się pełne definicje skilli (`kb-query`, `kb-ingest`, `kb-extract`, `kb-lint`, `kb-compile`, `kb-lib-analyze`, `kb-compare`, `kb-scout`, `kb-update`, `kb-archive`, `kb-merge`, `kb-review`, `kb-pattern-extract`, `kb-canvas`, `kb-blackbox`).
 
 Pomocniczy skrypt integralności i planowania transakcji: `python3 .agent/scripts/vaultie-cli.py`.
 

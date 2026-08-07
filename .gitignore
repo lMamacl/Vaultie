@@ -9,5 +9,14 @@
 .qmd/
 .env
 
+# Labs — artefakty build (źródła labu commitowane)
+labs/**/node_modules/
+labs/**/bin/
+labs/**/obj/
+labs/**/dist/
+labs/**/target/
+labs/**/.env
+labs/**/*.user
+
 # Duże extrakty (odkomentuj jeśli raw extracts zajmują zbyt dużo miejsca)
 # 00_Inbox/_raw/docs-*/

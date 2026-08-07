@@ -13,15 +13,15 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## 🎯 Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Masterclass — **Lekcja 1.1 & Roadmapa** wzbogacona o kluczowe pojęcia akademicko-inżynierskie z kompendium (SRS, COTS, CRC cards, Groupthink, Chief Programmer Team, SHA vs bcrypt).
-- **Ostatnie Zadanie:** Wyciągnięcie i wdrożenie 25% najbardziej przydatnych pojęć z `Kompendium_Egzaminacyjne_IO.md` do lekcji 1.1 oraz roadmapy.
+- **Aktywny Wątek:** Masterclass — Lekcja 1.1 zakończona. Przeniesienie koncepcji do `50_Concepts/` + akceptacja wzorca **Git Submodule** do podpinania projektów w `labs/`.
+- **Ostatnie Zadanie:** Wyjaśnienie mechanizmu Git Submodules (zero wpływu/kary na zespół) oraz dopisanie go do roadmapy (Lekcja 1.3).
 
 ## 📌 Ostatnio Modyfikowane Notatki
-- [[1.1-ideation-fr-nfr]] — dodano 8 Cech Dobrej Specyfikacji SRS, próbkowanie dokumentów, karty CRC oraz analizę ryzyka COTS
-- [[web-engineering-roadmap]] — rozbudowano plan Lekcji 1.2 o struktury zespołów (Chief Programmer Team), Groupthink oraz Egoless Programming
-- [[lesson-1.1-ideation-fr-nfr.canvas]] — wizualizacja 7 stref
-- `90_Meta/lessons/1.1/` — spec-fr-nfr-template, latency-budget, worked-example
+- [[project-initiation-fr-nfr]] — przeniesiono do `50_Concepts/project-initiation-fr-nfr.md`
+- [[web-engineering-roadmap]] — uzupełniono Lekcję 1.3 o wariant Git Submodule podpinania projektów w `labs/`
+- [[1.1-ideation-fr-nfr]] — pełna lekcja 1.1 po audycie inżynierskim
 
 ## 📝 Otwarte Kwestie / Następne Kroki
-- [x] **Integracja kompendium egzaminacyjnego IO** — zakończona (SRS, COTS, CRC, zespoły)
-- [ ] Przejdź do **Lekcji 1.2 (WBS, Metodyki i RACI)** w [[web-engineering-roadmap#1.2 — WBS, Metodyki i RACI]]
+- [x] **Lekcja 1.1** — zaliczona, zaaudytowana i przeniesiona do `50_Concepts/`
+- [x] **Wybor strategii repo w labs/** — wybrano Git Submodule (lub monorepo w labs/)
+- [ ] Rozpocznij **Lekcję 1.2 (WBS, Metodyki i RACI)** w [[web-engineering-roadmap#1.2 — WBS, Metodyki i RACI]]

@@ -2,14 +2,14 @@
 type: moc
 title: "Vaultie — Główna Mapa Treści i Punkt Wejścia"
 created: 2026-08-06
-updated: 2026-08-06
+updated: 2026-08-07
 tags: [moc, index, meta]
 up: ""
 ---
 
 # Vaultie — Inżynieryjna Baza Wiedzy
 
-> Wersja: v1.0.0 | Status: Produkcyjny | Ostatnia pełna kompilacja: 2026-08-06
+> Wersja: v1.1.0 | Status: Produkcyjny | Ostatnia pełna kompilacja: 2026-08-07
 
 ---
 
@@ -21,7 +21,8 @@ up: ""
 | `20_Patterns/` | Wzorce projektowe i architektoniczne | 2 | [[Patterns MOC]] |
 | `30_Decisions/` | Decyzje architektoniczne (ADR) | 2 | [[Decisions MOC]] |
 | `40_Snippets/` | Sprawdzony, przetestowany kod (verified) | 1 | [[Snippets MOC]] |
-| `50_Concepts/` | Teoria, edukacja i pojęcia domenowe | 1 | [[Concepts MOC]] |
+| `50_Concepts/` | Teoria, edukacja i pojęcia domenowe | 2 | [[Concepts MOC]] |
+| `labs/` | Sandbox ćwiczeń masterclass | — | `labs/web-engineering/` |
 | `00_Inbox/` | Surowiec, klipy, propozycje draftów | — | `00_Inbox/` |
 | `99_Archive/` | Zarchiwizowane notatki | 0 | `99_Archive/` |
 
@@ -48,4 +49,5 @@ up: ""
 - **Biblioteki:** [[react-flow]], [[jointjs]], [[tanstack-query]]
 - **Wzorce:** [[infinite-canvas-architecture]], [[optimistic-ui-updates]]
 - **Snippety:** [[use-tanstack-query-optimistic]]
-- **Koncepcje:** [[optimistic-updates]]
+- **Koncepcje:** [[project-initiation-fr-nfr]], [[optimistic-updates]]
+- **Masterclass:** [[web-engineering-roadmap]] · Lekcja [[1.1-ideation-fr-nfr]] · Lab `labs/web-engineering/1.1/`
