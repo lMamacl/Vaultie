@@ -20,8 +20,11 @@ up: "[[90_Meta/_index]]"
 - [[project-initiation-fr-nfr]] — przeniesiono do `50_Concepts/project-initiation-fr-nfr.md`
 - [[web-engineering-roadmap]] — uzupełniono Lekcję 1.3 o wariant Git Submodule podpinania projektów w `labs/`
 - [[1.1-ideation-fr-nfr]] — pełna lekcja 1.1 po audycie inżynierskim
+- `.agent/mcp.json` / `.mcp.json` — utworzona konfiguracja MCP (GitHub, Tavily, Fetch)
+- `.agent/skills/kb-solve-problem.md` — skill dla Scenariusza 1 (Problem X)
+- `.agent/skills/kb-deep-dive.md` — skill dla Scenariusza 2 (Deep Dive Y)
+- `.agent/skills/kb-solution-blueprint.md` — skill dla Scenariusza 3 (Architektura Z + ADR)
 
 ## 📝 Otwarte Kwestie / Następne Kroki
-- [x] **Lekcja 1.1** — zaliczona, zaaudytowana i przeniesiona do `50_Concepts/`
-- [x] **Wybor strategii repo w labs/** — wybrano Git Submodule (lub monorepo w labs/)
+- [x] **Skonfigurowanie MCP i 3 skilli badawczych** — gotowe w `.agent/mcp.json` oraz `.agent/skills/`
 - [ ] Rozpocznij **Lekcję 1.2 (WBS, Metodyki i RACI)** w [[web-engineering-roadmap#1.2 — WBS, Metodyki i RACI]]
