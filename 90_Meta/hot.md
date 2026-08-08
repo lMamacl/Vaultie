@@ -21,10 +21,10 @@ up: "[[90_Meta/_index]]"
 - [[web-engineering-roadmap]] — uzupełniono Lekcję 1.3 o wariant Git Submodule podpinania projektów w `labs/`
 - [[1.1-ideation-fr-nfr]] — pełna lekcja 1.1 po audycie inżynierskim
 - `.agent/mcp.json` / `.mcp.json` — utworzona konfiguracja MCP (GitHub, Tavily, Fetch)
-- `.agent/skills/kb-solve-problem.md` — skill dla Scenariusza 1 (Problem X)
-- `.agent/skills/kb-deep-dive.md` — skill dla Scenariusza 2 (Deep Dive Y)
-- `.agent/skills/kb-solution-blueprint.md` — skill dla Scenariusza 3 (Architektura Z + ADR)
+- `.agent/skills/kb-solve-problem.md`, `kb-deep-dive.md`, `kb-solution-blueprint.md` — 3 nowe skille badawcze
+- `00_Inbox/_proposals/tpl-blueprint-2026-08-08-agentic-vault-ecosystem.md` — wyczerpujący dokument analizy ekosystemu agentowego dla Vaulta
 
 ## 📝 Otwarte Kwestie / Następne Kroki
 - [x] **Skonfigurowanie MCP i 3 skilli badawczych** — gotowe w `.agent/mcp.json` oraz `.agent/skills/`
+- [x] **Opracowanie Blueprinta Ekosystemu Agentowego** — stworzono notatkę w `00_Inbox/_proposals/`
 - [ ] Rozpocznij **Lekcję 1.2 (WBS, Metodyki i RACI)** w [[web-engineering-roadmap#1.2 — WBS, Metodyki i RACI]]
