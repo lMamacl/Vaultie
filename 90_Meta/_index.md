@@ -2,7 +2,7 @@
 type: moc
 title: "Vaultie — Główna Mapa Treści i Punkt Wejścia"
 created: 2026-08-06
-updated: 2026-08-07
+updated: 2026-08-10
 tags: [moc, index, meta]
 up: ""
 ---
@@ -34,6 +34,7 @@ up: ""
 - Slownik i pojęcia: **[[glossary]]**
 - Historia zmian i wersji bazy: **[[changelog]]**
 - Raporty i audyty: **[[.agent/health-dashboard|Health Dashboard]]**
+- **Jakość lekcji:** [[lesson-quality-contract-v1]] · Audyt 1.1: [[1.1-lesson-quality-audit]] · Propozycja certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md`
 
 ---
 

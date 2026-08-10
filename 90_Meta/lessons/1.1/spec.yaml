@@ -1,0 +1,100 @@
+# Knowledge Spec — lekcja 1.1 (retrospektywa po Contract v1)
+# Źródło prawdy dla teach-back / kb-lesson-certify
+id: "1.1"
+title: "Ideation, Feasibility & Scope (FR / NFR)"
+diataxis: tutorial
+audience: "student projektu 2-semestralnego / junior engineer"
+level: novice
+threshold_concept: false
+
+prerequisites: []
+
+learning_objectives:
+  - "odróżnić FR od NFR i zapisać oba z kryterium akceptacji / metryką"
+  - "zastosować MoSCoW z limitem budżetu czasu (MUST ≤60%)"
+  - "zdecydować PoC vs MVP vs Production dla własnego scope"
+  - "wypełnić latency budget dla 2 endpointów powiązanych z NFR-PERF"
+  - "zbudować macierz traceability FR↔NFR"
+
+critical_competencies:
+  - fr_vs_nfr
+  - poc_not_production
+  - p95_latency_budget
+  - mvp_nfr_tradeoff_security_baseline
+
+mental_models:
+  - id: requirements_split
+    claim: "FR = co system robi; NFR = jak dobrze; wybór technologii ≠ FR"
+  - id: horizon_maturity
+    claim: "PoC waliduje ryzyko techniczne; MVP wartość dla użytkownika; Production przeżywalność pod obciążeniem i atakami"
+  - id: percentile_latency
+    claim: "Budżet UX opiera się na percentylach (p95), nie na średniej; p99 pilnuje ogona"
+
+misconceptions:
+  - "NFR to walidacja pól formularza lub reguła biznesowa UI"
+  - "Kod PoC można wypchnąć na demo promotora jako gotowy produkt bez rewrite"
+  - "Średnia latencji wystarczy do ustalenia SLO / latency budget"
+  - "W MVP wolno okroić baseline security (hash haseł, HTTPS, authz)"
+
+decision_points:
+  - "Czy jest niewiadoma techniczna wymagająca PoC przed MVP?"
+  - "Które FR są MUST vs SHOULD wg Critical Path Test?"
+  - "Które NFR wolno okroić w MVP, a których nie?"
+
+procedures:
+  - name: draft_spec_fr_nfr
+    trigger:
+      - "nowy pomysł projektu webowego"
+      - "brak specyfikacji przed pierwszym kodem"
+    steps:
+      - problem_statement
+      - stakeholders
+      - fr_moscow
+      - nfr_smart
+      - fr_nfr_matrix
+      - poc_mvp_prod_decision
+      - latency_budget
+      - lab_dod_self_check
+    anti_patterns:
+      - "skok od pomysłu do diagramu architektury"
+      - "wszystkie FR oznaczone MUST"
+      - "NFR bez metryki"
+
+examples:
+  minimal: "FR-001 rejestracja + NFR-SEC-001 Argon2id"
+  real_world: "VaultCollab — worked-example-student-project"
+  misleading: "System będzie szybki jako FR"
+  broken: "PoC jako baza production bez rewrite"
+
+assessment_ladder:
+  explain: required
+  worked_example: required
+  predict: not_applicable
+  complete: not_applicable
+  modify: optional
+  create: required
+  debug: not_applicable
+  transfer: required
+
+sources:
+  normative:
+    - "Google SRE Book — SLIs, SLOs, SLAs"
+    - "SWEBOK / IEEE — requirements concepts (FR/NFR, traceability)"
+  pedagogical:
+    - "Carpentries backward design"
+    - "90_Meta/web-engineering-roadmap.md#1.1"
+  counterexample:
+    - "Prototype in Production (PoC jako prod)"
+
+project_spine_link: "spec-fr-nfr.md → 1.2 WBS → … → 8.3 blueprint"
+
+lab:
+  path: "labs/web-engineering/1.1/"
+  exec: false
+  dod:
+    - "min. 5 FR MUST z kryteriami akceptacji"
+    - "min. 5 NFR mierzalnych (w tym 1 PERF + 1 SEC)"
+    - "macierz FR↔NFR (min. 3 powiązania)"
+    - "decyzja PoC tak/nie + uzasadnienie"
+    - "latency budget dla 2 endpointów"
+    - "Out of Scope / WON'T wypisane"

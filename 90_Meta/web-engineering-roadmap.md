@@ -2,8 +2,8 @@
 type: moc
 title: "Masterclass Inżynierii Webowej — Roadmapa v3 (Pełne Sprawozdania Lekcji)"
 created: 2026-08-06
-updated: 2026-08-06
-tags: [moc, roadmap, web-engineering, architecture, fullstack, capstone, guardrail, blackbox]
+updated: 2026-08-10
+tags: [moc, roadmap, web-engineering, architecture, fullstack, capstone, guardrail, blackbox, quality-gate]
 up: "[[90_Meta/_index]]"
 ---
 
@@ -19,7 +19,7 @@ up: "[[90_Meta/_index]]"
 ## Spis treści
 
 1. [Guard-Rail Policy](#guard-rail-policy)
-2. [Protokół Blackbox](#protokół-blackbox-verification)
+2. [Protokół weryfikacji (2 fazy)](#protokół-weryfikacji-2-fazy)
 3. [Szablon podpunktu lekcji](#szablon-podpunktu-lekcji)
 4. [Spis ID lekcji i kolejność](#spis-id-lekcji-i-kolejność-realizacji)
 5. [Etap 1 — Lifecycle](#etap-1-inicjacja-projektu-analiza-domenowa-i-zarządzanie)
@@ -40,65 +40,90 @@ up: "[[90_Meta/_index]]"
 1. **Brak skrótów (No Hand-Waving).** Każda lekcja schodzi do poziomu inżynieryjnego: protokoły, pamięć, plany zapytań, kody stanu, łańcuchy middleware, realny kod.
 2. **Obowiązkowa recenzja porównawcza (Trade-off Analysis).** Żadnej technologii w izolacji. Każde rozwiązanie ma Vs z macierzą kryteriów i werdyktem „kiedy A / kiedy B / kiedy unikać”. Wzorzec: ADR React Flow vs JointJS.
 3. **Niezależne omówienie przed Vs.** Najpierw osobna mini-sekcja na każdą technologię, dopiero potem porównanie.
-4. **Blackbox Verification Protocol.** Draft lekcji powstaje w **nowej instancji czata** ze źródeł; zaliczenie quizu otwartego jest bramą do kolejnego ID.
-5. **Zakaz w treści.** „m.in.” / „itd.” bez listy; „podobnie jak wyżej”; jednolinijkowe „recenzje”; pomijanie kotwic Java/C#/Angular gdy lekcja dotyczy stosu.
-6. **Język nauczyciela.** Pełne sprawozdanie: cel, mechanika, kod, werdykt, quiz, źródła — nie streszczenie blogowe.
+4. **Knowledge Spec przed prose.** Zanim powstanie draft lekcji Markdown, istnieje `90_Meta/lessons/<id>/spec.yaml` (cele, misconceptions, critical competencies, assessment ladder, źródła). Kontrakt: [[lesson-quality-contract-v1]].
+5. **Quality Gate przed screeningiem człowieka.** Automatyczna certyfikacja (`kb-lesson-certify`, propozycja) → status `certified` / `needs-human`. Człowiek nie jest pierwszym miejscem wykrywania luk strukturalnych i teach-back.
+6. **Blackbox Verification Protocol.** Draft lekcji powstaje w **nowej instancji czata** ze źródeł; zaliczenie quizu otwartego jest bramą do kolejnego ID **oraz** do promote `10_`–`50_`. Zaleca się Blackbox dopiero po `certified`.
+7. **Kod w labach:** uruchamialny albo jawnie oznaczony jako pseudokod / non-exec.
+8. **Zakaz w treści.** „m.in.” / „itd.” bez listy; „podobnie jak wyżej”; jednolinijkowe „recenzje”; pomijanie kotwic Java/C#/Angular gdy lekcja dotyczy stosu; AI-filler bez „show me” (lista w kontrakcie jakości).
+9. **Język nauczyciela.** Pełne sprawozdanie: cel, mechanika, kod/lab, chain-of-action, werdykt, quiz, źródła — nie streszczenie blogowe.
+10. **Orkiestracja skill-driven.** Wewnątrz `kb-lesson-certify` dozwolona pętla repair ≤3. Brak autonomicznego przechodzenia do kolejnego ID i brak self-grade Writer→Writer.
 
 ---
 
-## Protokół Blackbox Verification
+## Protokół weryfikacji (2 fazy)
 
-**Wariant operacyjny (Vaultie):** skill (propozycja) + zawsze nowa instancja czata + brama quizu.
+Kontrakt: [[lesson-quality-contract-v1]] · Skill Blackbox: `.agent/skills/kb-blackbox.md` · Propozycja Certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md`
 
 ```mermaid
 flowchart LR
-  Brief[Brief lekcji ID] --> NewChat[Nowa instancja czata]
-  NewChat --> Draft[Draft notatki ze źródeł]
-  Draft --> Quiz[Quiz otwarty 3-4 Q]
+  Spec[Knowledge_Spec] --> SpecOK{Human_akceptuje_Spec}
+  SpecOK --> Certify[kb-lesson-certify]
+  Certify --> Certified{certified?}
+  Certified -->|nie| NeedsHuman[needs-human]
+  Certified -->|tak| Brief[Brief_Blackbox]
+  Brief --> NewChat[Nowa_instancja_czata]
+  NewChat --> Draft[Draft_ze_zrodel]
+  Draft --> Quiz[Quiz_3-4_Q]
   Quiz --> Pass{Zaliczenie}
-  Pass -->|tak| CommitKB[Akceptacja do 10-50]
-  Pass -->|nie| Expand[Rozbudowa notatki]
+  Pass -->|tak| CommitKB[Propozycja_10-50]
+  Pass -->|nie| Expand[Rozbudowa]
   Expand --> Quiz
 ```
 
-### Kroki
+### Faza A — Certify (przed człowiekiem)
 
-1. W sesji masterclass agent przygotowuje **Brief Blackbox** dla danego ID: cele, lista źródeł z tej roadmapy, zakaz skracania, rubryka zaliczenia, ścieżka artefaktu.
-2. Właściciel otwiera **nowy czat Cursor** i wkleja brief. Ta instancja pisze głęboką notatkę wyłącznie na podstawie podanych źródeł (+ oficjalna dokumentacja wskazana w briefie).
-3. Po drafcie: **3–4 pytania otwarte** z rubryki. Odpowiedzi ocenia agent masterclass (lub ta sama sesja po wklejeniu odpowiedzi). Zaliczenie = ewidentne zrozumienie mechaniki, nie lista słów kluczowych.
-4. **Bez zaliczenia:** brak przejścia do kolejnego ID; notatka wraca do rozbudowy w Blackboxie.
-5. **Po zaliczeniu:** `00_Inbox/_proposals/` → akceptacja właściciela → `10_`–`50_` według typu artefaktu.
+1. Z roadmapy + źródeł zbuduj / wczytaj **Knowledge Spec** (`90_Meta/lessons/<id>/spec.yaml`).
+2. Właściciel **akceptuje Spec** (twarda brama).
+3. Skill `kb-lesson-certify`: Writer → Static validator → Student-sim → Judge; repair ≤3.
+4. Wynik: `certification_status: certified` | `needs-human` + `quality-report.yaml`.
+5. Orkiestracja: **skill-driven** (jedno wywołanie prowadzi pętlę). Writer nie odpala Judge’a samodzielnie; certify **nie** odpala kolejnego ID.
 
-### Rubryka domyślna (próg zaliczenia)
+### Faza B — Blackbox (właściciel, jak dotychczas)
 
-- **Zaliczone:** odpowiedzi poprawnie opisują przepływ / trade-off / „kiedy użyć”, zawierają co najmniej jeden konkret techniczny z lekcji (np. nazwa wzorca, nagłówek, poziom izolacji, etap pipeline).
-- **Do poprawy:** ogólniki, pomylone pojęcia (np. SSR = SPA), brak odpowiedzi na „dlaczego nie X”.
-- **Próg:** minimum 3 z 4 pytań zaliczone; przy 2/4 — obowiązkowa rozbudowa notatki i retake.
+1. W sesji masterclass agent przygotowuje **Brief Blackbox** dla ID: cele, źródła, zakaz skracania, rubryka, ścieżka artefaktu (**po** `certified`, o ile nie eskalacja `needs-human`).
+2. Właściciel otwiera **nowy czat Cursor** i wkleja brief. Draft wyłącznie ze źródeł briefu + oficjalna docs.
+3. **3–4 pytania otwarte**; próg ≥3/4.
+4. Bez zaliczenia: brak przejścia do kolejnego ID.
+5. Po zaliczeniu: `00_Inbox/_proposals/` → akceptacja → `10_`–`50_`.
 
-### Artefakty procesu (późniejsza implementacja)
+### Rubryka domyślna quizu właściciela (próg zaliczenia)
 
-- Propozycja skillu: `00_Inbox/_proposals/skill-kb-blackbox.md` → przyszły `.agent/skills/kb-blackbox.md`
-- Propozycja labs: `00_Inbox/_proposals/labs-web-engineering.md` → `labs/web-engineering/<lesson-id>/`
+- **Zaliczone:** przepływ / trade-off / „kiedy użyć” + ≥1 konkret techniczny z lekcji.
+- **Do poprawy:** ogólniki, pomylone pojęcia, brak „dlaczego nie X”.
+- **Próg:** minimum 3 z 4; przy 2/4 — rozbudowa + retake.
+
+### Artefakty procesu
+
+- Kontrakt: [[lesson-quality-contract-v1]]
+- Skill Blackbox: `.agent/skills/kb-blackbox.md` (zaakceptowany)
+- Propozycja Certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md` → przyszły `.agent/skills/kb-lesson-certify.md` (tylko na polecenie)
+- Labs: `labs/web-engineering/<lesson-id>/`
+- Spec per lekcja: `90_Meta/lessons/<id>/spec.yaml`
 
 ---
 
 ## Szablon podpunktu lekcji
 
-Każde ID poniżej wypełnia te pola:
+Każde ID poniżej wypełnia te pola. Pola Spec/certyfikacji **uzupełniaj przy realizacji lekcji** (nie bulk rewrite historycznych wpisów).
 
 | Pole | Opis |
 |---|---|
 | **ID / tytuł / czas** | Identyfikator, nazwa, 60–180 min orientacyjnie |
-| **Cel dydaktyczny** | Co umiesz wytłumaczyć i zastosować |
+| **Cel dydaktyczny** | Co umiesz wytłumaczyć i zastosować (czasownik działania) |
 | **Wymagania wstępne** | Wcześniejsze ID |
+| **Knowledge Spec** | Ścieżka `90_Meta/lessons/<id>/spec.yaml` (obowiązkowa przed draftem) |
+| **Critical competencies** | Lista kompetencji wymaganych 100% w teach-back |
+| **Assessment ladder** | Które szczeble: explain / predict / modify / create / debug / transfer (wg typu lekcji) |
+| **Chain of action** | Wymagane (tabela) / N/A z uzasadnieniem (rzadko) |
 | **Niezależne omówienia** | Osobna mini-sekcja na każdą technologię/pojęcie |
 | **Analiza Vs** | Macierz + werdykt kiedy A/B/unikać |
-| **Pod maską** | Mechanika (pakiety, AST, MVCC, Event Loop…) |
-| **Kod / lab** | `labs/web-engineering/<id>/` — co napisać |
+| **Pod maską** | Mechanika (pakiety, AST, MVCC, Event Loop…) / model mentalny |
+| **Kod / lab** | `labs/web-engineering/<id>/` — co napisać; exec vs non-exec |
 | **Artefakt Vaultie** | `concept` / `library` / `comparison` / `decision` / `snippet` |
-| **Kanwa** | Co pokazać w `90_Meta/canvases/` |
+| **Kanwa** | Co pokazać w `90_Meta/canvases/` (widok, nie SoT) |
+| **Certification status** | `draft` → `certified` / `needs-human` → po Blackbox: `screened` |
 | **Blackbox quiz** | 3–4 Q + rubryka |
-| **Źródła** | Min. 2 zewnętrzne przy Vs + ślad |
+| **Źródła** | Min. 2 zewnętrzne przy Vs + ślad; mapowane też w Spec |
 
 ---
 
@@ -147,11 +172,17 @@ Każde ID poniżej wypełnia te pola:
 
 ## 1.1 — Ideation, Feasibility & Scope (FR / NFR)
 
-> **Pełna lekcja (v1):** [[1.1-ideation-fr-nfr]] · **Kanwa:** [[lesson-1.1-ideation-fr-nfr.canvas]] · **Szablony:** `90_Meta/lessons/1.1/`
+> **Pełna lekcja (v1):** [[1.1-ideation-fr-nfr]] · **Kanwa:** [[lesson-1.1-ideation-fr-nfr.canvas]] · **Szablony:** `90_Meta/lessons/1.1/`  
+> **Audyt jakości:** [[1.1-lesson-quality-audit]] · **Kontrakt:** [[lesson-quality-contract-v1]]
 
 - **Czas:** 90–120 min
 - **Cel dydaktyczny:** Przekształcisz luźny pomysł w specyfikację z Functional Requirements (FR) i Non-Functional Requirements (NFR), z budżetami latencji i granicami MVP — zanim padnie pierwsza linia kodu.
 - **Wymagania wstępne:** brak
+- **Knowledge Spec:** [[90_Meta/lessons/1.1/spec.yaml|spec.yaml]] (retrospektywa 2026-08-10)
+- **Critical competencies:** `fr_vs_nfr`, `poc_not_production`, `p95_latency_budget`, `mvp_nfr_tradeoff_security_baseline`
+- **Assessment ladder:** explain ✓ · worked_example ✓ · create (lab) ✓ · transfer ✓ · predict/code N/A (lekcja dokumentacyjna)
+- **Chain of action:** wymagane (tabela decyzyjna FR/NFR / PoC-MVP) — *luka vs kontrakt: częściowo pokryte tabelami, brak jednej tabeli CoA*
+- **Certification status:** `screened` (lekcja zrealizowana przed kontraktem v1; re-certify opcjonalny)
 - **Niezależne omówienia:**
   - **Proof of Concept (PoC):** weryfikuje jedną niewiadomą techniczną (algorytm, integracja, limity API). Kod PoC jest jednorazowy; nie jest fundamentem produkcji.
   - **Minimum Viable Product (MVP):** najmniejszy zestaw FR, który pozwala zweryfikować wartość dla użytkownika. MVP ma świadomie okrojone NFR (np. brak HA).
@@ -168,7 +199,7 @@ Każde ID poniżej wypełnia te pola:
 
   **Werdykt:** PoC → tylko przy ryzyku technicznym. MVP → start semestru 1. Production-Ready checklist → cel końca semestru 2. Unikać traktowania PoC jako kodu bazowego bez rewrite.
 - **Pod maską:** Latency budget (p50/p95/p99); Availability = MTBF / (MTBF + MTTR); szacunek RPS = użytkownicy_aktywni × akcje_na_minutę / 60; SLO vs SLA (wewnętrzny cel vs umowa).
-- **Kod / lab:** `labs/web-engineering/1.1/` — szablon `spec-fr-nfr.md` + arkusz latency budget (tabela endpoint → budżet ms).
+- **Kod / lab:** `labs/web-engineering/1.1/` — szablon `spec-fr-nfr.md` + arkusz latency budget (tabela endpoint → budżet ms). Non-exec (lab dokumentacyjny).
 - **Artefakt Vaultie:** `00_Inbox/_proposals/spec-project-vision.md` (potem concept/decision)
 - **Kanwa:** mapa Pomysł → FR → NFR → PoC/MVP/Prod z kolorami ryzyka
 - **Blackbox quiz:**

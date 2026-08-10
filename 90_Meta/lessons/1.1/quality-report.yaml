@@ -1,0 +1,15 @@
+lesson_id: "1.1"
+iteration: 1
+max_iterations: 3
+gates:
+  structure: pass
+  pedagogy: pass
+  technical: pass
+  language: pass
+  teachback: pass
+failures: []
+verdict: certified
+writer_model_family: "human-curated"
+judge_model_family: "gemini-3.6-flash"
+evaluated_at: "2026-08-10T17:35:00Z"
+notes: "Audyt i certyfikacja zrealizowane wg Lesson Quality Contract v1. Uzupełniono frontmatter, sekcję Misconceptions, tabelę Chain of Action oraz poprawiono numerację quizu."

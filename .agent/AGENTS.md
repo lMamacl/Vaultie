@@ -63,7 +63,7 @@ up: "[[nadrzędna notatka]]"      # breadcrumb, wymagany poza MOC
 
 ## Skille i Narzędzia
 
-W katalogu `.agent/skills/` znajdują się pełne definicje skilli (`kb-query`, `kb-ingest`, `kb-extract`, `kb-lint`, `kb-compile`, `kb-lib-analyze`, `kb-compare`, `kb-scout`, `kb-update`, `kb-archive`, `kb-merge`, `kb-review`, `kb-pattern-extract`, `kb-canvas`, `kb-blackbox`).
+W katalogu `.agent/skills/` znajdują się pełne definicje skilli (`kb-query`, `kb-ingest`, `kb-extract`, `kb-lint`, `kb-compile`, `kb-lib-analyze`, `kb-compare`, `kb-scout`, `kb-update`, `kb-archive`, `kb-merge`, `kb-review`, `kb-pattern-extract`, `kb-canvas`, `kb-blackbox`, `kb-lesson-certify`).
 
 Pomocniczy skrypt integralności i planowania transakcji: `python3 .agent/scripts/vaultie-cli.py`.
 
