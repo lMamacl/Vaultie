@@ -17,10 +17,10 @@ up: "[[90_Meta/_index]]"
 - **Ostatnie Zadanie:** Wygenerowano `90_Meta/lessons/1.2/spec.yaml`, stworzono szkic lekcji w `90_Meta/lessons/1.2-wbs-raci.md` oraz scaffold labu w `labs/web-engineering/1.2/`. Statyczne bramki jakości `vaultie-certify.py 1.2` zwróciły **PASS**.
 
 ## Ostatnio Modyfikowane Notatki
-- `90_Meta/lessons/1.2/spec.yaml` — Knowledge Spec lekcji 1.2
-- `90_Meta/lessons/1.2-wbs-raci.md` — szkic lekcji 1.2 (PASS w certyfikacji)
+- `20_Patterns/peer-accountability-buddy-system.md` — nowy wzorzec struktury rówieśniczej (Peer-Review & Small Pods)
+- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — rozbudowa lekcji 1.2 o analizę i zestawienie systemów dowodzenia
+- `90_Meta/lessons/1.2/spec.yaml` — Knowledge Spec lekcji 1.2 z nowym modelem mentalnym
 - `labs/web-engineering/1.2/` — scaffold labu (README.md, board.yaml, raci.csv, wbs-template.md)
-- `.agent/scripts/vaultie-certify.py` — użyty do weryfikacji bramki jakości lekcji 1.2
 
 ## Otwarte Kwestie / Następne Kroki
 - [x] Rozpoczęto **Lekcję 1.2** w workflowie Spec-first: wygenerowano `spec.yaml`, notatkę i scaffold labu.

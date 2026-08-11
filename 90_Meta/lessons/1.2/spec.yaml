@@ -31,6 +31,8 @@ mental_models:
     claim: "Responsible może być wielu, ale Accountable musi być dokładnie JEDNA osoba — inaczej odpowiedzialność się rozmywa"
   - id: flow_over_ceremony
     claim: "W małym zespole ograniczenie prac w toku (WIP limit) bije sztuczne ceremonie i teatr statusów"
+  - id: peer_accountability_pods
+    claim: "W zespołach rówieśniczych bez formalnej władzy krzyżowa weryfikacja w parze/podzie (Peer-Review) z liderem jako arbitrem scala zespół bez mikrozarządzania"
 
 misconceptions:
   - "WBS to sekwencyjna lista zadań ułożona chronologicznie jak wykres Gantta"
@@ -38,9 +40,11 @@ misconceptions:
   - "Scrum to zawsze najlepsza metodyka dla każdego projektu studenckiego niezależnie od dostępności czasowej zespołu"
   - "Brak konfliktów i pełna zgoda w zespole od pierwszej minuty dyskusji to oznaka wysokiej efektywności (zamiast obawy przed Groupthink)"
   - "Estymacja w godzinach jest pewna i nie wymaga bufora na ryzyko technologiczne"
+  - "Lider w zespole rówieśniczym musi osobiście sprawdzać i kontrolować kod wszystkich deweloperów"
 
 decision_points:
   - "Czy metodyka Scrum, Kanban czy Shape Up najlepiej pasuje do dostępności i dyscypliny zespołu?"
+  - "Czy zastosować autorytarną strukturę dowodzenia czy rozproszony system podwójnej odpowiedzialności (Peer-Accountability Buddy System)?"
   - "Jaki wyznaczyć WIP limit na osobę/kolumnę na tablicy Kanban?"
   - "Kto pełni rolę Accountable (A) dla kluczowych modułów systemu w macierzy RACI?"
   - "Które elementy WBS znajdują się na ścieżce krytycznej (Critical Path)?"
