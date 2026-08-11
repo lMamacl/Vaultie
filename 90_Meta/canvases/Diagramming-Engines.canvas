@@ -3,8 +3,8 @@
 		{"id":"node-jointjs","type":"file","file":"10_Libraries/jointjs.md","x":760,"y":-2000,"width":1160,"height":2080},
 		{"id":"node-react-flow","type":"file","file":"10_Libraries/react-flow.md","x":-1480,"y":-2040,"width":1280,"height":2200},
 		{"id":"node-pattern","type":"file","file":"20_Patterns/infinite-canvas-architecture.md","x":-600,"y":-4800,"width":1670,"height":2560},
-		{"id":"node-adr","type":"file","file":"30_Decisions/2026-08-06-diagramming-engine-react-flow-vs-jointjs.md","x":-400,"y":400,"width":1240,"height":3000},
-		{"id":"node-summary","type":"text","text":"## Strategia Wyboru Silnika Canvas\n- **React Flow:** Szybki DX, edytory do 2k obiektów, natywne komponenty JSX\n- **JointJS:** Model MVC, wyższa stabilność przy skali 10k obiektów\n- **Canvas 2D (Konva):** Docelowy silnik przy masowej skali (>10k)","x":-100,"y":-600,"width":740,"height":160}
+		{"id":"node-summary","type":"text","text":"## Strategia Wyboru Silnika Canvas\n- **React Flow:** Szybki DX, edytory do 2k obiektów, natywne komponenty JSX\n- **JointJS:** Model MVC, wyższa stabilność przy skali 10k obiektów\n- **Canvas 2D (Konva):** Docelowy silnik przy masowej skali (>10k)","x":-100,"y":-600,"width":740,"height":160},
+		{"id":"node-adr","type":"file","file":"30_Decisions/2026-08-06-diagramming-engine-react-flow-vs-jointjs.md","x":-1480,"y":240,"width":3400,"height":3000}
 	],
 	"edges":[
 		{"id":"edge1","fromNode":"node-pattern","fromSide":"bottom","toNode":"node-react-flow","toSide":"top","label":"implementuje wzorzec (DOM)"},

@@ -13,17 +13,18 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Certyfikacja i zaliczenie Lekcji 1.2 (WBS, Metodyki i RACI) w procedurze Blackbox Simulation.
-- **Ostatnie Zadanie:** Użytkownik pomyślnie zaliczył Retake Pytania 3 (mechanizmy WIP limits, ciągły przepływ w Kanbanie oraz Fixed Time / Variable Scope i Scope Hammer w Shape Up). Lekcja 1.2 uzyskała status **`certified`** w `quality-report.yaml`.
+- **Aktywny Wątek:** Rozpoczęcie i realizacja Lekcji 1.3 (Repozytorium, Monorepo i Git Workflow) w workflowie Spec-first.
+- **Ostatnie Zadanie:** Utworzono specyfikację `90_Meta/lessons/1.3/spec.yaml`, roboczy szkic lekcji w `90_Meta/lessons/1.3/1.3-repo-monorepo-git-workflow.md` oraz scaffold laboratorium monorepo i CI w `labs/web-engineering/1.3/`. Statyczny audyt jakości `vaultie-certify.py 1.3` zwrócił status **PASS**.
 
 ## Ostatnio Modyfikowane Notatki
-- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — certyfikowana notatka (status `certified`)
-- `90_Meta/lessons/1.2/quality-report.yaml` — oficjalny raport jakości (certified, 4/4)
-- `.agent/scripts/vaultie-certify.py` — utwardzony skrypt z głęboką walidacją `spec.yaml`
-- `labs/web-engineering/1.2/` — zrealizowany i zweryfikowany scaffold labu
+- `90_Meta/lessons/1.3/spec.yaml` — specyfikacja wiedzy lekcji 1.3
+- `90_Meta/lessons/1.3/1.3-repo-monorepo-git-workflow.md` — draft lekcji (Diátaxis compliance: 100%)
+- `labs/web-engineering/1.3/` — scaffold monorepo (pnpm workspaces, ci.yml, pnpm-workspace.yaml)
+- `90_Meta/lessons/1.2/quality-report.yaml` — lekcja 1.2 certified (4/4)
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Przeprowadzono audyt krytyczny, poprawiono skrypt `vaultie-certify.py` oraz zaliczono Retake Pytania 3 (Lekcja 1.2 **CERTIFIED**)
-- [ ] Rozpocznij **Lekcję 1.3** (Repozytorium, Monorepo i Git Workflow) w workflowie Spec-first
+- [x] Rozpoczęto **Lekcję 1.3** (spec.yaml + draft + lab scaffold; `vaultie-certify.py 1.3` PASS)
+- [ ] Przeprowadź symulację **Blackbox Quiz** dla Lekcji 1.3
+- [ ] Przejdź do Lekcji 1.4 (Definition of Done, PR Templates i Code Review)
 
 

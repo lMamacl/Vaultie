@@ -1,0 +1,106 @@
+# Knowledge Spec — lekcja 1.3
+# Źródło prawdy dla teach-back / kb-lesson-certify
+id: "1.3"
+title: "Repozytorium, Monorepo i Git Workflow"
+diataxis: tutorial
+audience: "student projektu 2-semestralnego / junior engineer"
+level: novice
+threshold_concept: false
+
+prerequisites:
+  - "1.1"
+  - "1.2"
+
+learning_objectives:
+  - "dobrać strukturę repozytorium (Monorepo vs Polyrepo) dla zespołu 3–5 osób z atomowymi zmianami DTO"
+  - "skonfigurować deterministyczny build i reprodukowalność CI z użyciem lockfile (pnpm-lock.yaml / package-lock.json)"
+  - "zastosować wzorzec Git Submodules / External Projects do integracji niezależnych repozytoriów z bazą wiedzy Vaultie"
+  - "porównać strategie gałęzi (GitFlow vs Trunk-Based Development vs Feature Branch + PR) pod kątem narzutu merge i wycieków długu"
+  - "zkonfigurować narzędzia jakościowe lokalnie (Husky, lint-staged, Conventional Commits) i odróżnić bramki lokalne od nieobejściej kontroli CI"
+
+critical_competencies:
+  - monorepo_atomic_changes
+  - lockfile_reproducibility
+  - trunk_based_feature_flags
+  - git_submodules_integration
+  - git_hooks_ci_safety
+
+mental_models:
+  - id: monorepo_single_graph
+    claim: "Monorepo to nie wielki śmietnik kody; to jeden spójny graf zależności z atomowym commitem dla zmian API/DTO"
+  - id: lockfile_truth_contract
+    claim: "Plik lockfile to nienaruszalny kontrakt wersji; komenda npm ci / pnpm install --frozen-lockfile gwarantuje tożsamy build na każdej maszynie i w CI"
+  - id: trunk_over_long_branches
+    claim: "Długożyjące gałęzie to piekło scalania (Merge Hell); krótkie Feature Branche i Trunk-Based z Feature Flags drastycznie redukują konflikty"
+  - id: local_hooks_are_advisory
+    claim: "Git hooks lokalne (pre-commit) poprawiają Developer Experience, ale dopiero nieobejrzalne CI stanowi ostateczną bramkę bezpieczeństwa (bypassed by --no-verify)"
+
+misconceptions:
+  - "Monorepo oznacza wrzucenie kilku niezależnych projektów do jednego folderu bez wspólnego menedżera pakietów i grafu zależności"
+  - "Plik lockfile powinien być dodany do .gitignore, aby każdy deweloper instalował najnowsze paczki"
+  - "GitFlow to idealna i nowoczesna strategia dla każdego projektu bez względu na wielkość zespołu"
+  - "Wystarczy ustawić Husky pre-commit lokalnie, aby mieć pewność że zły kod nigdy nie trafi do repozytorium"
+  - "Polyrepo jest prostsze, ponieważ unikamy wspólnego builda (zapominając o braku spójności wersji shared DTO/skrótów API)"
+
+decision_points:
+  - "Czy wybrać strukturę Monorepo (pnpm workspaces / Turborepo) czy Polyrepo dla rozdzielnego Frontendu i Backendu?"
+  - "Jaką strategię pracy z gałęziami wybrać: GitFlow, Trunk-Based czy Feature Branch + PR?"
+  - "Jak zintegrować niezależne repozytorium projektu z vaultem wiedzy za pomocą Git Submodules?"
+  - "Jakie kontrole uruchamiać w pre-commit (szybki lint/format), a jakie zostawić wyłącznie dla CI (długie testy e2e, build)?"
+
+procedures:
+  - name: setup_monorepo_git_workflow
+    trigger:
+      - "zatwierdzony podział WBS z lekcji 1.2"
+      - "inicjalizacja struktur repozytorium projektu"
+    steps:
+      - choose_repository_structure
+      - configure_package_manager_workspaces
+      - commit_frozen_lockfile
+      - configure_git_hooks_husky
+      - enforce_conventional_commits
+      - setup_ci_pipeline
+    anti_patterns:
+      - "commitowanie kodu bez lockfile"
+      - "długożyjące gałęzie feature równe 3 tygodnie bez merge do main"
+      - "używanie --no-verify do omijania testów pre-commit"
+      - "zmiana shared DTO w polyrepo bez jednoczesnego wydania nowej wersji paczki"
+
+examples:
+  minimal: "pnpm workspaces: apps/web + packages/shared-dto + Husky pre-commit (lint-staged)"
+  real_world: "VaultCollab — Turborepo monorepo + Feature Branch PRs + GitHub Actions CI"
+  misleading: "Klonowanie 3 osobnych repozytoriów polyrepo i próba manualnej synchronizacji interfejsów TypeScript"
+  broken: "Brak lockfile w repo, pnpm install pobierające łamiącą wersję biblioteki w CI"
+
+assessment_ladder:
+  explain: required
+  worked_example: required
+  predict: not_applicable
+  complete: optional
+  modify: optional
+  create: required
+  debug: not_applicable
+  transfer: required
+
+sources:
+  normative:
+    - "Turborepo & pnpm Workspaces documentation"
+    - "Conventional Commits Specification v1.0.0"
+    - "Trunk Based Development (trunkbaseddevelopment.com)"
+  pedagogical:
+    - "Carpentries backward design"
+    - "90_Meta/web-engineering-roadmap.md#1.3"
+  counterexample:
+    - "GitFlow Hell (konflikty merge przy 5 długich gałęziach)"
+    - "Floating Dependencies Crash (brak lockfile w CI)"
+
+project_spine_link: "spec-fr-nfr.md → 1.2 WBS & RACI → 1.3 Git Workflow → 1.4 DoD & Code Review → … → 8.3 blueprint"
+
+lab:
+  path: "labs/web-engineering/1.3/"
+  exec: true
+  dod:
+    - "konfiguracja pnpm workspace / monorepo z podziałem na apps/web oraz packages/shared"
+    - "obecność sprawnego pliku lockfile (pnpm-lock.yaml / package-lock.json)"
+    - "konfiguracja Husky i lint-staged z weryfikacją Conventional Commits"
+    - "pliki konfiguracyjne .gitignore, .editorconfig oraz przykładowy GitHub Actions CI workflow (.github/workflows/ci.yml)"
