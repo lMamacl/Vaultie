@@ -34,7 +34,7 @@ def parse_frontmatter(file_path):
         return None, parts[2]
 
 def check_lesson_quality(lesson_file):
-    """Audits a lesson file against Lesson Quality Contract v1 rules."""
+    """Audits a lesson file against Lesson Quality Contract v1 rules and spec.yaml."""
     fm, body = parse_frontmatter(lesson_file)
     issues = []
     
@@ -56,6 +56,36 @@ def check_lesson_quality(lesson_file):
     # Check CoA Table
     if "Chain of Action" in body and "|" not in body:
         issues.append("Chain of Action section is missing Markdown table structure")
+
+    # Deep Check against spec.yaml if available
+    spec_path_str = fm.get("spec_path")
+    if spec_path_str:
+        spec_file = lesson_file.parent / Path(spec_path_str).name
+        if not spec_file.exists():
+            spec_file = Path.cwd() / spec_path_str
+
+        if spec_file.exists():
+            try:
+                spec_data = yaml.safe_load(spec_file.read_text(encoding='utf-8'))
+                
+                # Check critical competencies (word-level match)
+                competencies = spec_data.get("critical_competencies", [])
+                for comp in competencies:
+                    words = [w for w in comp.split("_") if len(w) >= 3]
+                    matched = any(w.lower() in body.lower() for w in words)
+                    if not matched:
+                        issues.append(f"Spec mismatch: critical competency '{comp}' not found/explained in lesson text")
+
+                # Check mental model keywords
+                for mm in spec_data.get("mental_models", []):
+                    mm_id = mm.get("id", "")
+                    words = [w for w in mm_id.split("_") if len(w) >= 3]
+                    matched = any(w.lower() in body.lower() for w in words)
+                    if not matched:
+                        issues.append(f"Spec mismatch: mental model '{mm_id}' not mentioned in lesson text")
+
+            except Exception as e:
+                issues.append(f"Failed to parse spec file {spec_file}: {e}")
 
     status = "PASS" if len(issues) == 0 else ("WARN" if len(issues) < 3 else "FAIL")
     return {

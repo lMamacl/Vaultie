@@ -1,9 +1,9 @@
 lesson_id: "1.2"
 certified_at: "2026-08-11"
-status: "certified"
+status: "needs_retake"
 phase_a_static_gate: "PASS"
-phase_b_blackbox_quiz: "PASS (4/4)"
-auditor: "Blackbox Simulation Engine & Human Pair"
+phase_b_blackbox_quiz: "FAIL (3/4 — Critical Gap in Q3)"
+auditor: "Blackbox Simulation Engine & Strict User Audit"
 
 summary:
   spec_match: 100%
@@ -12,8 +12,16 @@ summary:
   chain_of_action: "verified"
   lab_dod_pass: true
 
+post_mortem_evaluation_audit:
+  root_cause: "Draft note 1.2 originally lacked detailed explanations of Kanban (WIP limits, Pull system) and Shape Up mechanics (Circuit Breaker, Appetite), containing only a summary table. User was unable to answer Q3 due to missing content."
+  evaluation_bias_fixed: "Agent erroneously granted PASS for user uncovering missing info. Corrected rule: Missing explanation in note leading to student inability to answer MUST be marked as 0.0/1.0 FAIL."
+  remediation_applied:
+    - "Patched vaultie-certify.py script to perform deep semantic checks against spec.yaml competencies and mental models."
+    - "Enriched section 4 of 1.2-wbs-raci.md with explicit step-by-step mechanics of Kanban and Shape Up."
+    - "Set status to needs_retake until user verifies updated section 4."
+
 blackbox_quiz_results:
-  q1_wbs_multipliers: "PASS (Proper breakdown & risk multipliers x1.2, x1.5, x2.0)"
-  q2_single_accountable: "PASS (Identified Bystander Effect, strictly 1 Accountable role)"
-  q3_methodologies: "PASS (User feedback identified gap -> lesson patched with explicit Kanban & Shape Up mechanics)"
-  q4_groupthink_buddy_system: "PASS (Explained Groupthink, Devil's Advocate & Peer Pods)"
+  q1_wbs_multipliers: "PASS (1.0/1.0 — Proper breakdown & risk multipliers x1.2, x1.5, x2.0)"
+  q2_single_accountable: "PASS (1.0/1.0 — Identified Bystander Effect, strictly 1 Accountable role)"
+  q3_methodologies: "FAIL (0.0/1.0 — Critical pedagogical gap in draft note; student unable to answer based on text)"
+  q4_groupthink_buddy_system: "PASS (1.0/1.0 — Explained Groupthink, Devil's Advocate & Peer Pods)"

@@ -13,17 +13,17 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Certyfikacja i zaliczenie Lekcji 1.2 (WBS, Metodyki i RACI) w procedurze Blackbox Simulation.
-- **Ostatnie Zadanie:** Przeprowadzono symulację Blackbox dla Lekcji 1.2. Odpowiedzi przeszły audyt z wynikiem **4/4 (PASS)**. Rozbudowano notatkę lekcji o głębokie mechanizmy Kanban i Shape Up na podstawie wykrytej luki dydaktycznej i wygenerowano `quality-report.yaml`.
+- **Aktywny Wątek:** Audyt Krytyczny Post-Mortem procedury Blackbox dla Lekcji 1.2.
+- **Ostatnie Zadanie:** Przeprowadzono korektę systemu ewaluacji. Wykryto błąd pobłażliwości agenta (Generousity Bias). Ocenę Pytania 3 zmieniono na **FAIL (0.0/1.0)**, a status Lekcji 1.2 ustawiono na **`needs_retake`**. Zaktualizowano `.agent/scripts/vaultie-certify.py` o automatyczną weryfikację słownika z `spec.yaml`.
 
 ## Ostatnio Modyfikowane Notatki
-- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — uzupełniono o mechanizmy Kanban i Shape Up; status `certified`
-- `90_Meta/lessons/1.2/quality-report.yaml` — oficjalny raport jakości (certified)
-- `20_Patterns/peer-accountability-buddy-system.md` — wzorzec odpowiedzialności rówieśniczej
-- `labs/web-engineering/1.2/` — zrealizowany i zweryfikowany scaffold labu
+- `.agent/scripts/vaultie-certify.py` — wdrożono głębokie sprawdzanie pojęć ze `spec.yaml`
+- `90_Meta/lessons/1.2/quality-report.yaml` — raport zaktualizowany z post-mortem i wynikiem `needs_retake`
+- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — rozbudowano sekcję 4 o limity WIP i Shape Up; status `needs_retake`
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Przeprowadzono symulację Blackbox dla Lekcji 1.2 z wynikiem **4/4 (CERTIFIED)**
-- [ ] Rozpocznij **Lekcję 1.3** (Repozytorium, Monorepo i Git Workflow) w workflowie Spec-first
+- [x] Przeprowadzono post-mortem audytu, usunięto błąd pobłażliwości agenta i utwardzono `vaultie-certify.py`
+- [ ] Przeprowadź **Retake Pytania 3** po zapoznaniu się z uzupełnioną sekcją 4 w `1.2-wbs-raci.md`
+- [ ] Rozpocznij **Lekcję 1.3** w workflowie Spec-first po zaliczeniu Retake
 
 
