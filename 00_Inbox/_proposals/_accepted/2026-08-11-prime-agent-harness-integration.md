@@ -5,9 +5,11 @@ created: 2026-08-11
 updated: 2026-08-11
 tags: [proposal, prime-agent, architecture, python-skills, harness]
 up: "[[90_Meta/_index]]"
+status: accepted
+accepted: 2026-08-11
 ---
 
-# Proposal: Integracja Prime Agent Harness & Architektura Hybrydowa dla Vaultie
+# Proposal: ACCEPTED → Integracja Prime Agent Harness & Architektura Hybrydowa dla Vaultie
 
 ## 1. Kontekst & Problem
 
@@ -59,17 +61,12 @@ Każdy skrypt w `.agent/scripts/` (jak istniejący `vaultie-cli.py`) staje się 
 
 1. **`vaultie-cli.py lint`**: Deterministyczny audyt linków Wikilinks, braku frontmattera i sierot.
 2. **`vaultie-cli.py plan`**: Generowanie atomowych planów transakcyjnych SHA-256 przed zapisem do `10_`–`50_`.
-3. **Nowy `vaultie-certify.py`**: Automatyczna weryfikacja zgodności lekcji z *Lesson Quality Contract v1*.
+3. **`vaultie-certify.py`**: Automatyczna weryfikacja zgodności lekcji z *Lesson Quality Contract v1* i uruchamianie symulacji studenta.
 
 ---
 
 ## 4. Plan Wdrożenia (Action Plan)
 
-1. **Instalacja CLI Prime Agent**:
-   ```bash
-   curl -fsSL https://app.primeintellect.ai/prime-agent/install.sh | sh
-   ```
-2. **Uruchamianie zadań tle z poziomu Antigravity**:
-   Wykonywanie autonomicznych serii testowych w `labs/` przez `run_command` w tle.
-3. **Ekspansja `.agent/scripts/`**:
-   Przenoszenie ciężkich procedur weryfikacyjnych z tekstu promptów do czystego Pythona.
+1. **Przeniesienie propozycji do `_accepted`** (Wykonane: 2026-08-11).
+2. **Stworzenie `.agent/scripts/vaultie-certify.py`**: Skryptu do automatycznego testowania i certyfikacji lekcji (Student Simulation).
+3. **Konfiguracja Runnera Prime Agent / Python Harness**: Przygotowanie pomocnika `.agent/scripts/prime_runner.py` pozwalającego odpalanie pętli refinera.

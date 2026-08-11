@@ -13,17 +13,17 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Analiza i integracja Prime Agent Harness (Prime Intellect) z Antigravity w środowisku Vaultie.
-- **Ostatnie Zadanie:** Przeanalizowano repozytorium `PrimeIntellect-ai/prime-agent`, zweryfikowano mechanizm Python-Executable Skills (skille oparte na REPL i skryptach w `.agent/scripts/`) oraz sformułowano propozycję hybrydowej architektury.
+- **Aktywny Wątek:** Akceptacja i wdrożenie integracji Prime Agent Harness z Antigravity.
+- **Ostatnie Zadanie:** Akceptowano propozycję w `00_Inbox/_proposals/_accepted/2026-08-11-prime-agent-harness-integration.md`, wdrożono skrypty wykonywalne Pythona w `.agent/scripts/` (`vaultie-certify.py` i `prime_runner.py`).
 
 ## Ostatnio Modyfikowane Notatki
-- `00_Inbox/_proposals/2026-08-11-prime-agent-harness-integration.md` — propozycja integracji i podziału ról
-- [[1.1-ideation-fr-nfr]] — lekcja zaktualizowana do 100% zgodności z v1 (certified)
-- `90_Meta/lessons/1.1/quality-report.yaml` — raport jakości z weryfikacji
+- `00_Inbox/_proposals/_accepted/2026-08-11-prime-agent-harness-integration.md` — propozycja zaakceptowana
+- `.agent/scripts/vaultie-certify.py` — deterministyczny skrypt weryfikacji jakości lekcji
+- `.agent/scripts/prime_runner.py` — runner symulacji studenta dla Prime Agent Harness
+- [[1.1-ideation-fr-nfr]] — lekcja certified
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Przeprowadzono analizę kodu Prime Agent i przygotowano architekturę hybrydową
-- [ ] Zainstaluj Prime Agent w lokalnym terminalu / WSL (`curl -fsSL https://app.primeintellect.ai/prime-agent/install.sh | sh`)
-- [ ] Uruchom eksperymentalny lab w `labs/` przy użyciu Prime Agent CLI w tle
+- [x] Zaakceptowano propozycję integracji Prime Agent Harness i stworzono skrypty `.agent/scripts/`
+- [ ] Przetestuj pierwszą symulację studenta przy pomocy `python .agent/scripts/prime_runner.py 1.1`
 - [ ] Rozpocznij **Lekcję 1.2** w workflowie Spec-first: `90_Meta/lessons/1.2/spec.yaml`
 
