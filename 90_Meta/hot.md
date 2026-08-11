@@ -13,18 +13,17 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Rozpoczęto Lekcję 1.2 (WBS, Metodyki i RACI) według workflow Spec-first.
-- **Ostatnie Zadanie:** Wygenerowano `90_Meta/lessons/1.2/spec.yaml`, stworzono szkic lekcji w `90_Meta/lessons/1.2-wbs-raci.md` oraz scaffold labu w `labs/web-engineering/1.2/`. Statyczne bramki jakości `vaultie-certify.py 1.2` zwróciły **PASS**.
+- **Aktywny Wątek:** Certyfikacja i zaliczenie Lekcji 1.2 (WBS, Metodyki i RACI) w procedurze Blackbox Simulation.
+- **Ostatnie Zadanie:** Przeprowadzono symulację Blackbox dla Lekcji 1.2. Odpowiedzi przeszły audyt z wynikiem **4/4 (PASS)**. Rozbudowano notatkę lekcji o głębokie mechanizmy Kanban i Shape Up na podstawie wykrytej luki dydaktycznej i wygenerowano `quality-report.yaml`.
 
 ## Ostatnio Modyfikowane Notatki
-- `20_Patterns/peer-accountability-buddy-system.md` — nowy wzorzec struktury rówieśniczej (Peer-Review & Small Pods)
-- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — rozbudowa lekcji 1.2 o analizę i zestawienie systemów dowodzenia
-- `90_Meta/lessons/1.2/spec.yaml` — Knowledge Spec lekcji 1.2 z nowym modelem mentalnym
-- `labs/web-engineering/1.2/` — scaffold labu (README.md, board.yaml, raci.csv, wbs-template.md)
+- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — uzupełniono o mechanizmy Kanban i Shape Up; status `certified`
+- `90_Meta/lessons/1.2/quality-report.yaml` — oficjalny raport jakości (certified)
+- `20_Patterns/peer-accountability-buddy-system.md` — wzorzec odpowiedzialności rówieśniczej
+- `labs/web-engineering/1.2/` — zrealizowany i zweryfikowany scaffold labu
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Rozpoczęto **Lekcję 1.2** w workflowie Spec-first: wygenerowano `spec.yaml`, notatkę i scaffold labu.
-- [ ] Przetestuj symulację studenta / Blackbox dla Lekcji 1.2
-- [ ] Przygotuj się do Lekcji 1.3 (Repozytorium, Monorepo i Git Workflow)
+- [x] Przeprowadzono symulację Blackbox dla Lekcji 1.2 z wynikiem **4/4 (CERTIFIED)**
+- [ ] Rozpocznij **Lekcję 1.3** (Repozytorium, Monorepo i Git Workflow) w workflowie Spec-first
 
 

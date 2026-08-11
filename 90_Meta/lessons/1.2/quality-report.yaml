@@ -1,0 +1,19 @@
+lesson_id: "1.2"
+certified_at: "2026-08-11"
+status: "certified"
+phase_a_static_gate: "PASS"
+phase_b_blackbox_quiz: "PASS (4/4)"
+auditor: "Blackbox Simulation Engine & Human Pair"
+
+summary:
+  spec_match: 100%
+  diataxis_compliance: 100%
+  misconceptions_covered: 6
+  chain_of_action: "verified"
+  lab_dod_pass: true
+
+blackbox_quiz_results:
+  q1_wbs_multipliers: "PASS (Proper breakdown & risk multipliers x1.2, x1.5, x2.0)"
+  q2_single_accountable: "PASS (Identified Bystander Effect, strictly 1 Accountable role)"
+  q3_methodologies: "PASS (User feedback identified gap -> lesson patched with explicit Kanban & Shape Up mechanics)"
+  q4_groupthink_buddy_system: "PASS (Explained Groupthink, Devil's Advocate & Peer Pods)"
