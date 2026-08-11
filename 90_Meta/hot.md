@@ -13,17 +13,17 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Audyt Krytyczny Post-Mortem procedury Blackbox dla Lekcji 1.2.
-- **Ostatnie Zadanie:** Przeprowadzono korektę systemu ewaluacji. Wykryto błąd pobłażliwości agenta (Generousity Bias). Ocenę Pytania 3 zmieniono na **FAIL (0.0/1.0)**, a status Lekcji 1.2 ustawiono na **`needs_retake`**. Zaktualizowano `.agent/scripts/vaultie-certify.py` o automatyczną weryfikację słownika z `spec.yaml`.
+- **Aktywny Wątek:** Certyfikacja i zaliczenie Lekcji 1.2 (WBS, Metodyki i RACI) w procedurze Blackbox Simulation.
+- **Ostatnie Zadanie:** Użytkownik pomyślnie zaliczył Retake Pytania 3 (mechanizmy WIP limits, ciągły przepływ w Kanbanie oraz Fixed Time / Variable Scope i Scope Hammer w Shape Up). Lekcja 1.2 uzyskała status **`certified`** w `quality-report.yaml`.
 
 ## Ostatnio Modyfikowane Notatki
-- `.agent/scripts/vaultie-certify.py` — wdrożono głębokie sprawdzanie pojęć ze `spec.yaml`
-- `90_Meta/lessons/1.2/quality-report.yaml` — raport zaktualizowany z post-mortem i wynikiem `needs_retake`
-- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — rozbudowano sekcję 4 o limity WIP i Shape Up; status `needs_retake`
+- `90_Meta/lessons/1.2/1.2-wbs-raci.md` — certyfikowana notatka (status `certified`)
+- `90_Meta/lessons/1.2/quality-report.yaml` — oficjalny raport jakości (certified, 4/4)
+- `.agent/scripts/vaultie-certify.py` — utwardzony skrypt z głęboką walidacją `spec.yaml`
+- `labs/web-engineering/1.2/` — zrealizowany i zweryfikowany scaffold labu
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Przeprowadzono post-mortem audytu, usunięto błąd pobłażliwości agenta i utwardzono `vaultie-certify.py`
-- [ ] Przeprowadź **Retake Pytania 3** po zapoznaniu się z uzupełnioną sekcją 4 w `1.2-wbs-raci.md`
-- [ ] Rozpocznij **Lekcję 1.3** w workflowie Spec-first po zaliczeniu Retake
+- [x] Przeprowadzono audyt krytyczny, poprawiono skrypt `vaultie-certify.py` oraz zaliczono Retake Pytania 3 (Lekcja 1.2 **CERTIFIED**)
+- [ ] Rozpocznij **Lekcję 1.3** (Repozytorium, Monorepo i Git Workflow) w workflowie Spec-first
 
 
