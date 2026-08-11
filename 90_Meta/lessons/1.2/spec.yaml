@@ -1,0 +1,105 @@
+# Knowledge Spec — lekcja 1.2
+# Źródło prawdy dla teach-back / kb-lesson-certify
+id: "1.2"
+title: "WBS, Metodyki i RACI w Zespole Inżynieryjnym"
+diataxis: tutorial
+audience: "student projektu 2-semestralnego / junior engineer"
+level: novice
+threshold_concept: false
+
+prerequisites:
+  - "1.1"
+
+learning_objectives:
+  - "zdekomponować specyfikację FR/NFR na drzewo WBS (deliverables → work packages → zadania ≤ 1–2 dni)"
+  - "zastosować Mnożniki Ryzyka (Risk Multipliers: ×1.2, ×1.5, ×2.0) do urealnienia estymacji effortu"
+  - "dobrać metodykę (Kanban + WIP limit vs Shape Up vs Scrum) adekwatną do dynamiki i wielkości zespołu"
+  - "stworzyć macierz RACI z jednoznacznym przypisaniem Accountable (dokładnie 1 osoba per epik/moduł)"
+  - "zidentyfikować zagrożenia psychologii zespołu (Groupthink) i wdrożyć mechanizmy obronne (Egoless Programming, Adwokat Diabła)"
+
+critical_competencies:
+  - wbs_atomic_decomposition
+  - single_accountable_raci
+  - kanban_wip_limit
+  - risk_multiplier_estimation
+  - groupthink_defense
+
+mental_models:
+  - id: wbs_decomposition_tree
+    claim: "Projekt to nie płaska lista TODO; WBS dzieli produkty końcowe (deliverables) na pakiety pracy (work packages) i atomowe zadania (tasks ≤ 16h)"
+  - id: raci_accountability_singularity
+    claim: "Responsible może być wielu, ale Accountable musi być dokładnie JEDNA osoba — inaczej odpowiedzialność się rozmywa"
+  - id: flow_over_ceremony
+    claim: "W małym zespole ograniczenie prac w toku (WIP limit) bije sztuczne ceremonie i teatr statusów"
+
+misconceptions:
+  - "WBS to sekwencyjna lista zadań ułożona chronologicznie jak wykres Gantta"
+  - "W macierzy RACI można przypisać kilka osób jako Accountable do tego samego zadania, aby podzielić odpowiedzialność"
+  - "Scrum to zawsze najlepsza metodyka dla każdego projektu studenckiego niezależnie od dostępności czasowej zespołu"
+  - "Brak konfliktów i pełna zgoda w zespole od pierwszej minuty dyskusji to oznaka wysokiej efektywności (zamiast obawy przed Groupthink)"
+  - "Estymacja w godzinach jest pewna i nie wymaga bufora na ryzyko technologiczne"
+
+decision_points:
+  - "Czy metodyka Scrum, Kanban czy Shape Up najlepiej pasuje do dostępności i dyscypliny zespołu?"
+  - "Jaki wyznaczyć WIP limit na osobę/kolumnę na tablicy Kanban?"
+  - "Kto pełni rolę Accountable (A) dla kluczowych modułów systemu w macierzy RACI?"
+  - "Które elementy WBS znajdują się na ścieżce krytycznej (Critical Path)?"
+
+procedures:
+  - name: build_wbs_raci_board
+    trigger:
+      - "zatwierdzona specyfikacja FR/NFR z lekcji 1.1"
+      - "rozpoczynanie planowania prac w zespole inżynieryjnym"
+    steps:
+      - extract_deliverables_from_fr
+      - decompose_to_work_packages
+      - break_down_to_atomic_tasks
+      - apply_risk_multipliers
+      - assign_raci_roles
+      - set_kanban_wip_limits
+      - identify_critical_path
+    anti_patterns:
+      - "zadania w WBS opisane ogólnikowo (np. 'Zrób backend')"
+      - "przypisanie 'Wszyscy' w polu Accountable"
+      - "Scrum bez zdefiniowanego Definition of Done (DoD) i bez WIP limit"
+      - "brak uwzględnienia długu technicznego w budżecie cyklu/sprintu"
+
+examples:
+  minimal: "WBS: FR-001 -> Auth Package -> Task: Supabase Auth Handler (8h * 1.2 risk = ~10h) + RACI: Dev A (A/R)"
+  real_world: "VaultCollab — tablica Kanban YAML + RACI CSV"
+  misleading: "Wszyscy robią wszystko razem w Scrumie bez podziału RACI"
+  broken: "WBS z 1-tygodniowym monolitycznym zadaniem 'Napisz frontend' bez podziału na akcje"
+
+assessment_ladder:
+  explain: required
+  worked_example: required
+  predict: not_applicable
+  complete: optional
+  modify: optional
+  create: required
+  debug: not_applicable
+  transfer: required
+
+sources:
+  normative:
+    - "PMBOK Guide — Work Breakdown Structure (WBS) & RACI Matrix standard"
+    - "Basecamp Shape Up — Stop Falling Behind (Appetite & Shaping)"
+    - "Gerald M. Weinberg — The Psychology of Computer Programming (Egoless Programming)"
+  pedagogical:
+    - "Carpentries backward design"
+    - "90_Meta/web-engineering-roadmap.md#1.2"
+  counterexample:
+    - "Scrum Theater (ceremonie bez dyscypliny i bez DoD)"
+
+project_spine_link: "spec-fr-nfr.md → 1.2 WBS & RACI → 1.3 Git Workflow → … → 8.3 blueprint"
+
+lab:
+  path: "labs/web-engineering/1.2/"
+  exec: false
+  dod:
+    - "drzewo WBS z rozbiciem na min. 3 deliverables i zadania ≤ 16h"
+    - "uwzględnienie Mnożników Ryzyka (×1.2, ×1.5, ×2.0) w estymacji zadań WBS"
+    - "pliki board.yaml (z kolumnami, WIP limits i tagami) oraz raci.csv (min. 5 epików/zadań i 3-4 role)"
+    - "wybór metodyki (Scrum vs Kanban vs Shape Up) wraz z uzasadnieniem w kontekście zespołu"
+    - "zidentyfikowana ścieżka krytyczna (Critical Path) oraz alokacja bufora na dług techniczny (min. 15%)"
+    - "opis mechanizmu obrony przed Groupthink (Egoless Programming / Adwokat Diabła)"

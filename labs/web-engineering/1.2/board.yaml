@@ -1,0 +1,84 @@
+# Vaultie Masterclass — Lab 1.2 Kanban Board Configuration
+# Standard konfiguracji tablicy dla zespołu inżynieryjnego 3-5 osób
+
+project:
+  name: "VaultCollab — Web Engineering Lab 1.2"
+  methodology: "Kanban (Continuous Flow with Strict WIP)"
+  team_size: 4
+  sprint_cycle_weeks: 2
+
+columns:
+  - id: backlog
+    name: "Icebox / Unshaped Backlog"
+    description: "Nieuformowane pomysły i wymagania niezweryfikowane pod kątem shaping/feasibility."
+    max_wip: null
+
+  - id: ready
+    name: "Ready for Dev (Shaped)"
+    description: "Zadania po shaping z WBS, jasnym kryterium akceptacji i estymacją."
+    max_wip: 8
+
+  - id: in_progress
+    name: "In Progress"
+    description: "Aktualnie realizowane zadania deweloperskie."
+    max_wip: 4 # Strict WIP: max 1 zadanie na dewelopera (4 osoby)
+
+  - id: review
+    name: "Code Review & QA"
+    description: "Weryfikacja Pull Requestów, testy automatyczne i inspekcja kodu."
+    max_wip: 3
+
+  - id: done
+    name: "Done (Production/Main)"
+    description: "Zakończone zadania wdrożone na środowisko staging/prod i zweryfikowane."
+    max_wip: null
+
+limits_and_rules:
+  wip_enforcement: "hard_block" # Nie wolno brać nowego zadania z Ready, gdy In_Progress lub Review przekracza max_wip
+  tech_debt_budget_percent: 20  # 20% czasu w każdym tygodniu dedykowane na refactoring, CI/CD i dług techniczny
+  max_task_duration_hours: 16   # Zadanie > 16h musi zostać ponownie dekomponowane w WBS
+
+labels:
+  kinds:
+    - name: "kind/feature"
+      color: "#0E8A16"
+      description: "Nowa funkcjonalność biznesowa (FR)"
+    - name: "kind/nfr"
+      color: "#D93F0B"
+      description: "Wymaganie niefunkcjonalne (bezpieczeństwo, wydajność, observability)"
+    - name: "kind/tech-debt"
+      color: "#FBCA04"
+      description: "Refaktoryzacja, porządki w kodzie, usprawnienia deweloperskie"
+    - name: "kind/bug"
+      color: "#D73A4A"
+      description: "Błąd produkcyjny lub regresja"
+
+  areas:
+    - name: "area/frontend"
+      description: "Interfejs użytkownika (React / Next.js / Tailwind)"
+    - name: "area/backend"
+      description: "API, baza danych, logika biznesowa (FastAPI / Supabase)"
+    - name: "area/devops"
+      description: "CI/CD, Docker, infrastruktura, hosting"
+
+  effort:
+    - name: "effort/small"
+      description: "≤ 4h (niewielka modyfikacja)"
+    - name: "effort/medium"
+      description: "5–8h (standardowe zadanie atomowe)"
+    - name: "effort/large"
+      description: "9–16h (złożone zadanie na krawędzi limitu)"
+
+members:
+  - role: "Dev Lead / Architect"
+    username: "dev_lead"
+    max_active_tasks: 1
+  - role: "Frontend Developer"
+    username: "frontend_dev"
+    max_active_tasks: 1
+  - role: "Backend Developer"
+    username: "backend_dev"
+    max_active_tasks: 1
+  - role: "QA / DevOps Engineer"
+    username: "qa_devops"
+    max_active_tasks: 1

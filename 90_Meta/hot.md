@@ -13,17 +13,18 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Akceptacja i wdrożenie integracji Prime Agent Harness z Antigravity.
-- **Ostatnie Zadanie:** Akceptowano propozycję w `00_Inbox/_proposals/_accepted/2026-08-11-prime-agent-harness-integration.md`, wdrożono skrypty wykonywalne Pythona w `.agent/scripts/` (`vaultie-certify.py` i `prime_runner.py`).
+- **Aktywny Wątek:** Rozpoczęto Lekcję 1.2 (WBS, Metodyki i RACI) według workflow Spec-first.
+- **Ostatnie Zadanie:** Wygenerowano `90_Meta/lessons/1.2/spec.yaml`, stworzono szkic lekcji w `90_Meta/lessons/1.2-wbs-raci.md` oraz scaffold labu w `labs/web-engineering/1.2/`. Statyczne bramki jakości `vaultie-certify.py 1.2` zwróciły **PASS**.
 
 ## Ostatnio Modyfikowane Notatki
-- `00_Inbox/_proposals/_accepted/2026-08-11-prime-agent-harness-integration.md` — propozycja zaakceptowana
-- `.agent/scripts/vaultie-certify.py` — deterministyczny skrypt weryfikacji jakości lekcji
-- `.agent/scripts/prime_runner.py` — runner symulacji studenta dla Prime Agent Harness
-- [[1.1-ideation-fr-nfr]] — lekcja certified
+- `90_Meta/lessons/1.2/spec.yaml` — Knowledge Spec lekcji 1.2
+- `90_Meta/lessons/1.2-wbs-raci.md` — szkic lekcji 1.2 (PASS w certyfikacji)
+- `labs/web-engineering/1.2/` — scaffold labu (README.md, board.yaml, raci.csv, wbs-template.md)
+- `.agent/scripts/vaultie-certify.py` — użyty do weryfikacji bramki jakości lekcji 1.2
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Zaakceptowano propozycję integracji Prime Agent Harness i stworzono skrypty `.agent/scripts/`
-- [ ] Przetestuj pierwszą symulację studenta przy pomocy `python .agent/scripts/prime_runner.py 1.1`
-- [ ] Rozpocznij **Lekcję 1.2** w workflowie Spec-first: `90_Meta/lessons/1.2/spec.yaml`
+- [x] Rozpoczęto **Lekcję 1.2** w workflowie Spec-first: wygenerowano `spec.yaml`, notatkę i scaffold labu.
+- [ ] Przetestuj symulację studenta / Blackbox dla Lekcji 1.2
+- [ ] Przygotuj się do Lekcji 1.3 (Repozytorium, Monorepo i Git Workflow)
+
 

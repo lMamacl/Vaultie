@@ -1,0 +1,8 @@
+Task_Deliverable,Dev_Lead,Frontend_Dev,Backend_Dev,QA_DevOps
+Architektura i Schema Bazy Danych (Supabase),A,C,R,I
+Autentykacja i Auth Handlers (JWT / OAuth),C,R,A,I
+Komponenty UI Canvas & Infinite Grid (React Flow),I,A/R,C,I
+Konfiguracja CI/CD Pipeline & GitHub Actions,C,I,I,A/R
+Wydajnościowe Testy Obciążeniowe (k6 / NFR-PERF),I,I,C,A/R
+Zgodność z Security Baseline (Argon2 / RLS Policies),A,C,R,C
+Wdrożenie Produkcyjne (Docker / Vercel Deploy),A,I,C,R
