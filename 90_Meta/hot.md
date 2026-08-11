@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-08-10
+updated: 2026-08-11
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,17 +13,17 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Review i certyfikacja Lekcji 1.1 wg Lesson Quality Contract v1.
-- **Ostatnie Zadanie:** Przeprowadzono pełną certyfikację lekcji 1.1: zaktualizowano frontmatter (`certification_status: certified`, `diataxis`, `spec_path`), dodano jawną sekcję Misconceptions oraz tabelę Chain of Action, poprawiono numerację quizu, wygenerowano `quality-report.yaml`.
+- **Aktywny Wątek:** Analiza i integracja Prime Agent Harness (Prime Intellect) z Antigravity w środowisku Vaultie.
+- **Ostatnie Zadanie:** Przeanalizowano repozytorium `PrimeIntellect-ai/prime-agent`, zweryfikowano mechanizm Python-Executable Skills (skille oparte na REPL i skryptach w `.agent/scripts/`) oraz sformułowano propozycję hybrydowej architektury.
 
 ## Ostatnio Modyfikowane Notatki
+- `00_Inbox/_proposals/2026-08-11-prime-agent-harness-integration.md` — propozycja integracji i podziału ról
 - [[1.1-ideation-fr-nfr]] — lekcja zaktualizowana do 100% zgodności z v1 (certified)
 - `90_Meta/lessons/1.1/quality-report.yaml` — raport jakości z weryfikacji
-- [[1.1-lesson-quality-audit]] — audyt zrealizowany
-- [[lesson-quality-contract-v1]] — kontrakt jakości lekcji AI
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Domknięto luki P1/P2 w lekcji 1.1 (Misconceptions + CoA tabela + frontmatter + report)
-- [ ] Uruchom `kb-blackbox` dla 1.1 (opcjonalny finalny quiz właściciela)
-- [ ] Rozpocznij **Lekcję 1.2** w workflowie Spec-first: `90_Meta/lessons/1.2/spec.yaml` → draft → certyfikacja
+- [x] Przeprowadzono analizę kodu Prime Agent i przygotowano architekturę hybrydową
+- [ ] Zainstaluj Prime Agent w lokalnym terminalu / WSL (`curl -fsSL https://app.primeintellect.ai/prime-agent/install.sh | sh`)
+- [ ] Uruchom eksperymentalny lab w `labs/` przy użyciu Prime Agent CLI w tle
+- [ ] Rozpocznij **Lekcję 1.2** w workflowie Spec-first: `90_Meta/lessons/1.2/spec.yaml`
 
