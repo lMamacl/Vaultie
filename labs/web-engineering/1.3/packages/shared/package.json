@@ -1,0 +1,11 @@
+{
+  "name": "@vaultie/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./index.js",
+  "scripts": {
+    "build": "node -e \"console.log('@vaultie/shared build ok')\"",
+    "test": "node -e \"console.log('@vaultie/shared test ok')\""
+  }
+}

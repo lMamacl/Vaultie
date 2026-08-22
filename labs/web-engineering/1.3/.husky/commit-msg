@@ -1,0 +1,7 @@
+commit_msg=$(cat "$1")
+pattern='^(feat|fix|docs|style|refactor|test|chore|ci|build|perf)(\(.+\))?: .{3,}'
+
+if ! echo "$commit_msg" | grep -Eq "$pattern"; then
+  echo "commit-msg: use Conventional Commits, e.g. feat: add auth handler"
+  exit 1
+fi

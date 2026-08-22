@@ -1,0 +1,29 @@
+{
+	"nodes":[
+		{"id":"title","type":"text","text":"# Lekcja 1.3 — Repo, Monorepo, Git\n\n**Przepływ:** WBS (1.2) → struktura repo → branch → PR → CI\n\n[[1.3/1.3-repo-monorepo-git-workflow]]","x":-80,"y":-1100,"width":520,"height":180,"color":"5"},
+		{"id":"z2","type":"text","text":"## STREFA 2 — Monorepo\n\npnpm workspaces\napps/web + packages/shared\n\nworkspace:* = atomowy DTO\n**Default:** Monorepo 3–5 os.","x":-950,"y":-700,"width":380,"height":240,"color":"2"},
+		{"id":"lesson","type":"file","file":"90_Meta/lessons/1.3/1.3-repo-monorepo-git-workflow.md","x":-1400,"y":-300,"width":1680,"height":7860,"color":"5"},
+		{"id":"lab-readme","type":"file","file":"labs/web-engineering/1.3/README.md","x":380,"y":-300,"width":1270,"height":1640,"color":"3"},
+		{"id":"ci","type":"file","file":"labs/web-engineering/1.3/.github/workflows/ci.yml","x":1800,"y":-300,"width":400,"height":280,"color":"4"},
+		{"id":"z1","type":"text","text":"## STREFA 1 — Wejście z 1.2\n\n*Masz:* WBS + RACI\nDeliverables → repo layout\n\n→ wybór Monorepo vs Polyrepo","x":-1540,"y":-700,"width":360,"height":220,"color":"1"},
+		{"id":"prev","type":"text","text":"← **1.2** [[1.2/1.2-wbs-raci]]\nWBS + RACI","x":-1500,"y":-920,"width":280,"height":120,"color":"2"},
+		{"id":"z3","type":"text","text":"## STREFA 3 — Gałęzie\n\nGitFlow ❌ (merge hell)\nTrunk-Based + flags\nFeature Branch + PR ✓\n\nżycie branch ≤ 1–2 dni","x":-400,"y":-700,"width":400,"height":240,"color":"3"},
+		{"id":"z4","type":"text","text":"## STREFA 4 — Lockfile\n\npnpm-lock.yaml → commit\n\ninstall = może zmienić lock\nfrozen-lockfile / npm ci\n= determinizm w CI","x":160,"y":-710,"width":380,"height":260,"color":"4"},
+		{"id":"z5","type":"text","text":"## STREFA 5 — Hooki lokalne\n\nHusky pre-commit\ncommit-msg (Conventional)\n\n--no-verify = bypass\n**DX only**","x":720,"y":-710,"width":400,"height":240,"color":"5"},
+		{"id":"z6","type":"text","text":"## STREFA 6 — CI\n\nGitHub Actions ci.yml\nubuntu + frozen install\nlint → test → build\n\n**Autorytatywna bramka**","x":1270,"y":-700,"width":380,"height":220,"color":"6"},
+		{"id":"z7","type":"text","text":"## STREFA 7 — Vaultie\n\nGit Submodule\nlabs/ + notatki 10_–50_\n\nagent widzi kod + KB\n→ input do 1.4 DoD","x":1800,"y":-700,"width":360,"height":200,"color":"1"},
+		{"id":"next","type":"text","text":"**1.4** DoD & Code Review →\n[[web-engineering-roadmap#1.4]]","x":2280,"y":-660,"width":320,"height":120,"color":"2"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"z1","fromSide":"right","toNode":"z2","toSide":"left","label":"layout"},
+		{"id":"e2","fromNode":"z2","fromSide":"right","toNode":"z3","toSide":"left","label":"workflow"},
+		{"id":"e3","fromNode":"z3","fromSide":"right","toNode":"z4","toSide":"left","label":"build"},
+		{"id":"e4","fromNode":"z4","fromSide":"right","toNode":"z5","toSide":"left","label":"local"},
+		{"id":"e5","fromNode":"z5","fromSide":"right","toNode":"z6","toSide":"left","label":"server"},
+		{"id":"e6","fromNode":"z6","fromSide":"right","toNode":"z7","toSide":"left","label":"vault"},
+		{"id":"e7","fromNode":"prev","fromSide":"bottom","toNode":"z1","toSide":"top"},
+		{"id":"e8","fromNode":"z7","fromSide":"right","toNode":"next","toSide":"left"},
+		{"id":"e9","fromNode":"lesson","fromSide":"right","toNode":"lab-readme","toSide":"left","label":"lab 1.3"},
+		{"id":"e10","fromNode":"lab-readme","fromSide":"right","toNode":"ci","toSide":"left","label":"CI"}
+	]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@vaultie/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vaultie/shared": "workspace:*"
+  },
+  "scripts": {
+    "build": "node index.mjs",
+    "test": "node -e \"import('./index.mjs').then(() => console.log('@vaultie/web test ok'))\""
+  }
+}
