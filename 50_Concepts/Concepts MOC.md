@@ -22,3 +22,6 @@ SORT file.name ASC
 
 - [[project-initiation-fr-nfr]] — Inicjacja projektu: FR, NFR, PoC/MVP (Masterclass 1.1)
 - [[optimistic-updates]] — Koncepcja Optymistycznego Interfejsu (Optimistic UI)
+- [[epistemic-agency]] — Sprawczość Epistemiczna, Metapoznanie i Kalibracja Pewności w Systemach AI
+- [[agentic-failure-modes]] — Katalog Trybów Awarii i Pułapek Behawioralnych Agentów LLM
+

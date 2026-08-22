@@ -23,3 +23,7 @@ SORT file.name ASC
 - [[react-flow]] — Niezależna biblioteka React do tworzenia edytorów grafów i nieskończonych pól (`adopt`)
 - [[jointjs]] — Zaawansowany silnik diagramowania i wizualizacji SVG z wrapperem React (`trial`)
 - [[tanstack-query]] — Standard zarządzania stanem serwerowym w React (`adopt`)
+- [[mcp-protocol]] — Model Context Protocol: standard komunikacji agent-narzędzia (`adopt`)
+- [[context7]] — Upstash Context7: ugruntowanie w aktualnej dokumentacji bibliotek (`adopt`)
+- [[exa-search]] — Exa Neural Search: semantyczna wyszukiwarka kodu i web dla agentów (`adopt`)
+

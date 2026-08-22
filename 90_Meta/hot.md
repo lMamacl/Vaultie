@@ -13,19 +13,21 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Wszechstronna analiza architektoniczna i inżynierska systemu **Epistemicznego Agenta Kodującego** na podstawie dokumentacji źródłowej (`00-Index.md` do `05-Research-Foundations.md`).
-- **Ostatnie Zadanie:** Przeprowadzono dekonstrukcję 6 dokumentów źródłowych, utworzono pełny pakiet 6 analiz dziedzinowych w `00_Inbox/_proposals/epistemic-agent-analysis/` oraz opracowano kompleksowy dokument zbiorczy i werdykt inżynierski (`00-MASTER-SYNTHESIS-AND-VERDICT.md`).
+- **Aktywny Wątek:** Wdrożenie **Fazy 1 Epistemicznego Agenta Kodującego** (Tier 1 MVP + elementy Tier 2) w ekosystemie Vaultie.
+- **Ostatnie Zadanie:** Zaakceptowano kierunek analityczny. Opracowano pełnowymiarowy plan realizacji Fazy 1 (`00_Inbox/_proposals/2026-08-22-phase-1-epistemic-agent-implementation.md`) z rygorystycznymi kryteriami DoD. Przeniesiono ustrukturyzowaną wiedzę z analizy do kanonicznych warstw bazy wiedzy (`10_Libraries/`, `20_Patterns/`, `30_Decisions/`, `50_Concepts/`) i zaktualizowano odpowiednie MOC.
 
 ## Ostatnio Modyfikowane Notatki
-- `00_Inbox/_proposals/epistemic-agent-analysis/00-MASTER-SYNTHESIS-AND-VERDICT.md` — dokument zbiorczy i werdykt
-- `00_Inbox/_proposals/epistemic-agent-analysis/00-Index-Analysis.md` — analiza paradygmatu epistemicznego
-- `00_Inbox/_proposals/epistemic-agent-analysis/01-Verdict-Analysis.md` — wiwisekcja werdyktu i kalibracja
-- `00_Inbox/_proposals/epistemic-agent-analysis/02-Architecture-Analysis.md` — trzypoziomowa architektura (Tier 1..3)
-- `00_Inbox/_proposals/epistemic-agent-analysis/03-Tools-and-APIs-Analysis.md` — protokół MCP, Exa, Context7, Tavily, Firecrawl
-- `00_Inbox/_proposals/epistemic-agent-analysis/04-Implementation-Guide-Analysis.md` — maszyna stanów, pętla solve() i testy A/B
-- `00_Inbox/_proposals/epistemic-agent-analysis/05-Research-Foundations-Analysis.md` — podwaliny badawcze i tryby awarii
+- `00_Inbox/_proposals/2026-08-22-phase-1-epistemic-agent-implementation.md` — plan wdrożenia Fazy 1 i kryteria DoD
+- `30_Decisions/2026-08-22-epistemic-coding-agent-architecture.md` — ADR przyjęcia architektury epistemicznej
+- `20_Patterns/epistemic-reasoning-loop.md` — wzorzec pętli epistemicznej i ugruntowania wykonawczego
+- `10_Libraries/mcp-protocol.md` — specyfikacja standardu Model Context Protocol
+- `10_Libraries/context7.md` — ugruntowanie dokumentacji i eliminacja API drift
+- `10_Libraries/exa-search.md` — semantyczne wyszukiwanie kodu i sieci
+- `50_Concepts/epistemic-agency.md` — sprawczość epistemiczna, metapoznanie i kalibracja
+- `50_Concepts/agentic-failure-modes.md` — katalog trybów awarii agentów LLM
+- `10_Libraries/Libraries MOC.md`, `20_Patterns/Patterns MOC.md`, `30_Decisions/Decisions MOC.md`, `50_Concepts/Concepts MOC.md` — zaktualizowane mapy treści
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Opracowano pełny pakiet analizy epistemicznego agenta (6 plików dedykowanych + 1 synteza)
-- [ ] Decyzja użytkownika co do zatwierdzenia kierunku i wyboru wariantu wdrożenia (rekomendowany Tier 1 + elementy Tier 2)
-- [ ] Opcjonalnie: konfiguracja serwerów MCP (`Exa`, `Context7`) oraz stworzenie skilla `kb-epistemic-solve` w `.agent/skills/`
+- [x] Opracowano i zaakceptowano propozycję realizacji Fazy 1
+- [x] Zintegrowano stan wiedzy z kanonicznymi warstwami bazy wiedzy Vaultie
+- [ ] Rozpocznij realizację Kroków 1–3 Fazy 1: Konfiguracja serwerów MCP (`Exa`, `Context7`), utworzenie skilla `.agent/skills/kb-epistemic-solve/` oraz skryptu kontrolera maszyny stanów
