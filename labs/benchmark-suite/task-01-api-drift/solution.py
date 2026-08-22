@@ -11,10 +11,10 @@ class UserProfile:
         self.is_active = is_active
 
     def serialize_payload(self) -> dict:
-        # BUG: Legacy method name and missing required 'schema_version' key
-        # In modern API contract, serialization must return dict with schema_version: 2 and validated fields
         return {
-            "id": self.user_id,
-            "name": self.username,
-            "email": self.email
+            "schema_version": 2,
+            "user_id": self.user_id,
+            "username": self.username,
+            "email": self.email,
+            "is_active": self.is_active,
         }

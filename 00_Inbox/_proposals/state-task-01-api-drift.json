@@ -1,0 +1,89 @@
+{
+  "task_id": "task-01-api-drift",
+  "goal": "Napraw błąd w solution.py tak aby test python test_task.py przeszedł na zielono",
+  "created_at": "2026-08-22T10:25:34Z",
+  "iteration": 1,
+  "budget": {
+    "max_iterations": 3,
+    "max_tool_calls": 10
+  },
+  "facts": [
+    {
+      "statement": "Konstruktor UserProfile w solution.py:7-11 przyjmuje parametry user_id, username, email, is_active=True.",
+      "status": "verified",
+      "source": "labs/benchmark-suite/task-01-api-drift/solution.py:7",
+      "timestamp": "2026-08-22T10:26:00Z"
+    },
+    {
+      "statement": "Test test_modern_schema_compliance w test_task.py:5-14 asertuje klucze schema_version==2, user_id==101, username=='alex_dev', is_active==True.",
+      "status": "verified",
+      "source": "labs/benchmark-suite/task-01-api-drift/test_task.py:10-14",
+      "timestamp": "2026-08-22T10:26:00Z"
+    },
+    {
+      "statement": "Metoda serialize_payload w solution.py:13-20 zwraca przestarzałe klucze 'id' i 'name' oraz pomija 'schema_version' i 'is_active'.",
+      "status": "verified",
+      "source": "labs/benchmark-suite/task-01-api-drift/solution.py:16-20",
+      "timestamp": "2026-08-22T10:26:00Z"
+    },
+    {
+      "statement": "serialize_payload powoduje niezgodność ze schematem v2 i nie przechodzi asercji kontraktu.",
+      "status": "inferred",
+      "source": "deduction from test_task.py and solution.py",
+      "timestamp": "2026-08-22T10:26:00Z"
+    },
+    {
+      "statement": "Test command passed: python test_task.py",
+      "status": "verified",
+      "source": "test_runner:python test_task.py",
+      "timestamp": "2026-08-22T10:26:17Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "hypothesis": "Zaktualizowanie słownika zwracanego przez serialize_payload o klucze schema_version (int 2), user_id, username, email, is_active spowoduje natychmiastowe przejście testu.",
+      "status": "pending_verification"
+    }
+  ],
+  "unknowns": [
+    {
+      "question": "Czy schemat v2 wymaga dodatkowych pól wykraczających poza model UserProfile?",
+      "why_it_matters": "Mogłoby wpłynąć na dodatkową walidację w innych testach regresyjnych."
+    }
+  ],
+  "dependencies": [
+    "unittest",
+    "solution.py",
+    "test_task.py"
+  ],
+  "prior_art_checked": true,
+  "prior_art_findings": [
+    "Wzorzec ewolucji schematu API (API Drift) wymaga jawnego pola 'schema_version: 2' oraz eliminacji przestarzałych aliasów (id -> user_id, name -> username).",
+    "Sprawdzono bazę wzorców 20_Patterns/epistemic-reasoning-loop.md dotyczącą rygorystycznej weryfikacji ugruntowanej."
+  ],
+  "plan": [
+    "Krok 1: Zmodyfikować UserProfile.serialize_payload w labs/benchmark-suite/task-01-api-drift/solution.py.",
+    "Krok 2: Dodać schema_version: 2, zmapować user_id, username, email oraz is_active.",
+    "Krok 3: Przeprowadzić weryfikację ugruntowaną testem 'python labs/benchmark-suite/task-01-api-drift/test_task.py' za pomocą epistemic_runner.py.",
+    "Krok 4 (Kluczowe założenie): Plan opiera się na założeniu Z, że test_task.py oczekuje schema_version=2, user_id, username, email, is_active. Jeśli Z jest fałszywe, plan zawiedzie podczas asercji unittest."
+  ],
+  "critique": [
+    "Adversarial audit: Plan jest bezpośredni, nie wprowadza nadmiarowych zależności zewnętrznych.",
+    "Brak ryzyka regresji upstream/downstream, ponieważ UserProfile zachowuje ten sam interfejs inicjalizacji.",
+    "Wymagany test: python test_task.py (uruchamiany przez grounded runner)."
+  ],
+  "tests_added": [
+    "labs/benchmark-suite/task-01-api-drift/test_task.py"
+  ],
+  "execution_history": [
+    {
+      "command": "python test_task.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n",
+      "elapsed_seconds": 0.13
+    }
+  ],
+  "status": "solved"
+}

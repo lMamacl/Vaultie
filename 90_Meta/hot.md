@@ -13,20 +13,18 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Wdrożenie infrastruktury **Fazy 1 Epistemicznego Agenta Kodującego** (Tier 1 MVP + elementy Tier 2) w ekosystemie Vaultie.
+- **Aktywny Wątek:** Weryfikacja ewaluacyjna Fazy 1 Epistemicznego Agenta Kodującego (Wariant B).
 - **Ostatnie Zadanie:** 
-  1. Zaimplementowano skrypt kontrolera i maszyny stanów `.agent/scripts/epistemic_runner.py` z obsługą UTF-8 i guardrailami regex.
-  2. Utworzono specyfikację skilla `.agent/skills/kb-epistemic-solve.md` oraz `.agent/skills/kb-epistemic-solve/SKILL.md` i zarejestrowano w `.agent/AGENTS.md`.
-  3. Zbudowano pakiet ewaluacji A/B w `labs/benchmark-suite/` ze skryptem `run_benchmark.py` i 3 referencyjnymi zadaniami (API Drift, Root Cause Auth, Exponential Backoff).
+  1. Uruchomiono procedurę `kb-epistemic-solve` dla zadania `labs/benchmark-suite/task-01-api-drift/`.
+  2. Przeprowadzono 5-fazową pętlę epistemiczną (Investigator -> Prior Art -> Planner -> Critic -> Grounded Verify).
+  3. Zmodyfikowano `labs/benchmark-suite/task-01-api-drift/solution.py` i zweryfikowano testem `test_task.py` (PASS, 0.11s).
+  4. Wygenerowano raport w `00_Inbox/_proposals/state-task-01-api-drift.json`.
 
 ## Ostatnio Modyfikowane Notatki
-- `.agent/scripts/epistemic_runner.py` — kontroler maszyny stanów, guardrails i runner testów
-- `.agent/skills/kb-epistemic-solve.md` — specyfikacja skilla epistemicznego pętli rozwiązywania problemów
-- `.agent/skills/kb-epistemic-solve/SKILL.md` — definicja skilla folder-based
-- `.agent/AGENTS.md` — zaktualizowany rejestr skilli agenta
-- `labs/benchmark-suite/` — pakiet referencyjny benchmarku A/B (README, harness, zadania 01-03)
-- `00_Inbox/_proposals/2026-08-22-phase-1-epistemic-agent-implementation.md` — plan wdrożenia Fazy 1
+- `labs/benchmark-suite/task-01-api-drift/solution.py` — modernizacja kontraktu API v2 (schema_version: 2)
+- `00_Inbox/_proposals/state-task-01-api-drift.json` — zarejestrowany stan pętli epistemicznej
+- `90_Meta/hot.md` — aktywny bufor sesji
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Zbudowano kompletną infrastrukturę Fazy 1 (Runner, Guardrails, Skill, Benchmark Suite)
-- [ ] Gotowość do uruchomienia ślepego testu benchmarkowego A/B (w czystych oknach czatu zgodnie z instrukcją w `labs/benchmark-suite/README.md`)
+- [x] Rozwiązano i zweryfikowano zadanie 01 (`task-01-api-drift`) w protokole epistemicznym
+- [ ] Opcjonalna realizacja kolejnych zadań ewaluacyjnych (`task-02-root-cause-auth`, `task-03-retry-backoff`)
