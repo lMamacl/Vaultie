@@ -1,0 +1,29 @@
+{
+	"nodes":[
+		{"id":"title","type":"text","text":"# Lekcja 1.2 — WBS, Metodyki, RACI\n\n**Przepływ:** FR/NFR (1.1) → WBS → metodyka → RACI → tablica\n\n[[1.2/1.2-wbs-raci]]","x":-100,"y":-1100,"width":520,"height":180,"color":"5"},
+		{"id":"z3","type":"text","text":"## STREFA 3 — Metodyka\n\nScrum | Kanban | Shape Up\n\n**Default uczelni:** Kanban + WIP\n\nShape Up: appetite + circuit breaker","x":-480,"y":-700,"width":400,"height":240,"color":"3"},
+		{"id":"z4","type":"text","text":"## STREFA 4 — RACI\n\nR = wykonuje\nA = **1 osoba** odpowiada\nC = konsultacja\nI = informowany\n\nAccountability Singularity","x":40,"y":-710,"width":380,"height":260,"color":"4"},
+		{"id":"z7","type":"text","text":"## STREFA 7 — Lab output\n\nwbs-template.md\nraci.csv\n\n→ input do 1.3 repo","x":1740,"y":-700,"width":360,"height":200,"color":"1"},
+		{"id":"z5","type":"text","text":"## STREFA 5 — Psychologia\n\nGroupthink → Egoless Programming\nAdwokat Diabła\n\nPeer Pods (6–10 os.)\n[[peer-accountability-buddy-system]]","x":600,"y":-690,"width":400,"height":240,"color":"5"},
+		{"id":"z6","type":"text","text":"## STREFA 6 — Tablica\n\nboard.yaml\nkolumny + max_wip\nkind/ area/ effort/\n\ntech_debt 15–20%","x":1200,"y":-680,"width":380,"height":220,"color":"6"},
+		{"id":"next","type":"text","text":"**1.3** [[1.3/1.3-repo-monorepo-git-workflow]]\nrepo + monorepo →","x":1760,"y":-420,"width":320,"height":120,"color":"2"},
+		{"id":"pattern","type":"file","file":"20_Patterns/wbs-raci-student-team.md","x":1080,"y":-230,"width":1200,"height":2310,"color":"4"},
+		{"id":"z1","type":"text","text":"## STREFA 1 — Wejście z 1.1\n\n*Masz:* spec-fr-nfr.md\nFR MUST, NFR, PoC/MVP\n\n→ wyciągnij deliverables","x":-1640,"y":-520,"width":360,"height":220,"color":"1"},
+		{"id":"prev","type":"text","text":"← **1.1** [[1.1-ideation-fr-nfr]]\nspec FR/NFR","x":-1640,"y":-700,"width":280,"height":120,"color":"2"},
+		{"id":"z2","type":"text","text":"## STREFA 2 — WBS\n\nDeliverable → Work Package → Task ≤16h\n\nINVEST + Critical Path\nRisk Multipliers ×1.2/×1.5/×2.0","x":-1080,"y":-690,"width":380,"height":240,"color":"2"},
+		{"id":"lesson","type":"file","file":"90_Meta/lessons/1.2/1.2-wbs-raci.md","x":-1640,"y":-230,"width":1120,"height":10110,"color":"5"},
+		{"id":"lab-readme","type":"file","file":"labs/web-engineering/1.2/README.md","x":-360,"y":-230,"width":1240,"height":1155,"color":"3"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"z1","fromSide":"right","toNode":"z2","toSide":"left","label":"deliverables"},
+		{"id":"e2","fromNode":"z2","fromSide":"right","toNode":"z3","toSide":"left","label":"harmonogram"},
+		{"id":"e3","fromNode":"z3","fromSide":"right","toNode":"z4","toSide":"left","label":"role"},
+		{"id":"e4","fromNode":"z4","fromSide":"right","toNode":"z5","toSide":"left","label":"zespół"},
+		{"id":"e5","fromNode":"z5","fromSide":"right","toNode":"z6","toSide":"left","label":"przepływ"},
+		{"id":"e6","fromNode":"z6","fromSide":"right","toNode":"z7","toSide":"left","label":"artefakty"},
+		{"id":"e7","fromNode":"prev","fromSide":"bottom","toNode":"z1","toSide":"top"},
+		{"id":"e8","fromNode":"z7","fromSide":"bottom","toNode":"next","toSide":"top"},
+		{"id":"e9","fromNode":"lesson","fromSide":"right","toNode":"lab-readme","toSide":"left","label":"lab 1.2"},
+		{"id":"e10","fromNode":"lab-readme","fromSide":"right","toNode":"pattern","toSide":"left","label":"wzorzec"}
+	]
+}
