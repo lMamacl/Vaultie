@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-08-22 12:22:39",
+  "total_tasks": 3,
+  "passed_tasks": 0,
+  "pass_rate_percent": 0.0,
+  "results": [
+    {
+      "task": "task-01-api-drift",
+      "status": "FAIL",
+      "passed": false,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "F\n======================================================================\nFAIL: test_modern_schema_compliance (__main__.TestUserProfileModernAPI.test_modern_schema_compliance)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\cyunc\\Documents\\Projects\\Vaultie\\labs\\benchmark-suite\\task-01-api-drift\\test_task.py\", line 10, in test_modern_schema_compliance\n    self.assertIn(\"schema_version\", data, \"Payload must include 'schema_v",
+      "elapsed_seconds": 0.11
+    },
+    {
+      "task": "task-02-root-cause-auth",
+      "status": "FAIL",
+      "passed": false,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "F.\n======================================================================\nFAIL: test_session_token_validation (__main__.TestAuthenticationPersistence.test_session_token_validation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\cyunc\\Documents\\Projects\\Vaultie\\labs\\benchmark-suite\\task-02-root-cause-auth\\test_task.py\", line 15, in test_session_token_validation\n    self.assertTrue(verifier_service.authenticate_request(tok",
+      "elapsed_seconds": 0.13
+    },
+    {
+      "task": "task-03-retry-backoff",
+      "status": "FAIL",
+      "passed": false,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "F.\n======================================================================\nFAIL: test_exponential_backoff_applied (__main__.TestExponentialBackoffJitter.test_exponential_backoff_applied)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Python314\\Lib\\unittest\\mock.py\", line 1432, in patched\n    return func(*newargs, **newkeywargs)\n  File \"C:\\Users\\cyunc\\Documents\\Projects\\Vaultie\\labs\\benchmark-suite\\task-03-retry-backoff\\test_tas",
+      "elapsed_seconds": 0.28
+    }
+  ]
+}
