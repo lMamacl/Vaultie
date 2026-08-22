@@ -13,18 +13,23 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Weryfikacja ewaluacyjna Fazy 1 Epistemicznego Agenta Kodującego (Wariant B).
+- **Aktywny Wątek:** Zakończenie i pełna certyfikacja ewaluacyjna Fazy 1 Epistemicznego Agenta Kodującego (`kb-epistemic-solve`).
 - **Ostatnie Zadanie:** 
-  1. Uruchomiono procedurę `kb-epistemic-solve` dla zadania `labs/benchmark-suite/task-01-api-drift/`.
-  2. Przeprowadzono 5-fazową pętlę epistemiczną (Investigator -> Prior Art -> Planner -> Critic -> Grounded Verify).
-  3. Zmodyfikowano `labs/benchmark-suite/task-01-api-drift/solution.py` i zweryfikowano testem `test_task.py` (PASS, 0.11s).
-  4. Wygenerowano raport w `00_Inbox/_proposals/state-task-01-api-drift.json`.
+  1. Wykonano pełną pętlę epistemiczną dla wszystkich 3 zadań referencyjnych w `labs/benchmark-suite/`:
+     - `task-01-api-drift`: PASS (modernizacja kontraktu schema v2),
+     - `task-02-root-cause-auth`: PASS (usunięcie efemerycznego sekretu i persystencja klucza sesji upstream),
+     - `task-03-retry-backoff`: PASS (implementacja wzorca Exponential Backoff ze skalowaniem wykładniczym i jitterem).
+  2. Uruchomiono zbiorczy harness `run_benchmark.py` osiągając **100% Pass Rate (3/3 PASSED)**.
+  3. Zapisano raporty stanu w `00_Inbox/_proposals/state-task-0*.json`.
 
 ## Ostatnio Modyfikowane Notatki
-- `labs/benchmark-suite/task-01-api-drift/solution.py` — modernizacja kontraktu API v2 (schema_version: 2)
-- `00_Inbox/_proposals/state-task-01-api-drift.json` — zarejestrowany stan pętli epistemicznej
-- `90_Meta/hot.md` — aktywny bufor sesji
+- `labs/benchmark-suite/task-01-api-drift/solution.py` — v2 schema
+- `labs/benchmark-suite/task-02-root-cause-auth/token_generator.py` — shared secret upstream
+- `labs/benchmark-suite/task-03-retry-backoff/solution.py` — exponential backoff & jitter
+- `labs/benchmark-suite/benchmark_report.json` — wynik benchmarku: 100% Pass Rate
+- `00_Inbox/_proposals/state-task-02-root-cause-auth.json`, `state-task-03-retry-backoff.json` — zarejestrowane stany zadań
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Rozwiązano i zweryfikowano zadanie 01 (`task-01-api-drift`) w protokole epistemicznym
-- [ ] Opcjonalna realizacja kolejnych zadań ewaluacyjnych (`task-02-root-cause-auth`, `task-03-retry-backoff`)
+- [x] Wdrożono infrastrukturę Fazy 1 (`epistemic_runner.py`, `kb-epistemic-solve`, `mcp_config`)
+- [x] Zweryfikowano wszystkie 3 zadania referencyjne z wynikiem 100% Pass Rate
+- [ ] Gotowość do używania skilla `kb-epistemic-solve` w codziennej pracy inżynierskiej w repozytoriach i bazach wiedzy

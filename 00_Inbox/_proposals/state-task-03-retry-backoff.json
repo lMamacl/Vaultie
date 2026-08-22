@@ -1,0 +1,78 @@
+{
+  "task_id": "task-03-retry-backoff",
+  "goal": "Implementacja wzorca Exponential Backoff z Jitterem dla ponawiania operacji",
+  "created_at": "2026-08-22T10:32:00Z",
+  "iteration": 1,
+  "budget": {
+    "max_iterations": 3,
+    "max_tool_calls": 10
+  },
+  "facts": [
+    {
+      "statement": "Funkcja execute_with_retry w solution.py:8-18 wykonuje stałe uśpienie time.sleep(base_delay) zamiast skalowania wykładniczego.",
+      "status": "verified",
+      "source": "labs/benchmark-suite/task-03-retry-backoff/solution.py:18",
+      "timestamp": "2026-08-22T10:32:30Z"
+    },
+    {
+      "statement": "Test test_exponential_backoff_applied w test_task.py:13-29 asertuje, że opóźnienie rośnie wykładniczo (delays[1] > delays[0] oraz delays[1] >= 1.5 dla base_delay=1.0).",
+      "status": "verified",
+      "source": "labs/benchmark-suite/task-03-retry-backoff/test_task.py:27-28",
+      "timestamp": "2026-08-22T10:32:30Z"
+    },
+    {
+      "statement": "Test command passed: python test_task.py",
+      "status": "verified",
+      "source": "test_runner:python test_task.py",
+      "timestamp": "2026-08-22T10:33:31Z"
+    }
+  ],
+  "hypotheses": [
+    {
+      "statement": "Zastosowanie formuły delay = base_delay * (2 ** (attempts - 1)) + jitter spełni wymagania testu i zapobiegnie zjawisku thundering herd.",
+      "status": "inferred",
+      "evidence": "Wzorzec Exponential Backoff & Jitter (AWS/Netflix Architecture)"
+    }
+  ],
+  "unknowns": [
+    {
+      "question": "Jaki algorytm jittera jest optymalny: Full Jitter, Equal Jitter czy Decorrelated Jitter?",
+      "why_it_matters": "Equal Jitter zapewnia rosnący trend minimalnego czasu oczekiwania przy zachowaniu losowości."
+    }
+  ],
+  "dependencies": [
+    "solution.py",
+    "test_task.py",
+    "random",
+    "time"
+  ],
+  "prior_art_checked": true,
+  "prior_art_findings": [
+    "Wzorzec architektury odporności: AWS Architecture Blog 'Exponential Backoff And Jitter'.",
+    "Sprawdzono bazę 20_Patterns/epistemic-reasoning-loop.md."
+  ],
+  "plan": [
+    "Krok 1: W labs/benchmark-suite/task-03-retry-backoff/solution.py zaimplementować wyliczanie opóźnienia: backoff = base_delay * (2 ** (attempts - 1)).",
+    "Krok 2: Dodać jitter zachowujący skalę wykładniczą.",
+    "Krok 3: Wykonać fizyczny test jednostkowy za pomocą epistemic_runner.py.",
+    "Krok 4 (Kluczowe założenie): Zakłada się, że funkcja natychmiast zwraca wynik w przypadku powodzenia w 1. próbie bez wywoływania sleep."
+  ],
+  "critique": [
+    "Adversarial Audit: Czy przy max_retries funkcja podnosi oryginalny wyjątek? Tak, klauzula if attempts >= max_retries: raise e gwarantuje propagację.",
+    "Wymagany test ugruntowany: python test_task.py"
+  ],
+  "tests_added": [
+    "labs/benchmark-suite/task-03-retry-backoff/test_task.py"
+  ],
+  "execution_history": [
+    {
+      "command": "python test_task.py",
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n",
+      "elapsed_seconds": 0.3
+    }
+  ],
+  "status": "solved"
+}

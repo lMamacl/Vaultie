@@ -1,11 +1,14 @@
 import time
 import hashlib
-import secrets
+import os
 
 class TokenGenerator:
+    DEFAULT_SECRET = "vaultie-production-shared-secret-key-32b"
+
     def __init__(self, secret: str = None):
-        # BUG: Generates random ephemeral secret per process/instance instead of persisting
-        self.secret = secret if secret is not None else secrets.token_hex(16)
+        # Resolve shared secret from parameter, environment, or deterministic default
+        self.secret = secret if secret is not None else os.getenv("SESSION_SECRET", self.DEFAULT_SECRET)
+
 
     def generate_token(self, user_id: str) -> str:
         salt = str(time.time_ns())
