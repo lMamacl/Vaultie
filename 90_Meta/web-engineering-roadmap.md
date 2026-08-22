@@ -217,6 +217,8 @@ Każde ID poniżej wypełnia te pola. Pola Spec/certyfikacji **uzupełniaj przy 
 
 ## 1.2 — WBS, Metodyki i RACI
 
+> **Pełna lekcja:** [[1.2/1.2-wbs-raci]] · **Kanwa:** [[lesson-1.2-wbs-raci.canvas]] · **Lab:** `labs/web-engineering/1.2/` · **Wzorzec:** [[wbs-raci-student-team]]
+
 - **Czas:** 90–120 min
 - **Cel dydaktyczny:** Zdekomponujesz projekt na zadania atomowe (WBS), dobierzesz metodykę do zespołu 3–5 osób i przypiszesz odpowiedzialności macierzą RACI.
 - **Wymagania wstępne:** 1.1
@@ -239,7 +241,7 @@ Każde ID poniżej wypełnia te pola. Pola Spec/certyfikacji **uzupełniaj przy 
   **Werdykt:** Domyślnie Kanban + twarde WIP (np. 2 zadania/osoba) albo Shape Up w cyklach semestralnych. Scrum tylko gdy zespół chce ceremonie i ma stałe sloty. Unikać „Scrum bez DoD i bez WIP” (teatr statusów).
 - **Pod maską:** GitHub Projects / Issues: etykiety `kind/*`, `area/*`, `effort/*`; critical path na WBS; dług techniczny jako osobny bucket z limitem % czasu sprintu/cyklu.
 - **Kod / lab:** `labs/web-engineering/1.2/` — przykładowy board YAML (kolumny + WIP) + szablon RACI CSV.
-- **Artefakt:** pattern `20_Patterns/wbs-raci-student-team.md` (propozycja)
+- **Artefakt:** pattern [[wbs-raci-student-team]]
 - **Kanwa:** WBS drzewo + RACI heatmapa ról
 - **Blackbox quiz:**
   1. Czym Accountable różni się od Responsible w RACI?
@@ -255,6 +257,8 @@ Każde ID poniżej wypełnia te pola. Pola Spec/certyfikacji **uzupełniaj przy 
 ---
 
 ## 1.3 — Repozytorium, Monorepo i Git Workflow
+
+> **Pełna lekcja:** [[1.3/1.3-repo-monorepo-git-workflow]] · **Kanwa:** [[lesson-1.3-repo-monorepo.canvas]] · **Lab:** `labs/web-engineering/1.3/`
 
 - **Czas:** 120–150 min
 - **Cel dydaktyczny:** Skonfigurujesz repozytorium z deterministycznym buildem, hookami jakości i świadomym wyborem monorepo vs polyrepo oraz strategii gałęzi.
