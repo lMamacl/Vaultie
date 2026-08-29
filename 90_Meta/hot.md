@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-08-22
+updated: 2026-08-29
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,23 +13,17 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Zakończenie i pełna certyfikacja ewaluacyjna Fazy 1 Epistemicznego Agenta Kodującego (`kb-epistemic-solve`).
-- **Ostatnie Zadanie:** 
-  1. Wykonano pełną pętlę epistemiczną dla wszystkich 3 zadań referencyjnych w `labs/benchmark-suite/`:
-     - `task-01-api-drift`: PASS (modernizacja kontraktu schema v2),
-     - `task-02-root-cause-auth`: PASS (usunięcie efemerycznego sekretu i persystencja klucza sesji upstream),
-     - `task-03-retry-backoff`: PASS (implementacja wzorca Exponential Backoff ze skalowaniem wykładniczym i jitterem).
-  2. Uruchomiono zbiorczy harness `run_benchmark.py` osiągając **100% Pass Rate (3/3 PASSED)**.
-  3. Zapisano raporty stanu w `00_Inbox/_proposals/state-task-0*.json`.
+- **Aktywny Wątek:** Submoduł badawczy `labs/Fantasy-Map-Generator-experimental/`.
+- **Ostatnie Zadanie:**
+  1. Zainicjalizowano i zaktualizowano submoduł `labs/Fantasy-Map-Generator-experimental` z `https://github.com/lMamacl/Fantasy-Map-Generator-experimental` na gałęzi `master` (commit `4164b63d`).
+  2. Zaktualizowano `labs/README.md` oraz utworzono wpis sesji.
 
 ## Ostatnio Modyfikowane Notatki
-- `labs/benchmark-suite/task-01-api-drift/solution.py` — v2 schema
-- `labs/benchmark-suite/task-02-root-cause-auth/token_generator.py` — shared secret upstream
-- `labs/benchmark-suite/task-03-retry-backoff/solution.py` — exponential backoff & jitter
-- `labs/benchmark-suite/benchmark_report.json` — wynik benchmarku: 100% Pass Rate
-- `00_Inbox/_proposals/state-task-02-root-cause-auth.json`, `state-task-03-retry-backoff.json` — zarejestrowane stany zadań
+- `labs/Fantasy-Map-Generator-experimental/` — zainicjalizowane subrepo
+- `labs/README.md` — dodano wpis o submodule
+- `90_Meta/sessions/2026-08-29-1232.md` — raport z sesji
+- `90_Meta/hot.md` — bufor aktywnego kontekstu
 
 ## Otwarte Kwestie / Następne Kroki
-- [x] Wdrożono infrastrukturę Fazy 1 (`epistemic_runner.py`, `kb-epistemic-solve`, `mcp_config`)
-- [x] Zweryfikowano wszystkie 3 zadania referencyjne z wynikiem 100% Pass Rate
-- [ ] Gotowość do używania skilla `kb-epistemic-solve` w codziennej pracy inżynierskiej w repozytoriach i bazach wiedzy
+- [x] Zainicjalizowano i zaktualizowano submoduł `labs/Fantasy-Map-Generator-experimental` do najnowszego `origin/master`
+- [ ] Dalsza analiza lub praca eksperymentalna w ramach `labs/Fantasy-Map-Generator-experimental`

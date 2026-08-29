@@ -27,9 +27,10 @@ Commitujemy źródła labu. Ignorujemy: `node_modules/`, `bin/`, `obj/`, `.env`,
 
 ## Start
 
-| Lekcja | Lab | Status |
+| Lekcja / Sandbox | Ścieżka | Status |
 |---|---|---|
 | 1.1 Ideation / FR-NFR | [web-engineering/1.1](web-engineering/1.1/) | Aktywny |
 | 1.2+ | — | Po realizacji lekcji |
+| Fantasy Map Generator | [Fantasy-Map-Generator-experimental](Fantasy-Map-Generator-experimental/) | Submoduł badawczo-eksperymentalny |
 
 Mapa lekcji: [`90_Meta/web-engineering-roadmap.md`](../90_Meta/web-engineering-roadmap.md)
