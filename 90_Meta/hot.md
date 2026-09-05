@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-09-01
+updated: 2026-09-04
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,23 +13,30 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Audyt Code Review & Physics Audit modułu Aero-Hydro 2.0 (Fate / FMG).
+- **Aktywny Wątek:** Wdrożenie pakietu poprawek P0/P1 dla podsystemu Aero-Hydro w Fantasy Map Generator oraz ustalenie architektury steady-state (odrzucenie sezonowości w silniku fizycznym).
 - **Zrealizowane Zadania:**
-  1. **Pełny audyt 4-filarowy modułu Aero-Hydro** (algorytmy, edytory, wizualizacja, zgodność z fizyką Ziemi/Fate/Azgaar FMG) → raport: `labs/Fantasy-Map-Generator-experimental/AERO_HYDRO_AUDIT_2026-09-01.md` (18 ustaleń A-01…A-18, backlog P0/P1/P2, plan testów T-*).
-  2. **P0 wykryte w audycie:** (a) podejrzenie odwróconego znaku rotacji Ekmana (`ocean-engine.ts:90`), (b) skala geostroficzna w hPa/komórkę → wiatr zależny od rozdzielczości siatki (`atmosphere-engine.ts`), (c) trzy różne stałe prec→mm (40/45/55) rozspajające bilans opad→rzeki→biomy.
-  3. **P1 kluczowe:** Coriolis odwrócony przy równiku (geostrofia najsilniejsza przy f→0), Western Intensification od pozycji na mapie zamiast krawędzi basenu, „Fate-izmy" hardkodowane w ścieżkach generycznych (fallback współrzędnych Fate w `temperature-engine.ts`), „Priority-Flood" bez kolejki priorytetowej, `cells.fl` nadpisywane m³/s niezgodnie z semantyką FMG.
-  4. Potwierdzone mocne strony: serializacja `data[52]` (wzorcowa), silnik wilgoci (Dijkstra upwind + Smith-Barstad + Föhn), edytor z live recompute żetonów H/L.
+  1. **Decyzja produktowa:** Potwierdzenie modelu stacjonarnego (steady-state, średniorocznego). Sezonalność odrzucona z silnika fizycznego — ewentualne sezony będą wyłącznie lekką nakładką wizualną (post-process shader/filtr) w przyszłości.
+  2. **[A-09] Bezpieczna hydrologia:** Wdrożono zapis fizycznego przepływu $Q$ do dedykowanego `cells.flAero: Float32Array` oraz rzędowości Strahlera do `cells.strahlerAero: Uint8Array`. Ochroniono natywną tablicę `grid.cells.fl` przed korupcją jednostek FMG. Zaktualizowano test jednostkowy `hydrology-engine.test.ts`.
+  3. **[A-20] Naprawa buga tęczy podczas dragu:** Zastąpiono błędne `updatePressureColorsOnly` poprawnym rebuildingiem wiader ścieżek `updatePressureHeatmap()` w `draw-pressure.ts`. Wprowadzono koalescencję zdarzeń myszy przez `requestAnimationFrame` (60 FPS podczas ruchu żetonu) oraz statyczny import `drawWinds`.
+  4. **[A-21] UI i kontrolki wilgoci:** W `aero-hydro-editor.ts` dodano dedykowaną kontrolkę `condensationRateInput` spiętą z `options.moistureAdvection.condensationRate`, porządkując etykietę dla blokady orograficznej. Zaktualizowano test `aero-hydro-editor.test.ts`.
+  5. **Optymalizacja wydajnościowa:** Wyeliminowano alokację 100 000 tablic tymczasowych na klatkę (`Math.max(...neigh.map(...))`) w `atmosphere-engine.ts`.
+  6. **Weryfikacja testowa:** Zestaw 55 plików testowych (452 testy) przechodzi w 100% na zielono (`vitest`).
 
 ## Ostatnio Modyfikowane Notatki i Pliki
-- `labs/Fantasy-Map-Generator-experimental/AERO_HYDRO_AUDIT_2026-09-01.md` (**NOWY** — główny wynik sesji)
+- `src/generators/aero-hydro/hydrology-engine.ts`
+- `src/generators/aero-hydro/hydrology-engine.test.ts`
+- `src/renderers/aero-hydro/draw-pressure.ts`
+- `src/controllers/aero-hydro-editor.ts`
+- `src/controllers/aero-hydro-editor.test.ts`
+- `src/generators/aero-hydro/atmosphere-engine.ts`
 - `90_Meta/hot.md`
-- `90_Meta/sessions/2026-09-01-*.md`
 
 ## Następne Kroki
-- [ ] Naprawa P0: znak Ekmana (A-01) + skala wiatru w km (A-02) + jedna stała prec→mm (A-03) — z testami T-OC-1, T-AT-4, T-MO-3
-- [ ] Dekontaminacja Fate (A-06): generyczne fallbacki `mapCoordinates` + źródła wilgoci dla dowolnej krawędzi mapy
-- [ ] Priority-Flood Barnes 2014 zamiast iteracyjnego raise (A-08); rozdzielenie `cells.fl` vs `flAero` (A-09)
-- [ ] Prawdziwe izobary (marching squares) zamiast kropek (A-10); RK2 w streamline'ach (A-11)
+- [ ] Priority-Flood Barnes 2014 zamiast iteracyjnego podnoszenia + jeziora endoreiczne (A-08)
+- [ ] Gradient FVM Green-Gauss / LSQ na siatce Voronoi w `grid-math.ts` (A-19)
+- [ ] Ujednolicenie skali mapy z cos(midLat) we wszystkich silnikach (atmosfera vs wilgoć)
+- [ ] Warstwa intencji: piny biomów chronione przed nadpisaniem przy recompute klimatu
+
 
 
 
