@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-09-04
+updated: 2026-09-05
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,29 +13,42 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Wdrożenie pakietu poprawek P0/P1 dla podsystemu Aero-Hydro w Fantasy Map Generator oraz ustalenie architektury steady-state (odrzucenie sezonowości w silniku fizycznym).
+- **Aktywny Wątek:** Integracja uwag z nowego audytu kodu `aero-hydro-system-architecture-review(1)` (ustalenia CV-1 do CV-9) w eksperymentalnym labie FMG.
 - **Zrealizowane Zadania:**
-  1. **Decyzja produktowa:** Potwierdzenie modelu stacjonarnego (steady-state, średniorocznego). Sezonalność odrzucona z silnika fizycznego — ewentualne sezony będą wyłącznie lekką nakładką wizualną (post-process shader/filtr) w przyszłości.
-  2. **[A-09] Bezpieczna hydrologia:** Wdrożono zapis fizycznego przepływu $Q$ do dedykowanego `cells.flAero: Float32Array` oraz rzędowości Strahlera do `cells.strahlerAero: Uint8Array`. Ochroniono natywną tablicę `grid.cells.fl` przed korupcją jednostek FMG. Zaktualizowano test jednostkowy `hydrology-engine.test.ts`.
-  3. **[A-20] Naprawa buga tęczy podczas dragu:** Zastąpiono błędne `updatePressureColorsOnly` poprawnym rebuildingiem wiader ścieżek `updatePressureHeatmap()` w `draw-pressure.ts`. Wprowadzono koalescencję zdarzeń myszy przez `requestAnimationFrame` (60 FPS podczas ruchu żetonu) oraz statyczny import `drawWinds`.
-  4. **[A-21] UI i kontrolki wilgoci:** W `aero-hydro-editor.ts` dodano dedykowaną kontrolkę `condensationRateInput` spiętą z `options.moistureAdvection.condensationRate`, porządkując etykietę dla blokady orograficznej. Zaktualizowano test `aero-hydro-editor.test.ts`.
-  5. **Optymalizacja wydajnościowa:** Wyeliminowano alokację 100 000 tablic tymczasowych na klatkę (`Math.max(...neigh.map(...))`) w `atmosphere-engine.ts`.
-  6. **Weryfikacja testowa:** Zestaw 55 plików testowych (452 testy) przechodzi w 100% na zielono (`vitest`).
+  1. **Audyt ustaleń `review(1)` (CV-1 do CV-9):**
+     - Zweryfikowano status każdego ustalenia z nowego modułu `CodeVerification`: CV-1 (unifikacja MM_PER_PREC=55), CV-3 (heurystyka zachodniego brzegu vs Stommel), CV-4 (saturacja Michaelisa-Mentena orografii), CV-6 (decay SST 375 km).
+     - Utrzymano twardą regułę właściciela: **odrzucenie sezonowości fizycznej (Pivot 3 / F-09)** na rzecz modelu steady-state.
+  2. **[CV-2 / P0] Likwidacja nadpisywania klimatu w `public/main.js`:**
+     - Zidentyfikowano i usunięto krytyczny błąd: `public/main.js` w funkcji `generateMap()` wywoływało `generateAeroHydro()`, a natychmiast potem uruchamiało legacy `calculateTemperatures()` i `generatePrecipitation()`, które nadpisywały wyliczone pola `cells.temp` i `cells.prec` starymi procedurami z 2018 roku.
+     - Zarejestrowano `TemperatureEngine` i `MoistureAdvectionEngine` na obiekcie `window` i `globalThis` w `src/generators/aero-hydro/index.ts`.
+     - Zaktualizowano `calculateTemperatures()` i `generatePrecipitation()` w `public/main.js`, aby delegowały do nowych silników fizycznych.
+  3. **[CV-5 / F-05 / P1] Ciągłe pole Float32 `precipMm` w Biomach i Hydrologii:**
+     - Zmodyfikowano `BiomesGenerator.define()` w `biomes-generator.ts`, aby bezpośrednio konsumowało pole `grid.cells.precipMm` (Float32Array) z AeroHydro, eliminując skokową kwantyzację 55 mm i sztuczne przeskoki na progach pustyń (124/125 mm).
+     - Zaktualizowano `HydrologyEngine` do czytania `precipMm` z pełną precyzją.
+  4. **[CV-7 / F-02 / P1] Barnes (2014) Priority-Flood w `HydrologyEngine`:**
+     - Zastąpiono uproszczony 30-przebiegowy relaksator pełnym algorytmem Priority-Flood Barnesa (2014) opartym na min-kopcu `BinaryHeap` ($O(N \log N)$).
+     - Wypełnianie depresji gwarantuje brak bezodpływowych dziur, eliminuje sztuczny spadek `+0.05` i zapewnia monotoniczny drenaż do oceanu.
+     - Wyekstrahowano czystą klasę narzędziową `src/utils/binary-heap.ts` wraz z testami `binary-heap.test.ts`.
+  5. **Weryfikacja testowa:**
+     - Wszystkie 56 plików testowych (456 testów) przechodzi w 100% na zielono w `vitest`.
+     - Zmiany zatwierdzone commitem `6f423328` w repozytorium `labs/Fantasy-Map-Generator-experimental`.
 
 ## Ostatnio Modyfikowane Notatki i Pliki
+- `public/main.js`
+- `src/generators/aero-hydro/index.ts`
 - `src/generators/aero-hydro/hydrology-engine.ts`
 - `src/generators/aero-hydro/hydrology-engine.test.ts`
-- `src/renderers/aero-hydro/draw-pressure.ts`
-- `src/controllers/aero-hydro-editor.ts`
-- `src/controllers/aero-hydro-editor.test.ts`
-- `src/generators/aero-hydro/atmosphere-engine.ts`
+- `src/generators/aero-hydro/moisture-advection-engine.ts`
+- `src/generators/biomes-generator.ts`
+- `src/utils/binary-heap.ts`
+- `src/utils/binary-heap.test.ts`
 - `90_Meta/hot.md`
 
 ## Następne Kroki
-- [ ] Priority-Flood Barnes 2014 zamiast iteracyjnego podnoszenia + jeziora endoreiczne (A-08)
-- [ ] Gradient FVM Green-Gauss / LSQ na siatce Voronoi w `grid-math.ts` (A-19)
-- [ ] Ujednolicenie skali mapy z cos(midLat) we wszystkich silnikach (atmosfera vs wilgoć)
+- [ ] Opcjonalne wsparcie dla basenów bezodpływowych (endorheic sinks) przy skrajnym ujemnym bilansie wodnym
+- [ ] Ujednolicenie skali mapy z cos(midLat) w `moisture-advection-engine.ts`
 - [ ] Warstwa intencji: piny biomów chronione przed nadpisaniem przy recompute klimatu
+
 
 
 

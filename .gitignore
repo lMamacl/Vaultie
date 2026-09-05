@@ -8,6 +8,7 @@
 .DS_Store
 .qmd/
 .env
+node_modules/
 
 # Labs — artefakty build (źródła labu commitowane)
 labs/**/node_modules/
