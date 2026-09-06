@@ -33,5 +33,6 @@ Commitujemy źródła labu. Ignorujemy: `node_modules/`, `bin/`, `obj/`, `.env`,
 | 1.2+ | — | Po realizacji lekcji |
 | Fantasy Map Generator | [Fantasy-Map-Generator-experimental](Fantasy-Map-Generator-experimental/) | Submoduł badawczo-eksperymentalny |
 | Poland Statecraft | [poland-statecraft](poland-statecraft/) | Symulator systemowy & Drzewo reform Polski 2026+ |
+| HitTimline | [HitTimline](HitTimline/) | Submoduł gry muzycznej Android (Kotlin, Compose, Ktor, Spotify) |
 
 Mapa lekcji: [`90_Meta/web-engineering-roadmap.md`](../90_Meta/web-engineering-roadmap.md)
