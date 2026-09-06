@@ -32,5 +32,6 @@ Commitujemy źródła labu. Ignorujemy: `node_modules/`, `bin/`, `obj/`, `.env`,
 | 1.1 Ideation / FR-NFR | [web-engineering/1.1](web-engineering/1.1/) | Aktywny |
 | 1.2+ | — | Po realizacji lekcji |
 | Fantasy Map Generator | [Fantasy-Map-Generator-experimental](Fantasy-Map-Generator-experimental/) | Submoduł badawczo-eksperymentalny |
+| Poland Statecraft | [poland-statecraft](poland-statecraft/) | Symulator systemowy & Drzewo reform Polski 2026+ |
 
 Mapa lekcji: [`90_Meta/web-engineering-roadmap.md`](../90_Meta/web-engineering-roadmap.md)

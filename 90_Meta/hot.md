@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-09-05
+updated: 2026-09-06
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,7 +13,13 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Integracja uwag z nowego audytu kodu `aero-hydro-system-architecture-review(1)` (ustalenia CV-1 do CV-9) w eksperymentalnym labie FMG.
+- **Aktywny Wątek:** `labs/poland-statecraft/` — uruchomienie symulatora systemowego i drzewa reform polityczno-społecznych Polski (Polska 2026+).
+- **Zrealizowane Zadania:**
+  1. **Architektura 6 Filarów i Reguł Gry:** Utworzono `labs/poland-statecraft/README.md`, `config/actors.json` oraz `config/simulation-rules.json` (zasada 30% budżetu, próg buntu 3.0%, limit przepustowości administracji, mechanizm archetypów rządu).
+  2. **Dossiers 12 Węzłów Reform (Karty Markdown):** Opracowano szczegółowe karty analityczne dla 6 filarów z danymi na 2026 rok, wariantami decyzyjnymi A/B/C i sprzężeniami zwrotnymi.
+  3. **Wizualne Drzewo Obsidian Canvas:** Wygenerowano `labs/poland-statecraft/canvases/poland_statecraft_tree.canvas` integrujący notatki z grupami kolorystycznymi i krawędziami prerekwizytów.
+  4. **Interaktywny Panel HTML5/JS:** Zbudowano `labs/poland-statecraft/web-panel/index.html` z dynamicznym przeliczaniem budżetu, KP, wskaźnika buntu (3%) i reakcji 8 frakcji.
+- **Poprzedni Wątek:** Integracja uwag z nowego audytu kodu `aero-hydro-system-architecture-review(1)` w eksperymentalnym labie FMG.
 - **Zrealizowane Zadania:**
   1. **Audyt ustaleń `review(1)` (CV-1 do CV-9):**
      - Zweryfikowano status każdego ustalenia z nowego modułu `CodeVerification`: CV-1 (unifikacja MM_PER_PREC=55), CV-3 (heurystyka zachodniego brzegu vs Stommel), CV-4 (saturacja Michaelisa-Mentena orografii), CV-6 (decay SST 375 km).
