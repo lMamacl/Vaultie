@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-09-06
+updated: 2026-09-09
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,10 +13,15 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** `labs/HitTimline/` — rejestracja projektu gry muzycznej na Androida jako submodułu Git w `labs/`.
+- **Aktywny Wątek:** Modernizacja i audyt globalnych skilli Antigravity IDE (AAS v17.0.0 + Context7).
 - **Zrealizowane Zadania:**
-  1. **Podpięcie submodułu:** Skonfigurowano `git submodule add https://github.com/cyunczykg/HitTimline.git labs/HitTimline`.
-  2. **Aktualizacja spisu:** Zaktualizowano `labs/README.md` oraz `.gitmodules`.
+  1. **Audyt i czyszczenie:** Wykonano pełen backup `skills_backup_20260909` (196 starych folderów). Usunięto martwe i zduplikowane skille, zwolniono zablokowany budżet kontekstu tokenów.
+  2. **Wyłączenie pluginu `science`:** Przeniesiono 32 nieużywane w codziennym kodowaniu skille bioinformatyczne do `plugins_disabled/science`.
+  3. **Wdrożenie AAS v17.0.0:** Pobrano oficjalne repozytorium do `skills_repo/` i zsynchronizowano pełną bibliotekę 2017+ skilli w `skills_library/`.
+  4. **Instalacja `context-7`:** Wdrożono skill wyszukiwania bieżącej dokumentacji REST API (z natywnym wrapperem Python + bash).
+  5. **Aktywacja wyselekcjonowanego zestawu (113 skilli):** Wdrożono paczki Essentials, Web Wizard, Systems Programming, Architecture, Security, DDD, OSS Maintainer, Mobile oraz zachowano skille customowe (`academic-thesis-auditor`, `tauri-ipc-architecture`, `canvas-performance`).
+  6. **Narzędzia zarządzania:** Utworzono skrypty `scripts/activate-skills.bat` oraz `scripts/manage-skills.ps1` do szybkiego przełączania i warstwowania paczek.
+- **Poprzedni Wątek:** `labs/HitTimline/` — rejestracja projektu gry muzycznej na Androida jako submodułu Git w `labs/`.
 - **Poprzedni Wątek:** `labs/poland-statecraft/` — uruchomienie symulatora systemowego i drzewa reform polityczno-społecznych Polski (Polska 2026+).
 - **Zrealizowane Zadania:**
   1. **Audyt ustaleń `review(1)` (CV-1 do CV-9):**
