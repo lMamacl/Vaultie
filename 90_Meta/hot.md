@@ -13,7 +13,13 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek:** Modernizacja i audyt globalnych skilli Antigravity IDE (AAS v17.0.0 + Context7).
+- **Aktywny Wątek (2026-09-10):** Weryfikacja systemu Aero-Hydro w `labs/Fantasy-Map-Generator-experimental` — analiza modułowa, decyzje ulepszenie/przebudowa, prototyp wizualizacji.
+- **Bieżące artefakty:** `00_Inbox/fmg-aero-hydro-analiza-2026-09-10.md`, `00_Inbox/fmg-aero-hydro-podsumowanie-decyzje-2026-09-10.md`, `00_Inbox/fmg-aero-hydro-prototyp-2026-09-10.html`.
+- **Zrealizowane Zadania:**
+  1. **Weryfikacja stanu:** potwierdzono naprawy P0 z audytu 2026-09-01 (Ekman, skala wiatru w km, jedna stała 55, Barnes Priority-Flood, izolacja `flAero`, delegacja temp/opadu, `precipMm` w biomach); podzbiór krytyczny 12 plików / 69 testów przechodzi w 100%.
+  2. **Dokumenty:** `00_Inbox/fmg-aero-hydro-analiza-2026-09-10.md` (analiza), `00_Inbox/fmg-aero-hydro-podsumowanie-decyzje-2026-09-10.md` (decyzje + plan wdrożenia), `00_Inbox/fmg-aero-hydro-prototyp-2026-09-10.html` (zamrożony prototyp SVG). Rekomendacja globalna: ulepszenie ukierunkowane, bez generalnej przebudowy; do przeprojektowania tylko wzmocnienie zachodnie oceanu i panel edytora.
+  3. **Sesja:** `90_Meta/sessions/2026-09-10-1130.md`. Nie commitowano.
+- **Poprzedni Wątek:** Modernizacja i audyt globalnych skilli Antigravity IDE (AAS v17.0.0 + Context7).
 - **Zrealizowane Zadania:**
   1. **Audyt i czyszczenie:** Wykonano pełen backup `skills_backup_20260909` (196 starych folderów). Usunięto martwe i zduplikowane skille, zwolniono zablokowany budżet kontekstu tokenów.
   2. **Wyłączenie pluginu `science`:** Przeniesiono 32 nieużywane w codziennym kodowaniu skille bioinformatyczne do `plugins_disabled/science`.
@@ -57,7 +63,6 @@ up: "[[90_Meta/_index]]"
 - [ ] Opcjonalne wsparcie dla basenów bezodpływowych (endorheic sinks) przy skrajnym ujemnym bilansie wodnym
 - [ ] Ujednolicenie skali mapy z cos(midLat) w `moisture-advection-engine.ts`
 - [ ] Warstwa intencji: piny biomów chronione przed nadpisaniem przy recompute klimatu
-
 
 
 
