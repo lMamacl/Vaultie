@@ -117,3 +117,8 @@ Prototyp znajduje się w:
 `00_Inbox/fmg-aero-hydro-prototyp-2026-09-10.html`
 
 Jest zamrożoną wizualizacją kierunku, nie deklaracją gotowej implementacji WebGL.
+Po porównaniu z uruchomionym FMG prototyp został skorygowany: używa układu
+pełnoekranowej mapy, małego panelu pływającego w lewym górnym rogu, zakładek
+`Layers / Style / Options / Tools / About`, siatki istniejących warstw oraz
+dolnego paska skali i statusu. Aero-Hydro jest przedstawiony jako dodatkowa
+sekcja wewnątrz panelu Layers, a nie jako osobna aplikacja.

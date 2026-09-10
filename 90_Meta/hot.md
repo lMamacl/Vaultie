@@ -14,7 +14,7 @@ up: "[[90_Meta/_index]]"
 
 ## Bieżący Punkt Skupienia
 - **Aktywny Wątek (2026-09-10):** Weryfikacja systemu Aero-Hydro w `labs/Fantasy-Map-Generator-experimental` — analiza modułowa, decyzje ulepszenie/przebudowa, prototyp wizualizacji.
-- **Bieżące artefakty:** `00_Inbox/fmg-aero-hydro-analiza-2026-09-10.md`, `00_Inbox/fmg-aero-hydro-podsumowanie-decyzje-2026-09-10.md`, `00_Inbox/fmg-aero-hydro-prototyp-2026-09-10.html`.
+- **Bieżące artefakty:** `00_Inbox/fmg-aero-hydro-analiza-2026-09-10.md`, `00_Inbox/fmg-aero-hydro-podsumowanie-decyzje-2026-09-10.md`, `00_Inbox/fmg-aero-hydro-prototyp-2026-09-10.html`. Prototyp skorygowano po zrzutach rzeczywistego FMG: jest teraz statycznym overlayem panelu `Layers` na pełnoekranowej mapie.
 - **Zrealizowane Zadania:**
   1. **Weryfikacja stanu:** potwierdzono naprawy P0 z audytu 2026-09-01 (Ekman, skala wiatru w km, jedna stała 55, Barnes Priority-Flood, izolacja `flAero`, delegacja temp/opadu, `precipMm` w biomach); podzbiór krytyczny 12 plików / 69 testów przechodzi w 100%.
   2. **Dokumenty:** `00_Inbox/fmg-aero-hydro-analiza-2026-09-10.md` (analiza), `00_Inbox/fmg-aero-hydro-podsumowanie-decyzje-2026-09-10.md` (decyzje + plan wdrożenia), `00_Inbox/fmg-aero-hydro-prototyp-2026-09-10.html` (zamrożony prototyp SVG). Rekomendacja globalna: ulepszenie ukierunkowane, bez generalnej przebudowy; do przeprojektowania tylko wzmocnienie zachodnie oceanu i panel edytora.
@@ -63,7 +63,6 @@ up: "[[90_Meta/_index]]"
 - [ ] Opcjonalne wsparcie dla basenów bezodpływowych (endorheic sinks) przy skrajnym ujemnym bilansie wodnym
 - [ ] Ujednolicenie skali mapy z cos(midLat) w `moisture-advection-engine.ts`
 - [ ] Warstwa intencji: piny biomów chronione przed nadpisaniem przy recompute klimatu
-
 
 
 

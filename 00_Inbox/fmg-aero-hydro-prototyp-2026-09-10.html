@@ -3,126 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fantasy Map Generator — Aero-Hydro static view</title>
+  <title>FMG — Aero-Hydro overlay prototype</title>
   <style>
-    :root { --ui:#f4f4f4; --line:#b8b8b8; --text:#333; --muted:#777; --accent:#b44c36; }
+    :root { --panel:rgba(255,245,250,.82); --panel-strong:rgba(255,247,251,.94); --ink:#332a31; --line:#a98e9f; --active:#9f728d; --blue:#638fbf; --violet:#79639a; --cyan:#4d9da8; --gold:#b4883e; }
     * { box-sizing:border-box; }
-    html, body { width:100%; height:100%; margin:0; overflow:hidden; font:10px Arial, sans-serif; color:var(--text); }
-    body { background:#111; }
-    #map { position:absolute; inset:0; width:100%; height:100%; background:#d7e6e7; }
-    .map-bg { fill:#c8e0e2; }
-    .land { fill:#dfd3a6; stroke:#806f57; stroke-width:1.2; }
-    .land.alt { fill:#d1c28e; }
-    .lake { fill:#8dbcc6; stroke:#577f86; stroke-width:1; }
-    .river { fill:none; stroke:#477f9d; stroke-width:2.2; stroke-linecap:round; opacity:.88; }
-    .river.minor { stroke-width:1; opacity:.72; }
-    .border { fill:none; stroke:#9b594f; stroke-width:1.4; stroke-dasharray:4 2; opacity:.8; }
-    .wind { fill:none; stroke:#725a9a; stroke-width:1.2; opacity:.7; marker-end:url(#arrow); }
-    .isobar { fill:none; stroke:#8069a8; stroke-width:.9; stroke-dasharray:5 3; opacity:.72; }
-    .label { fill:#4b4037; font-family:Georgia, serif; text-anchor:middle; pointer-events:none; }
-    .label.state { font-size:15px; letter-spacing:2px; opacity:.7; }
-    .label.city { font-size:11px; }
-    .city { fill:#7e4535; stroke:#fff; stroke-width:1; }
-    #topbar { position:absolute; top:0; left:0; right:0; height:33px; display:flex; align-items:center; background:rgba(245,245,245,.94); border-bottom:1px solid #aaa; box-shadow:0 1px 3px #3335; }
-    #title { padding:0 12px; font-weight:bold; font-size:12px; }
-    #topbar button, #tabs button, #options button, select { font:inherit; color:var(--text); background:#fafafa; border:1px solid #aaa; border-radius:2px; }
-    #topbar button { height:23px; margin-left:3px; padding:0 8px; }
-    #topbar button:hover, #tabs button.active, #options button.active { background:#e5e5e5; border-color:#888; }
-    #map-controls { position:absolute; left:8px; top:43px; display:grid; gap:3px; }
-    .map-control { width:27px; height:27px; border:1px solid #aaa; background:#f7f7f7dd; font-weight:bold; box-shadow:0 1px 2px #3335; }
-    #scale { position:absolute; left:12px; bottom:36px; padding:3px 5px; background:#fff9; border:1px solid #999; }
-    #legend { position:absolute; left:12px; bottom:67px; width:142px; padding:7px; background:#f5f5f5e8; border:1px solid #aaa; box-shadow:0 1px 3px #3335; }
-    #legend b { display:block; margin-bottom:5px; }
-    .key { display:flex; align-items:center; gap:5px; margin:3px 0; }
-    .swatch { width:16px; height:3px; background:#477f9d; } .swatch.pressure { background:#8069a8; border-top:1px dashed #8069a8; } .swatch.border { background:#9b594f; }
-    #options { position:absolute; top:33px; right:0; bottom:0; width:300px; background:#f7f7f7f2; border-left:1px solid #aaa; box-shadow:-2px 0 6px #3334; overflow:auto; }
-    #tabs { display:flex; padding:5px 5px 0; border-bottom:1px solid #aaa; background:#eee; }
-    #tabs button { flex:1; height:25px; border-bottom-left-radius:0; border-bottom-right-radius:0; }
-    .content { padding:9px 10px; }
-    .hint { color:var(--muted); margin:5px 0 9px; line-height:1.35; }
-    select { height:21px; width:100%; }
-    .section { border-top:1px solid #ccc; padding:9px 0; }
-    .section:first-of-type { border-top:0; }
-    .section-title { font-weight:bold; margin-bottom:6px; }
-    ul { list-style:none; padding:0; margin:0; border:1px solid #ccc; background:#fff; }
-    li { display:flex; justify-content:space-between; padding:5px 6px; border-bottom:1px solid #ddd; }
-    li:last-child { border:0; } li.active { background:#e9e9e9; font-weight:bold; }
-    .eye { color:#555; }
-    .row { display:grid; grid-template-columns:1fr 94px; align-items:center; gap:8px; margin:7px 0; }
-    input[type=range] { width:100%; accent-color:#777; }
-    .notice { padding:7px; background:#eee; border-left:3px solid var(--accent); line-height:1.35; }
-    .button-row { display:flex; gap:5px; margin-top:8px; } .button-row button { flex:1; padding:5px; }
-    #status { position:absolute; left:0; right:300px; bottom:0; height:25px; display:flex; justify-content:space-between; align-items:center; padding:0 9px; background:#f4f4f4e8; border-top:1px solid #aaa; color:#555; }
-    @media (max-width:700px) { #options { width:260px; } #status { right:260px; } #title { display:none; } }
+    html,body { width:100%; height:100%; margin:0; overflow:hidden; }
+    body { color:var(--ink); font:14px Georgia, "Times New Roman", serif; background:#8aaad6; }
+    #map { position:fixed; inset:0; overflow:hidden; background:linear-gradient(145deg,#91b0dc 0%,#7798ca 46%,#9bb5dc 100%); }
+    #map:before { content:""; position:absolute; inset:-10%; opacity:.17; background:repeating-linear-gradient(8deg,transparent 0 8px,rgba(255,255,255,.22) 9px 10px,transparent 11px 18px); transform:rotate(-7deg); }
+    .land { position:absolute; background:#e8eed5; border:2px solid rgba(255,255,255,.62); box-shadow:0 0 0 9px rgba(232,238,213,.18), 0 0 0 18px rgba(232,238,213,.1); }
+    .north { width:51%; height:31%; right:4%; top:4%; border-radius:44% 51% 38% 58%; transform:rotate(7deg); }
+    .south { width:27%; height:57%; right:9%; bottom:3%; border-radius:42% 56% 41% 51%; transform:rotate(16deg); background:#dceacb; }
+    .island { width:15%; height:19%; left:29%; bottom:11%; border-radius:46% 57% 42% 55%; transform:rotate(-12deg); }
+    .island2 { width:9%; height:12%; left:17%; bottom:27%; border-radius:55% 38% 61% 44%; transform:rotate(22deg); }
+    .political { position:absolute; inset:0; opacity:.48; background:linear-gradient(28deg,transparent 0 18%,#eab7b8 18.2% 28%,transparent 28.3% 43%,#d8e5bb 43.3% 58%,transparent 58.4% 72%,#efdca8 72.3% 84%,transparent 84.3%); mix-blend-mode:multiply; }
+    .label { position:absolute; color:#54444a; font-size:clamp(18px,2.4vw,38px); letter-spacing:.04em; text-align:center; text-shadow:0 1px #fff; }
+    .l1 { right:17%; top:16%; transform:rotate(-4deg); } .l2 { right:23%; top:43%; transform:rotate(8deg); } .l3 { right:9%; bottom:20%; transform:rotate(12deg); }
+    .river { position:absolute; height:2px; background:#6393b7; transform-origin:left; opacity:.8; border-radius:100%; }
+    .r1 { width:24%; right:22%; top:35%; transform:rotate(118deg); } .r2 { width:17%; right:17%; top:55%; transform:rotate(102deg); } .r3 { width:13%; right:32%; top:64%; transform:rotate(72deg); }
+    .overlay { position:absolute; left:14px; top:14px; width:min(420px,calc(100vw - 28px)); max-height:calc(100vh - 28px); overflow:auto; background:var(--panel); border:1px solid #765f6d; box-shadow:0 3px 14px rgba(49,34,47,.28); backdrop-filter:blur(3px); }
+    .tabs { height:38px; display:flex; align-items:stretch; border-bottom:1px solid var(--line); background:rgba(177,142,159,.72); }
+    .tabs button { border:0; border-right:1px solid rgba(118,93,109,.35); background:transparent; color:var(--ink); padding:0 16px; font:italic 15px Georgia,serif; cursor:pointer; }
+    .tabs button.active { background:var(--panel-strong); font-weight:bold; }
+    .content { padding:10px 16px 12px; }
+    .row { display:flex; align-items:center; gap:8px; margin:7px 0; }
+    .row label { font-style:italic; min-width:104px; } select,input { font:14px Georgia,serif; color:var(--ink); } select { flex:1; background:#fff; border:1px solid #876e7d; padding:3px 5px; }
+    .hint { font-size:12px; font-style:italic; color:#665760; margin:6px 0; }
+    .layer-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin:8px 0 7px; }
+    .layer { min-height:27px; padding:5px 3px; border:1px solid rgba(165,137,151,.35); background:rgba(218,198,209,.55); text-align:center; font-size:12px; cursor:pointer; }
+    .layer.on { background:rgba(163,115,142,.74); color:#201820; text-decoration:underline; }
+    .section { border-top:1px solid rgba(139,111,126,.6); margin:10px -16px 0; padding:9px 16px 0; }
+    .section h3 { margin:0 0 7px; font-size:14px; font-style:italic; }
+    .control { display:grid; grid-template-columns:1fr 115px 42px; gap:7px; align-items:center; margin:7px 0; font-size:12px; }
+    input[type=range] { width:100%; accent-color:var(--active); }
+    .value { font:12px ui-monospace,monospace; text-align:right; }
+    .buttons { display:flex; gap:5px; border-top:1px solid rgba(139,111,126,.5); padding-top:9px; margin-top:10px; }
+    .buttons button { flex:1; border:0; background:rgba(209,184,198,.8); padding:5px 3px; color:var(--ink); font:13px Georgia,serif; cursor:pointer; }
+    .buttons button.primary { background:#8f657d; color:#fff; }
+    .climate-badge { display:inline-block; border:1px solid var(--violet); color:#55426f; padding:2px 5px; font-size:11px; margin-left:4px; }
+    .legend { position:absolute; right:17px; bottom:40px; padding:7px 10px; background:rgba(255,248,247,.78); border:1px solid #8e7781; font-size:12px; line-height:1.55; }
+    .legend span { white-space:nowrap; margin-right:8px; }
+    .wind { position:absolute; color:rgba(255,255,255,.72); font-size:20px; letter-spacing:13px; transform:rotate(-18deg); }
+    .w1 { left:42%; top:15%; } .w2 { right:16%; top:70%; transform:rotate(13deg); }
+    .status { position:absolute; left:14px; bottom:12px; color:#fff; font:12px ui-monospace,monospace; text-shadow:0 1px 2px #314a6d; }
+    .scale { position:absolute; right:20px; bottom:13px; color:#332a31; font:12px Georgia,serif; border-bottom:3px solid #332a31; width:220px; padding-bottom:2px; text-align:right; }
+    @media (max-width:650px) { .overlay { width:calc(100vw - 28px); } .layer-grid { grid-template-columns:repeat(3,1fr); } .legend { display:none; } }
   </style>
 </head>
 <body>
-  <svg id="map" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice" aria-label="Static Fantasy Map Generator preview">
-    <defs>
-      <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7z" fill="#725a9a"/></marker>
-      <filter id="paper"><feTurbulence baseFrequency=".02" numOctaves="2" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feBlend in="SourceGraphic" mode="multiply"/></filter>
-    </defs>
-    <rect class="map-bg" width="1200" height="760"/>
-    <g id="viewbox">
-      <path class="land" d="M146 130 C220 75 326 111 372 164 C419 218 479 189 527 237 C574 285 531 342 582 382 C632 420 622 495 560 530 C490 570 421 535 365 584 C302 638 225 592 212 529 C198 465 139 430 157 366 C173 303 102 260 146 130z"/>
-      <path class="land alt" d="M745 110 C828 57 929 102 975 160 C1025 224 1091 225 1085 302 C1079 365 1012 381 1011 443 C1010 518 943 585 864 553 C799 527 760 469 702 441 C652 416 669 354 713 314 C749 281 700 211 745 110z"/>
-      <path class="lake" d="M300 235 C331 211 373 224 387 253 C376 282 333 289 303 273 C290 261 290 247 300 235z"/>
-      <path class="lake" d="M822 397 C853 373 897 382 905 412 C891 437 846 441 821 424z"/>
-      <path class="river" d="M319 119 C342 183 344 228 343 253 C341 291 372 323 399 357 C420 383 412 435 449 468 C468 484 477 509 493 537"/>
-      <path class="river minor" d="M344 254 C311 286 304 326 286 363 C273 390 244 407 236 445"/>
-      <path class="river minor" d="M399 357 C370 367 350 394 337 426"/>
-      <path class="river" d="M861 113 C837 177 847 230 824 282 C804 326 781 357 805 400 C827 437 829 484 864 552"/>
-      <path class="river minor" d="M824 282 C872 286 906 307 948 342"/>
-      <path class="border" d="M157 366 C233 337 292 351 344 398 C390 438 453 423 521 451"/>
-      <path class="border" d="M710 314 C773 337 829 321 884 345 C934 367 974 356 1012 333"/>
-      <ellipse class="isobar" cx="585" cy="205" rx="176" ry="75"/><ellipse class="isobar" cx="585" cy="205" rx="115" ry="47"/>
-      <path class="wind" d="M423 174 C501 135 605 128 698 157"/><path class="wind" d="M475 220 C554 188 642 190 714 218"/>
-      <path class="wind" d="M560 534 C637 570 722 578 784 549"/>
-      <text class="label state" x="270" y="177">NORTHMARK</text><text class="label state" x="890" y="178">VALERION</text>
-      <circle class="city" cx="344" cy="253" r="5"/><text class="label city" x="373" y="250">Aldermere</text>
-      <circle class="city" cx="493" cy="537" r="5"/><text class="label city" x="520" y="543">Ravenport</text>
-      <circle class="city" cx="824" cy="282" r="5"/><text class="label city" x="855" y="276">Aethelburg</text>
-      <circle class="city" cx="864" cy="552" r="5"/><text class="label city" x="895" y="559">Southwatch</text>
-    </g>
-  </svg>
-  <header id="topbar">
-    <span id="title">Fantasy Map Generator</span>
-    <button>New Map</button><button>Load</button><button>Save</button><button>Tools</button>
-    <span style="flex:1"></span><button>ⓘ</button><button>?</button>
-  </header>
-  <div id="map-controls"><button class="map-control">+</button><button class="map-control">−</button><button class="map-control">⌂</button></div>
-  <div id="legend"><b>Aero-Hydro preview</b><div class="key"><i class="swatch"></i> Rivers</div><div class="key"><i class="swatch pressure"></i> Pressure field</div><div class="key"><i class="swatch border"></i> State borders</div></div>
-  <div id="scale">1000 km</div>
-  <aside id="options">
-    <div id="tabs"><button>Layers</button><button>Style</button><button class="active">Options</button><button>Tools</button><button>About</button></div>
-    <div class="content">
-      <div class="section">
-        <div class="section-title">Aero-Hydro climate editor</div>
-        <div class="hint">Static preview of the existing FMG options panel. Changes are grouped by the map data they affect.</div>
-        <select><option>Climate & Winds</option><option>Physical map</option><option>Political map</option></select>
+  <div id="map" aria-label="Statyczna wizualizacja mapy FMG z nakładką Aero-Hydro">
+    <div class="land north"></div><div class="land south"></div><div class="land island"></div><div class="land island2"></div>
+    <div class="political"></div>
+    <div class="river r1"></div><div class="river r2"></div><div class="river r3"></div>
+    <div class="label l1">MITZRATIAN<br>THEOCRACY</div><div class="label l2">GHRIAN<br>EMPIRE</div><div class="label l3">KINGDOM OF<br>CHORBERIA</div>
+    <div class="wind w1">› › ›</div><div class="wind w2">› › ›</div>
+    <div class="overlay">
+      <div class="tabs">
+        <button class="active">Layers</button><button>Style</button><button>Options</button><button>Tools</button><button>About</button>
       </div>
-      <div class="section">
-        <div class="section-title">Displayed layers and layers order</div>
-        <ul><li class="active"><span><span class="eye">◉</span> Pressure field</span><span>≡</span></li><li><span><span class="eye">◉</span> Winds and currents</span><span>≡</span></li><li><span><span class="eye">◉</span> Temperature</span><span>≡</span></li><li><span><span class="eye">◉</span> Precipitation</span><span>≡</span></li><li><span><span class="eye">◉</span> Rivers</span><span>≡</span></li><li><span><span class="eye">◉</span> Labels</span><span>≡</span></li></ul>
-        <div class="hint">Click to toggle, drag to reorder. Ctrl + click opens layer style.</div>
-      </div>
-      <div class="section">
-        <div class="section-title">Climate parameters</div>
-        <div class="row"><span>Equator temperature</span><input type="range" value="67"></div>
-        <div class="row"><span>North pole temperature</span><input type="range" value="20"></div>
-        <div class="row"><span>Precipitation modifier</span><input type="range" value="100"></div>
-        <div class="row"><span>Orographic effect</span><input type="range" value="65"></div>
-      </div>
-      <div class="section">
-        <div class="notice"><b>Regeneration scope</b><br>Temperature and precipitation will be recomputed. Biomes update next; settlements remain unchanged until a full regeneration.</div>
-        <div class="button-row"><button>Cancel</button><button class="active">Apply & redraw</button></div>
-      </div>
-      <div class="section">
-        <div class="section-title">View mode</div>
-        <button class="active">Standard</button> <button>3D scene</button> <button>Globe</button>
+      <div class="content">
+        <div class="row"><label>Layers preset:</label><select><option>Climate &amp; Winds</option><option>Political map</option><option>Physical map</option></select></div>
+        <div class="hint">Displayed layers and layers order:</div>
+        <div class="layer-grid">
+          <div class="layer">Texture</div><div class="layer">Heightmap</div><div class="layer">Lakes</div>
+          <div class="layer">Biomes</div><div class="layer">Cells</div><div class="layer">Grid</div>
+          <div class="layer">Wind Rose</div><div class="layer">Rivers</div><div class="layer">Relief</div>
+          <div class="layer">Temperature</div><div class="layer on">Pressure</div><div class="layer on">Winds 2D</div>
+          <div class="layer on">Currents</div><div class="layer on">Flow Particles</div><div class="layer">Precipitation</div>
+          <div class="layer">States</div><div class="layer">Borders</div><div class="layer on">Labels</div>
+        </div>
+        <div class="hint">Click to toggle, drag to raise or lower the layer<br>Ctrl + click to edit layer style</div>
+        <div class="section">
+          <h3>Aero-Hydro overlay <span class="climate-badge">static preview</span></h3>
+          <div class="control"><span>Pressure contours</span><input type="range" value="72"><span class="value">72%</span></div>
+          <div class="control"><span>Wind streamlines</span><input type="range" value="58"><span class="value">58%</span></div>
+          <div class="control"><span>Ocean currents</span><input type="range" value="64"><span class="value">64%</span></div>
+          <div class="control"><span>Precipitation</span><input type="range" value="0"><span class="value">off</span></div>
+          <div class="buttons"><button>Standard</button><button>3D scene</button><button>Globe</button></div>
+        </div>
+        <div class="buttons"><button>New Map</button><button>Export</button><button>Save</button><button class="primary">Recompute</button></div>
       </div>
     </div>
-  </aside>
-  <div id="status"><span>Map: Aethelgard · Seed: 834921</span><span>Zoom 86% · 10 000 cells · SVG renderer</span></div>
+    <div class="legend"><span style="color:var(--violet)">● Pressure</span><span style="color:var(--cyan)">● Currents</span><span style="color:var(--gold)">● Temperature</span></div>
+    <div class="status">Aero-Hydro preview · 10 000 cells · last recompute 420 ms</div>
+    <div class="scale">0 &nbsp;&nbsp; 80 &nbsp;&nbsp; 160 &nbsp;&nbsp; 240 mi</div>
+  </div>
 </body>
 </html>
