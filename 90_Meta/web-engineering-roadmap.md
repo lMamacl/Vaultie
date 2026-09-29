@@ -340,50 +340,74 @@ Każde ID poniżej wypełnia te pola. Pola Spec/certyfikacji **uzupełniaj przy 
 
 # ETAP 2: Fundamenty Architektury Webowej i Decyzje Stosowe
 
-## 2.1 — Website vs Web App & Paradygmaty Renderowania
+## 2.1 — Website vs Web App, Paradygmaty Renderowania i Środowiska Wykonawcze
 
-- **Czas:** 120–150 min
-- **Cel dydaktyczny:** Dobierzesz paradygmat renderowania do SEO, interaktywności i kosztu serwera; wyjaśnisz hydrację i TTFB.
+> **Pełna lekcja:** [[2.1/2.1-website-vs-webapp-rendering-runtimes]] · **Kanwa:** [[lesson-2.1-rendering-runtimes.canvas]] · **Lab:** `labs/web-engineering/2.1/` · **Knowledge Spec:** [[90_Meta/lessons/2.1/spec.yaml|spec.yaml]] · **Status:** `certified`
+
+- **Czas:** 150–180 min
+- **Cel dydaktyczny:** Dobierzesz paradygmat renderowania (MPA/SPA/SSR/SSG/RSC) do wymagań SEO i latencji, ocenisz zasadność użycia WebAssembly (WASM) pod kątem narzutu mostka, porównasz architektury desktopowe (Electron vs WebView: Tauri / Wails) oraz wpiszesz w te modele Reacta i Angulara.
 - **Wymagania wstępne:** 1.1
 - **Niezależne omówienia:**
-  - **MPA:** pełny reload, HTML z serwera per nawigacja (klasyczny Rails/Django templates, PHP).
-  - **SPA:** jeden shell HTML, routing w JS (Vite+React CSR). Szybka nawigacja, SEO trudniejsze bez SSR.
-  - **SSR:** HTML generowany per request (Next.js Node). Lepsze SEO/TTFB treści, koszt CPU serwera.
-  - **SSG:** HTML w build time (blog, docs). Najtańszy edge/CDN.
-  - **ISR:** SSG z rewalidacją tła (stale-while-revalidate na poziomie frameworka).
-  - **RSC (React Server Components):** komponenty serwerowe bez JS w bundle klienta; granica server/client.
-- **Analiza Vs:**
+  - **Website vs Web App:** dokument/treść (read-heavy, SEO, stateless, edge) vs stanowa aplikacja procesowa (rich UI, offline-first, transakcje, maszyna stanów w piaskownicy).
+  - **Paradygmaty renderowania:**
+    - **MPA:** pełny reload, HTML generowany na serwerze per nawigacja (Rails, Django, PHP), brak kosztu hydracji.
+    - **SPA (CSR):** pusty shell HTML, routing po stronie klienta (Vite + React / Angular), natychmiastowe przejścia, trudniejsze SEO bez pre-renderu.
+    - **SSR:** HTML renderowany w locie per request (Node/Bun runtime), optymalne SEO/TTFB treści, koszt CPU serwera.
+    - **SSG / ISR:** pre-render w build-time, dystrybucja CDN, rewalidacja w tle (*stale-while-revalidate*).
+    - **RSC (React Server Components):** komponenty serwerowe bez JS w bundle klienta, granica `use client`, Islands Architecture.
+  - **WebAssembly (WASM):** binarny kod dla maszyny stosowej w przeglądarce; model pamięci liniowej (`WebAssembly.Memory`), brak bezpośredniego dostępu do DOM (komunikacja przez TypedArray / JS glue). Narzut mostka (Bridge Overhead) przy mikro-wywołaniach vs zysk przy CPU-bound (silniki grafiki, fizyki, szyfrowanie, SQLite w przeglądarce przez OPFS).
+  - **Desktop Web Runtimes — Electron vs WebView (Tauri, Wails):**
+    - **Electron (Bundled Chromium + Node.js):** 100% spójność silnika Blink/V8 na wszystkich OS, dostęp do natywnych modułów Node C++ (Node-API); kosztem rozmiaru binarki (100–150 MB) i zużycia pamięci RAM (200–500 MB per instancja).
+    - **Native WebView (Tauri / Wails):** pożyczanie silnika z systemu OS (WebView2 na Windows, WebKit na macOS, WebKitGTK na Linux) spiętego z backendem kompilowanym (Rust w Tauri v2, Go w Wails v2/v3). Skrajnie mała binarka (5–15 MB), minimalny RAM (30–80 MB), silna izolacja bezpieczeństwa (Tauri capability-based IPC). Różnice renderowania między systemami.
+  - **Rola Reacta i Angulara w środowiskach wykonawczych:**
+    - **React:** naturalny i najpopularniejszy shell CSR (Vite) dla aplikacji desktopowych (Tauri/Wails/Electron) dzięki lekkości i composability; w webie rozszczepiony na CSR i meta-frameworki SSR/RSC (Next.js).
+    - **Angular:** zintegrowana platforma enterprise (DI, router, HttpClient, Reactive Forms). Tradycyjnie cięższy cold start i narzut Zone.js, lecz nowoczesny Angular (Standalone Components + Signals + Esbuild) drastycznie zbliżył wydajność do Reacta, oferując gotowe szyny architektoniczne bez sporów o biblioteki.
+- **Analiza Vs (Środowiska i Runtimes):**
 
-  | Kryterium | MPA | SPA | SSR | SSG | ISR | RSC |
-  |---|---|---|---|---|---|---|
-  | SEO | + | − (bez SSR) | + | + | + | + |
-  | Interaktywność app | − | + | + | −/+ | + | + |
-  | Koszt serwera | śr. | niski (static+API) | wysoki | niski | śr. | śr./wys. |
-  | Złożoność DX | niska | śr. | wys. | niska | śr. | wys. |
+  | Kryterium | Web SPA (CSR) | Web SSR/RSC | Electron | Tauri (Rust + TS) | Wails (Go + TS) |
+  |---|---|---|---|---|---|
+  | Silnik | Przeglądarka usera | Node/Edge + Browser | Wbudowany Chromium | Systemowy WebView | Systemowy WebView |
+  | Rozmiar dystrybucji | < 2 MB bundle | < 500 KB first load | 80–150 MB binarka | 5–15 MB binarka | 10–20 MB binarka |
+  | RAM w spoczynku | Zależny od karty | Zależny od karty | 200–500 MB | 30–80 MB | 40–90 MB |
+  | Spójność renderera | Zmienna | Zmienna (klient) | **100% tożsama** | Różna (WebKit vs Edge) | Różna (WebKit vs Edge) |
+  | Onboarding backendu | TS/Node API | TS/Node | JS/TS (Node) | Wymaga Rust (stromy) | Go (niska bariera) |
+  | Dostęp do OS / I/O | Przez Web API/Piaskownica | Serwerowy | Pełny Node API | Bezpieczny IPC bridge | Bezpieczny IPC bridge |
 
-  **Werdykt:** Landing/docs → SSG. Dashboard zalogowany → SPA/CSR lub SSR+auth. Marketing+app → hybrydowo (SSG marketing, CSR app). RSC gdy zespół rozumie granicę serwer/klient. Unikać „wszystko SSR” bez potrzeby SEO.
-- **Pod maską:** Hydration — serwerowy HTML + payload stanu → React przykleja listenery; mismatch hydration; TTFB vs LCP; streaming SSR.
-- **Kod / lab:** `labs/web-engineering/2.1/` — ta sama strona w wariancie static vs CSR vs prosty SSR (Node) + pomiar TTFB.
-- **Artefakt:** comparison `rendering-paradigms` + decision matrix per moduł
-- **Kanwa:** timeline request → HTML → JS → hydrate → interactive
+- **Pod maską:**
+  - Hydracja: serwerowy HTML + stan JSON → reconciler odtwarza drzewo w pamięci i podpina listenery zdarzeń; Hydration Mismatch; Streaming SSR z chunked transfer.
+  - Mostek IPC / WASM: serializacja JSON vs shared ArrayBuffer; memory copies a przepustowość 60 FPS.
+- **Kod / lab:** `labs/web-engineering/2.1/` — trójstronny benchmark:
+  1. Czysty CSR (Vite + React) vs Prosty SSR (Node/Express).
+  2. Mini-obliczenie CPU w JS vs WebAssembly (Rust/Wasm-pack lub C).
+  3. Prototyp okna IPC (architektura Tauri/Wails vs Electron demo).
+- **Artefakt:** comparison `rendering-and-runtime-paradigms` + ADR wyboru środowiska wykonawczego.
+- **Kanwa:** [[lesson-2.1-rendering-runtimes.canvas]] — mapa decyzyjna: Wymagania (SEO / CPU / Offline / OS API) → Paradygmat renderowania → Wybór środowiska (Web vs Tauri vs Electron) → Wybór frameworka (React vs Angular).
 - **Blackbox quiz:**
-  1. Czym hydracja różni się od zwykłego CSR mount?
-  2. Kiedy SSG jest lepszy niż SSR dla bloga?
-  3. Jaki problem SEO ma czyste SPA?
-  4. Podaj przykładową macierz: landing / dashboard / blog.
-  - *Rubryka:* hydracja = reconcilacja z istniejącym DOM; SSG = build-time; SPA SEO = brak treści w pierwszym HTML.
+  1. Kiedy WASM jest wolniejszy niż zwykły kod JavaScript?
+  2. Dlaczego Tauri zużywa 5-10x mniej pamięci RAM niż Electron i jaki jest tego koszt inżynieryjny?
+  3. Czym różni się Hydracja od zwykłego montowania komponentu w CSR?
+  4. Jak dobrać React vs Angular do aplikacji desktopowej pisanej w Tauri?
+  - *Rubryka:* mostek IPC/WASM generuje narzut serializacji; Electron ma własny Chromium a Tauri używa WebView OS; hydracja = zgranie DOM z virtual DOM; Angular daje zintegrowane DI a React lżejszy shell.
 - **Źródła:**
-  - Next.js docs: Rendering / RSC
-  - web.dev: hydration / TTFB / LCP
-  - Bytepane / Scrimba roadmaps 2026 — Next.js jako warstwa integracji fullstack
+  - W3C WebAssembly Specification & MDN Linear Memory
+  - Tauri Architecture v2 & Electron Process Model Docs
+  - Next.js RSC & Angular Signals (angular.dev)
+  - Ślad: Benchmarks 2025/2026 (Tauri vs Electron RAM footprint, WASM IPC throughput)
 
 ---
 
 ## 2.2 — Paradygmaty Architektoniczne Systemów
 
+> **Pełna lekcja (v1):** [[2.2-system-architecture-paradigms]] · **Kanwa:** [[lesson-2.2-system-architecture.canvas]] · **Lab:** `labs/web-engineering/2.2/` · **Knowledge Spec:** [[90_Meta/lessons/2.2/spec.yaml|spec.yaml]] · **Raport jakości:** [[90_Meta/lessons/2.2/quality-report.yaml|quality-report.yaml]] (`certified`)
+
 - **Czas:** 150–180 min
 - **Cel dydaktyczny:** Zaprojektujesz podział odpowiedzialności (warstwy / porty / moduły) i wybierzesz architekturę pod 2 semestry bez Big Ball of Mud i bez przedwczesnych mikroserwisów.
 - **Wymagania wstępne:** 2.1, 1.1
+- **Knowledge Spec:** [[90_Meta/lessons/2.2/spec.yaml|spec.yaml]]
+- **Critical competencies:** `dip_inversion_vs_injection`, `modular_monolith_bounded_contexts`, `hexagonal_ports_vs_adapters`, `shared_database_antipattern`, `anti_corruption_layer`, `architecture_fitness_functions`
+- **Assessment ladder:** explain ✓ · predict ✓ · modify ✓ · create (lab) ✓ · debug ✓ · transfer ✓
+- **Chain of action:** Tabela Rurociągu Decyzji Architektonicznych (Tydzień 1 do 4)
+- **Certification status:** `certified`
 - **Niezależne omówienia:**
   - **Layered / N-Tier:** UI → Application/Service → Domain → Infrastructure/DB. Prosty start; ryzyko wycieku szczegółów ORM w górę.
   - **Hexagonal (Ports & Adapters):** rdzeń aplikacji zależy od portów (interfejsów); adaptery HTTP/DB na zewnątrz. Wysoka testowalność.

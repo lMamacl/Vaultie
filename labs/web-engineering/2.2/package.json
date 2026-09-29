@@ -1,0 +1,11 @@
+{
+  "name": "lab-2.2-modular-monolith-hexagonal",
+  "version": "1.0.0",
+  "description": "Lab 2.2 — Wzorzec Monolitu Modułowego, Ports & Adapters oraz Testy Sprawnościowe Architektury",
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/tests/**/*.test.mjs",
+    "test:fitness": "node --test src/tests/architecture-fitness.test.mjs",
+    "test:domain": "node --test src/tests/checkout.use-case.test.mjs"
+  }
+}

@@ -1,0 +1,196 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"text": "# Lekcja 2.1 — Renderowanie & Środowiska Wykonawcze\n\n**Przepływ inżynieryjny:** Wymagania (1.1) → Website vs Web App → Paradygmat renderowania → Silnik obliczeniowy (WASM) → Runtime Desktop (Tauri vs Electron) → UI Framework (React vs Angular)\n\n[[2.1/2.1-website-vs-webapp-rendering-runtimes]]",
+			"x": -100,
+			"y": -1100,
+			"width": 640,
+			"height": 200,
+			"color": "5"
+		},
+		{
+			"id": "prev",
+			"type": "text",
+			"text": "← **1.1** [[1.1-ideation-fr-nfr]]\nFR / NFR & Latency Budget",
+			"x": -1500,
+			"y": -920,
+			"width": 280,
+			"height": 120,
+			"color": "2"
+		},
+		{
+			"id": "z1",
+			"type": "text",
+			"text": "## STREFA 1 — Klasyfikacja Domenowa\n\n**Website (Dokument / Treść):**\n- Zorientowany na odczyt i SEO\n- Czas sesji krótki, stan efemeryczny w URL\n- Środowisko: SSG, ISR, MPA na CDN Edge\n\n**Web App (Aplikacja / Procesy):**\n- Ciągła maszyna stanów w RAM klienta\n- TTI / INP i płynność 60 FPS\n- Środowisko: SPA (CSR) na Vite, Desktop WebView",
+			"x": -1500,
+			"y": -700,
+			"width": 420,
+			"height": 270,
+			"color": "1"
+		},
+		{
+			"id": "z2",
+			"type": "text",
+			"text": "## STREFA 2 — Paradygmaty Renderowania\n\n**SSG / ISR:** Pre-renderowany HTML, CDN, TTFB < 30ms\n**SPA / CSR:** Pusty shell, zero CPU serwera, stan w RAM\n**SSR:** Dynamiczne SEO per request, koszt CPU serwera\n**RSC:** Zero kodu serwera w paczce JS, wire payload\n**Podatek hydracji:** Data Doubling (HTML + stan JSON)",
+			"x": -960,
+			"y": -700,
+			"width": 440,
+			"height": 270,
+			"color": "2"
+		},
+		{
+			"id": "z3",
+			"type": "text",
+			"text": "## STREFA 3 — WebAssembly (WASM)\n\n**Pamięć liniowa:** WebAssembly.Memory (ArrayBuffer)\n**Granica FFI:** Narzut mostka niszczy mikro-wywołania\n**Złota reguła:** Przekaż bufor raz, przelicz w Rust/C++\n**Wielowątkowość:** Main Thread (UI) ↔ Web Worker (WASM)",
+			"x": -400,
+			"y": -700,
+			"width": 440,
+			"height": 270,
+			"color": "3"
+		},
+		{
+			"id": "z4",
+			"type": "text",
+			"text": "## STREFA 4 — Desktop Runtimes\n\n**Electron (Bundled Chromium + Node):**\n- 100% determinizm silnika Blink\n- 85-150 MB binarka, 200-400 MB RAM\n- Wymóg dla VS Code / Slack / Node-API C++\n\n**Tauri v2 (Native WebView + Rust):**\n- Pożyczony WebView OS (WebView2 / WebKit)\n- 5-15 MB binarka, 30-70 MB RAM\n- Model Capabilities & Scopes JSON",
+			"x": 160,
+			"y": -700,
+			"width": 440,
+			"height": 270,
+			"color": "4"
+		},
+		{
+			"id": "z5",
+			"type": "text",
+			"text": "## STREFA 5 — UI: React vs Angular\n\n**React:** Lekki shell CSR (Vite + shadcn), naturalny dla Tauri\n**Angular:** Zintegrowana platforma enterprise\n- Standalone Components + Signals\n- Tryb Zoneless (brak narzutu zone.js)\n- Dependency Injection: podmiana HTTP ↔ Tauri IPC",
+			"x": 720,
+			"y": -700,
+			"width": 420,
+			"height": 270,
+			"color": "5"
+		},
+		{
+			"id": "z6",
+			"type": "text",
+			"text": "## STREFA 6 — Lab & Benchmarks\n\n`labs/web-engineering/2.1/`\n1. `wasm-bridge.mjs` — FFI slowdown vs JIT\n2. `csr-vs-ssr.mjs` — Data Doubling & SSR payload\n3. `ipc-contract.ts` — TypeScript Desktop IPC Bridge",
+			"x": 1260,
+			"y": -700,
+			"width": 420,
+			"height": 270,
+			"color": "6"
+		},
+		{
+			"id": "next",
+			"type": "text",
+			"text": "**2.2** Architektura Warstwowa & Modular Monolith →\n[[web-engineering-roadmap#2.2]]",
+			"x": 1800,
+			"y": -650,
+			"width": 360,
+			"height": 130,
+			"color": "2"
+		},
+		{
+			"id": "lesson-file",
+			"type": "file",
+			"file": "90_Meta/lessons/2.1/2.1-website-vs-webapp-rendering-runtimes.md",
+			"x": -1400,
+			"y": -320,
+			"width": 1600,
+			"height": 6000,
+			"color": "5"
+		},
+		{
+			"id": "lab-readme",
+			"type": "file",
+			"file": "labs/web-engineering/2.1/README.md",
+			"x": 300,
+			"y": -320,
+			"width": 1000,
+			"height": 1600,
+			"color": "3"
+		},
+		{
+			"id": "ipc-file",
+			"type": "file",
+			"file": "labs/web-engineering/2.1/benchmarks/ipc-contract.ts",
+			"x": 1400,
+			"y": -320,
+			"width": 800,
+			"height": 1200,
+			"color": "4"
+		}
+	],
+	"edges": [
+		{
+			"id": "e-prev",
+			"fromNode": "prev",
+			"fromSide": "bottom",
+			"toNode": "z1",
+			"toSide": "top"
+		},
+		{
+			"id": "e1-2",
+			"fromNode": "z1",
+			"fromSide": "right",
+			"toNode": "z2",
+			"toSide": "left",
+			"label": "dekompozycja"
+		},
+		{
+			"id": "e2-3",
+			"fromNode": "z2",
+			"fromSide": "right",
+			"toNode": "z3",
+			"toSide": "left",
+			"label": "CPU bottlenecks"
+		},
+		{
+			"id": "e3-4",
+			"fromNode": "z3",
+			"fromSide": "right",
+			"toNode": "z4",
+			"toSide": "left",
+			"label": "desktop shell"
+		},
+		{
+			"id": "e4-5",
+			"fromNode": "z4",
+			"fromSide": "right",
+			"toNode": "z5",
+			"toSide": "left",
+			"label": "UI layer"
+		},
+		{
+			"id": "e5-6",
+			"fromNode": "z5",
+			"fromSide": "right",
+			"toNode": "z6",
+			"toSide": "left",
+			"label": "weryfikacja"
+		},
+		{
+			"id": "e-next",
+			"fromNode": "z6",
+			"fromSide": "right",
+			"toNode": "next",
+			"toSide": "left"
+		},
+		{
+			"id": "e-lesson-lab",
+			"fromNode": "lesson-file",
+			"fromSide": "right",
+			"toNode": "lab-readme",
+			"toSide": "left",
+			"label": "ćwiczenia lab 2.1"
+		},
+		{
+			"id": "e-lab-ipc",
+			"fromNode": "lab-readme",
+			"fromSide": "right",
+			"toNode": "ipc-file",
+			"toSide": "left",
+			"label": "kontrakt typów"
+		}
+	]
+}

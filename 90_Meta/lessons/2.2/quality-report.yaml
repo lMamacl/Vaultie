@@ -1,0 +1,15 @@
+lesson_id: "2.2"
+iteration: 1
+max_iterations: 3
+gates:
+  structure: pass
+  pedagogy: pass
+  technical: pass
+  language: pass
+  teachback: pass
+failures: []
+verdict: certified
+status: certified
+writer_model_family: "gemini-3.8-flash"
+judge_model_family: "gemini-3.8-flash"
+notes: "Pełna weryfikacja jakościowa zakończona sukcesem. Spełniono wszystkie bramki statyczne Phase A (struktura spec.yaml, testy lab w node:test pass 8/8, kanwa canvas, obalenie 6 mitów, worked example z refaktoryzacją, tabela Chain of Action, rurociąg decyzji tydzień 1-4 oraz testy sprawnościowe architektury)."

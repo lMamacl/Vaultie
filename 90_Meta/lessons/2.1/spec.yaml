@@ -1,0 +1,107 @@
+# Knowledge Spec — lekcja 2.1
+# Źródło prawdy dla teach-back / kb-lesson-certify
+id: "2.1"
+title: "Website vs Web App, Paradygmaty Renderowania i Środowiska Wykonawcze (WASM, Electron vs WebView, React vs Angular)"
+diataxis: explanation
+audience: "student projektu 2-semestralnego / junior-mid software engineer"
+level: intermediate
+threshold_concept: true
+
+prerequisites:
+  - "1.1"
+
+learning_objectives:
+  - "odróżnić Website (dokument/treść) od Web App (stanowa aplikacja procesowa) pod kątem cyklu życia, SEO i modelu stanowego"
+  - "porównać paradygmaty renderowania (MPA, SPA, SSR, SSG, ISR, RSC) wraz z kosztami TTFB, FCP, LCP oraz narzutem hydracji"
+  - "wyjaśnić architekturę WebAssembly (WASM): model pamięci liniowej, narzut mostka JS/WASM oraz wyznaczyć granice opłacalności użycia"
+  - "zestawić architektury desktopowe: Bundled Chromium + Node (Electron) vs Native WebView (Tauri z Rust / Wails z Go) pod kątem RAM, rozmiaru binarki i IPC"
+  - "dobrać warstwę frontendową (React vs Angular) w zależności od środowiska wykonawczego (Web Edge/SSR vs Desktop WebView/Electron)"
+
+critical_competencies:
+  - website_vs_webapp_boundary
+  - rendering_paradigms_tradeoffs
+  - hydration_cost_and_mismatch
+  - wasm_linear_memory_and_bridge_overhead
+  - electron_vs_webview_architecture
+  - desktop_runtime_stack_selection
+  - react_vs_angular_in_desktop_webviews
+
+mental_models:
+  - id: content_vs_process
+    claim: "Website to hipertekstowy dokument zoptymalizowany pod odczyt i SEO; Web App to stanowa maszyna oprogramowania uruchomiona w piaskownicy przeglądarki"
+  - id: hydration_tax
+    claim: "Hydracja nie jest darmowa — serwer wysyła HTML oraz stan JSON, a klient pobiera megabajty JS, by odtworzyć drzewo wirtualne i powiązać listenery zdarzeń"
+  - id: wasm_not_a_silver_bullet
+    claim: "WASM nie zastępuje DOM ani JS; to silnik obliczeniowy operujący na pamięci liniowej (TypedArray). Drobne wywołania przez mostek niszczą zysk wydajnościowy"
+  - id: webview_vs_bundled_engine
+    claim: "Electron pakuje całą przeglądarkę i runtime Node (determinizm kosztem 150MB+ i setek MB RAM); Tauri/Wails pożyczają silnik z systemu OS (5-15MB i niski RAM kosztem różnic WebKit/Blink)"
+  - id: frontend_framework_runtime_fitness
+    claim: "Na desktopie (Tauri/Electron) nie ma serwera SSR — dominuje czysty CSR (Vite+React lub Standalone Angular z Signals). React daje lekkość i composability, Angular daje zintegrowane szyny enterprise"
+
+misconceptions:
+  - "Wystarczy przepisać kod do WebAssembly, aby cała strona internetowa działała 10x szybciej"
+  - "Każda aplikacja internetowa powinna korzystać z Server-Side Rendering (Next.js) dla najlepszej wydajności"
+  - "Tauri i Electron działają tak samo pod maską, różnią się tylko językiem backendu"
+  - "Hydracja to po prostu załadowanie stylów CSS na wygenerowany HTML"
+  - "Angular nie nadaje się na desktop, a React jest jedynym słusznym wyborem dla Tauri/Electrona"
+  - "Electron jest przestarzały i nie ma żadnego powodu, by wybrać go zamiast Tauri"
+
+decision_points:
+  - "Kiedy wybrać czyste SPA (CSR), kiedy SSG, a kiedy hybrydowy SSR/RSC dla poszczególnych modułów systemu?"
+  - "Czy logika obliczeniowa wymaga przeniesienia do WASM (np. fizyka, silnik GIS, kryptografia), czy wystarczy Web Worker w JS?"
+  - "Kiedy dla aplikacji desktopowej wybrać Electron (VS Code / Slack), a kiedy Tauri (Rust) lub Wails (Go)?"
+  - "Jakie kryteria determinują wybór między Reactem a Angularem w środowisku desktopowym (WebView) vs webowym?"
+
+procedures:
+  - name: evaluate_rendering_and_runtime_architecture
+    trigger:
+      - "definiowanie architektury prezentacji i dystrybucji projektu (Etap 2)"
+      - "wybór między aplikacją przeglądarkową (Web App) a desktopową (Electron / Tauri / Wails)"
+    steps:
+      - classify_domain_as_website_or_webapp
+      - map_seo_and_initial_latency_requirements
+      - select_rendering_paradigm_per_route
+      - determine_cpu_bound_workloads_and_wasm_feasibility
+      - evaluate_desktop_packaging_requirements
+      - benchmark_ipc_and_bundle_size_targets
+    anti_patterns:
+      - "stawianie Next.js SSR dla zamkniętego dashboardu wewnętrznego za logowaniem"
+      - "używanie WASM do renderowania widoków z częstą manipulacją DOM"
+      - "wybór Electrona dla prostego narzędzia narzędziowego bez potrzeby natywnych modułów Node C++"
+      - "przesyłanie gigabajtów danych przez JSON w mostku IPC zamiast pamięci współdzielonej"
+
+examples:
+  minimal: "Vite + React (CSR) opakowane w Tauri v2 (Rust backend) z komendą IPC pobierającą stan"
+  real_world: "Figma (WASM C++ engine na Canvas + React UI) vs VS Code (Electron z Chromium + Node worker processes)"
+  misleading: "Aplikacja Blazor WASM pobierająca 40 MB bibliotek .NET runtime przy pierwszym wejściu użytkownika na stronę mobilną"
+  broken: "Pętla for w JavaScript wywołująca funkcję WASM 100 000 razy na sekundę z serializacją stringów JSON na mostku"
+
+assessment_ladder:
+  explain: required
+  worked_example: required
+  predict: required
+  complete: optional
+  modify: optional
+  create: required
+  debug: optional
+  transfer: required
+
+sources:
+  normative:
+    - "W3C WebAssembly Core Specification"
+    - "Tauri Architecture & Security Guidelines (v2)"
+    - "Electron Process Model & Security Architecture"
+    - "React Server Components & Next.js App Router Architecture"
+    - "Angular Signals & Non-destructive Hydration (angular.dev)"
+  pedagogical:
+    - "Carpentries backward design"
+    - "90_Meta/web-engineering-roadmap.md#2.1"
+  counterexample:
+    - "Hydration Mismatch crash w SSR"
+    - "Electron RAM exhaustion (5 instancji Chromium w tle)"
+    - "WASM bridge latency collapse przy mikro-wywołaniach"
+
+project_spine_link: "1.1 FR/NFR → 2.1 Rendering & Runtime Architecture → 2.2 Modular Monolith → 2.3 Stos & Frameworki → 2.4 ADR Wyboru Stosu"
+
+lab:
+  path: "labs/web-engineering/2.1/"

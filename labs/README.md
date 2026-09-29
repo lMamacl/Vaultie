@@ -30,9 +30,12 @@ Commitujemy źródła labu. Ignorujemy: `node_modules/`, `bin/`, `obj/`, `.env`,
 | Lekcja / Sandbox | Ścieżka | Status |
 |---|---|---|
 | 1.1 Ideation / FR-NFR | [web-engineering/1.1](web-engineering/1.1/) | Aktywny |
-| 1.2+ | — | Po realizacji lekcji |
+| 1.2 WBS & RACI | [web-engineering/1.2](web-engineering/1.2/) | Aktywny |
+| 1.3 Git Workflow & Monorepo | [web-engineering/1.3](web-engineering/1.3/) | Aktywny |
+| 2.1 Rendering, WASM & Runtimes | [web-engineering/2.1](web-engineering/2.1/) | Aktywny |
 | Fantasy Map Generator | [Fantasy-Map-Generator-experimental](Fantasy-Map-Generator-experimental/) | Submoduł badawczo-eksperymentalny |
 | Poland Statecraft | [poland-statecraft](poland-statecraft/) | Symulator systemowy & Drzewo reform Polski 2026+ |
 | HitTimline | [HitTimline](HitTimline/) | Submoduł gry muzycznej Android (Kotlin, Compose, Ktor, Spotify) |
+| Web Dev For Beginners (Microsoft) | [web-engineering/Web-Dev-For-Beginners](web-engineering/Web-Dev-For-Beginners/) | Submoduł referencyjny kursu inżynierii webowej (24 lekcje JS/HTML/CSS) |
 
 Mapa lekcji: [`90_Meta/web-engineering-roadmap.md`](../90_Meta/web-engineering-roadmap.md)

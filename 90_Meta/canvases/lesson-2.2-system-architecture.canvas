@@ -1,0 +1,159 @@
+{
+	"nodes": [
+		{
+			"id": "title",
+			"type": "text",
+			"text": "# Lekcja 2.2 — Paradygmaty Architektoniczne Systemów\n\n**Przepływ inżynieryjny:** Wymagania (1.1) → Renderowanie (2.1) → Styl Makro (Modular Monolith vs Mikroserwisy) → Podział Domenowy (Bounded Contexts) → Wnętrze Modułu (Hexagonal / Ports & Adapters) → Baza & Schematy → Testy Sprawnościowe (Fitness Functions)\n\n[[2.2/2.2-system-architecture-paradigms]]",
+			"x": -100,
+			"y": -1100,
+			"width": 640,
+			"height": 220,
+			"color": "5"
+		},
+		{
+			"id": "prev",
+			"type": "text",
+			"text": "← **2.1** [[2.1/2.1-website-vs-webapp-rendering-runtimes]]\nParadygmaty Renderowania & Runtimes\n(Oraz Aneks: [[appendix-aspnet-mvc-kuchnia-cygana]])",
+			"x": -1500,
+			"y": -920,
+			"width": 320,
+			"height": 130,
+			"color": "2"
+		},
+		{
+			"id": "z1",
+			"type": "text",
+			"text": "## STREFA 1 — Odwrócenie Zależności (DIP)\n\n**Zasada:**\n- Wysokopoziomowe reguły biznesowe NIE zależą od szczegółów (DB, HTTP, SDK).\n- Szczegóły zależą od abstrakcji zdefiniowanych w rdzeniu.\n\n**Composition Root:**\n- Jedyne miejsce w systemie (`Program.cs`), gdzie rejestrowane są konkretne implementacje w IoC.\n- Rdzeń operuje na czystych kontraktach.",
+			"x": -1500,
+			"y": -700,
+			"width": 420,
+			"height": 280,
+			"color": "1"
+		},
+		{
+			"id": "z2",
+			"type": "text",
+			"text": "## STREFA 2 — Layered (N-Tier)\n\n**Zalety:**\n- Najszybszy start w tygodniu 1\n- Idealny do prostych systemów CRUD i PoC\n\n**Pęknięcia pod obciążeniem:**\n- Podejście 'Database-Driven' (model bazy staje się modelem biznesu)\n- Wyciek encji ORM do kontrolerów (błędy Lazy Loading)\n- Anemiczny model domenowy i serwisy po 3000 linii kodu",
+			"x": -960,
+			"y": -700,
+			"width": 440,
+			"height": 280,
+			"color": "2"
+		},
+		{
+			"id": "z3",
+			"type": "text",
+			"text": "## STREFA 3 — Hexagonal (Ports & Adapters)\n\n**Porty Pierwotne (Driving):**\n- Wejście do domeny: interfejsy Use Cases (`ICreateOrderUseCase`).\n- Wywoływane przez: Kontrolery REST, CLI, Testy.\n\n**Porty Wtórne (Driven):**\n- Wyjście z domeny: interfejsy repozytoriów, bramek płatności.\n- Realizowane przez: Adaptery SQL, Stripe, Fake InMemory.\n\n**Zysk:** 100% testów use case w RAM bez bazy danych!",
+			"x": -400,
+			"y": -700,
+			"width": 440,
+			"height": 280,
+			"color": "3"
+		},
+		{
+			"id": "z4",
+			"type": "text",
+			"text": "## STREFA 4 — Monolit Modułowy (Gold Standard)\n\n**Trzy Filary:**\n1. **Izolacja kodu:** wewnętrzne klasy `internal`, publiczna tylko fasada (`IOrdersModuleApi`).\n2. **Izolacja bazy:** dedykowane schematy SQL (`[orders].*`, `[warehouse].*`). Zakaz cross-schema JOIN!\n3. **Komunikacja asynchroniczna:** In-Memory Event Bus / Mediator zamiast sieci.\n\n**Dla zespołu 3–5 osób:** Wszystkie zalety mikroserwisów przy zerowym narzucie sieciowym.",
+			"x": 160,
+			"y": -700,
+			"width": 440,
+			"height": 280,
+			"color": "4"
+		},
+		{
+			"id": "z5",
+			"type": "text",
+			"text": "## STREFA 5 — Mikroserwisy & Podatek Operacyjny\n\n**Koszty Ukryte w Małym Zespole:**\n- Utrata transakcji ACID (konieczność wzorca Saga)\n- Spójność ostateczna (Eventual Consistency)\n- Awarie sieciowe i kaskadowy collapse latencji\n- Narzut DevOps (Docker Compose, K8s, Distributed Tracing)\n\n**Antywzorzec 'Distributed Monolith':**\n- Mikroserwisy dzielące wspólną bazę danych — najgorszy z możliwych światów.",
+			"x": 720,
+			"y": -700,
+			"width": 440,
+			"height": 280,
+			"color": "6"
+		},
+		{
+			"id": "pipeline",
+			"type": "text",
+			"text": "## Rurociąg Decyzji Architektonicznych (Tydzień 1–4)\n\n1. **Tydzień 1:** Wybór makro-stylu (Modular Monolith) + WBS/DoD\n2. **Tydzień 2:** Wyznaczenie Bounded Contexts + Schematy DB (Schema-First, zakaz cross-schema JOIN)\n3. **Tydzień 3:** Dobór stosu technologicznego (.NET / Spring / Node) i formalizacja w ADR\n4. **Tydzień 4:** Wdrożenie testów strażniczych (ArchUnit / Fitness Functions) w CI",
+			"x": -960,
+			"y": -320,
+			"width": 1000,
+			"height": 220,
+			"color": "5"
+		},
+		{
+			"id": "next",
+			"type": "text",
+			"text": "→ **2.3 / 2.4** [[web-engineering-roadmap#2.4 — Macierz wyboru stosu (projekt 2-semestralny)|Macierz Wyboru Stosu]]\nDobór Kotwicy Backend/Frontend & Bazy",
+			"x": 160,
+			"y": -320,
+			"width": 440,
+			"height": 130,
+			"color": "2"
+		}
+	],
+	"edges": [
+		{
+			"id": "e_prev_z1",
+			"fromNode": "prev",
+			"fromSide": "bottom",
+			"toNode": "z1",
+			"toSide": "top"
+		},
+		{
+			"id": "e_title_z1",
+			"fromNode": "title",
+			"fromSide": "left",
+			"toNode": "z1",
+			"toSide": "top"
+		},
+		{
+			"id": "e_z1_z2",
+			"fromNode": "z1",
+			"fromSide": "right",
+			"toNode": "z2",
+			"toSide": "left"
+		},
+		{
+			"id": "e_z2_z3",
+			"fromNode": "z2",
+			"fromSide": "right",
+			"toNode": "z3",
+			"toSide": "left"
+		},
+		{
+			"id": "e_z3_z4",
+			"fromNode": "z3",
+			"fromSide": "right",
+			"toNode": "z4",
+			"toSide": "left"
+		},
+		{
+			"id": "e_z4_z5",
+			"fromNode": "z4",
+			"fromSide": "right",
+			"toNode": "z5",
+			"toSide": "left"
+		},
+		{
+			"id": "e_z2_pipeline",
+			"fromNode": "z2",
+			"fromSide": "bottom",
+			"toNode": "pipeline",
+			"toSide": "top"
+		},
+		{
+			"id": "e_z4_pipeline",
+			"fromNode": "z4",
+			"fromSide": "bottom",
+			"toNode": "pipeline",
+			"toSide": "top"
+		},
+		{
+			"id": "e_pipeline_next",
+			"fromNode": "pipeline",
+			"fromSide": "right",
+			"toNode": "next",
+			"toSide": "left"
+		}
+	]
+}

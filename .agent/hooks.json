@@ -1,0 +1,20 @@
+{
+  "stop-quality-gate": {
+    "enabled": true,
+    "Stop": [
+      {
+        "type": "command",
+        "command": "python .agents/../scripts/agent-quality-gate.py"
+      }
+    ]
+  },
+  "pre-invocation-review-reminder": {
+    "enabled": false,
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "python scripts/agent-preflight-reminder.py"
+      }
+    ]
+  }
+}

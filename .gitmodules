@@ -4,3 +4,6 @@
 [submodule "labs/HitTimline"]
 	path = labs/HitTimline
 	url = https://github.com/cyunczykg/HitTimline.git
+[submodule "labs/web-engineering/Web-Dev-For-Beginners"]
+	path = labs/web-engineering/Web-Dev-For-Beginners
+	url = https://github.com/microsoft/Web-Dev-For-Beginners.git

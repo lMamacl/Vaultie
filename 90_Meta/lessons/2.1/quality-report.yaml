@@ -1,0 +1,15 @@
+lesson_id: "2.1"
+iteration: 1
+max_iterations: 3
+gates:
+  structure: pass
+  pedagogy: pass
+  technical: pass
+  language: pass
+  teachback: pass
+failures: []
+verdict: certified
+status: certified
+writer_model_family: "gemini-3.8-flash"
+judge_model_family: "gemini-3.8-flash"
+notes: "Pelna weryfikacja jakosciowa zakonczona sukcesem. Spelniono wszystkie bramki statyczne Phase A (vaultie-certify.py strict), zweryfikowano modele mentalne, tabele Chain of Action, zadania predykcyjne i transferowe oraz zrealizowano 100% critical competencies ze spec.yaml."

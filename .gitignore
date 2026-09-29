@@ -9,6 +9,8 @@
 .qmd/
 .env
 node_modules/
+__pycache__/
+*.py[cod]
 
 # Labs — artefakty build (źródła labu commitowane)
 labs/**/node_modules/

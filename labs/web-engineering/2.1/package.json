@@ -1,0 +1,11 @@
+{
+  "name": "lab-2.1-rendering-and-runtimes",
+  "version": "1.0.0",
+  "description": "Lab 2.1 — Paradygmaty Renderowania, Mostek WASM i Runtimes Desktopowe",
+  "type": "module",
+  "scripts": {
+    "test": "node benchmarks/wasm-bridge.mjs && node benchmarks/csr-vs-ssr.mjs",
+    "bench:wasm": "node benchmarks/wasm-bridge.mjs",
+    "bench:render": "node benchmarks/csr-vs-ssr.mjs"
+  }
+}

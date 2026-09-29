@@ -1,0 +1,111 @@
+# Knowledge Spec — lekcja 2.2
+# Źródło prawdy dla teach-back / kb-lesson-certify
+id: "2.2"
+title: "Paradygmaty Architektoniczne Systemów (Warstwowa, Hexagonalna / Ports & Adapters, Onion, Clean Architecture, Modular Monolith vs Mikroserwisy)"
+diataxis: explanation
+audience: "student projektu 2-semestralnego / junior-mid software engineer"
+level: intermediate
+threshold_concept: true
+
+prerequisites:
+  - "1.1"
+  - "2.1"
+
+learning_objectives:
+  - "wyjaśnić zasadę odwrócenia zależności (DIP) oraz rolę Composition Root w izolacji logiki biznesowej od technologii wejścia/wyjścia"
+  - "porównać paradygmaty architektoniczne (Layered N-Tier, Hexagonal / Ports & Adapters, Onion, Clean Architecture) pod kątem kierunku zależności, testowalności i narzutu kodu"
+  - "zaprojektować architekturę Monolitu Modułowego (Modular Monolith) ze ścisłą separacją Bounded Contexts, jawnymi kontraktami publicznymi oraz izolacją schematów bazodanowych"
+  - "dokonać inżynierskiej analizy kosztów mikroserwisów (sieć, transakcje rozproszone Saga, spójność ostateczna, narzut operacyjny) i uzasadnić wyższość Monolitu Modułowego w zespole studenckim"
+  - "sformułować Kartę Decyzji Architektonicznej (ADR) wyboru stylu architektury oraz wdrożyć automatyczne testy sprawnościowe (Fitness Functions) egzekwujące granice modułów"
+
+critical_competencies:
+  - dependency_inversion_boundary
+  - layered_vs_hexagonal_tradeoff
+  - ports_and_adapters_mechanics
+  - modular_monolith_bounded_contexts
+  - microservices_operational_tax
+  - cross_module_data_isolation
+  - architectural_fitness_testing
+
+mental_models:
+  - id: dependency_points_inward
+    claim: "Logika biznesowa (Core / Domain) nie wie nic o bazie danych, protokole HTTP czy zewnętrznych API; to infrastruktura i adaptery zależą od abstrakcji zdefiniowanych w rdzeniu"
+  - id: modular_monolith_is_not_spaghetti
+    claim: "Monolit to wyłącznie jednostka wdrożeniowa (jeden proces), a nie styl organizacji kodu. Prawidłowy Monolit Modułowy posiada tak samo bezwzględne granice jak mikroserwisy, ale z zerowym narzutem sieciowym"
+  - id: microservices_are_distributed_systems
+    claim: "Mikroserwis to nie mniejszy monolit, lecz pełnoprawny system rozproszony podlegający awariom sieciowym, problemom partycjonowania CAP i konieczności stosowania spójności ostatecznej"
+  - id: database_schema_per_module
+    claim: "Wspólna przestrzeń tabel w bazie danych natychmiast degeneruje monolit modułowy w Big Ball of Mud poprzez niedozwolone złączenia SQL JOIN między modułami"
+  - id: ports_as_contracts
+    claim: "Port to logiczne gniazdo w domenie określające 'co ma być zrobione'; Adapter to wtyczka infrastruktury określająca 'jak konkretna technologia to realizuje'. Wymiana technologii nie dotyka ani jednej linii use case'u"
+
+misconceptions:
+  - "Nowoczesna aplikacja webowa w 2026 roku musi być od razu podzielona na mikroserwisy, żeby była profesjonalna i skalowalna"
+  - "Architektura warstwowa (N-Tier) to to samo co Clean Architecture, a różnica sprowadza się tylko do innych nazw folderów w solucji"
+  - "Monolit Modułowy to rozwiązanie przestarzałe i gorsze od mikroserwisów, z którego jak najszybciej należy migrować"
+  - "Wystarczy dodać interfejs IOrderRepository, aby mieć architekturę hexagonalną, nawet jeśli encje domenowe są ozdobione atrybutami ORM i zależą od bazy"
+  - "W architekturze modułowej wewnątrz jednej bazy danych można swobodnie łączyć tabele innych modułów za pomocą SQL JOIN, bo to optymalizuje zapytania"
+  - "Mikroserwisy rozwiązują problem złej organizacji kodu i chaosu komunikacyjnego w zespole programistycznym"
+
+decision_points:
+  - "Kiedy prosta architektura warstwowa (N-Tier) wystarczy na etap PoC/MVP, a kiedy konieczne jest wdrożenie Ports & Adapters?"
+  - "Jak podzielić monolityczny system na Bounded Contexts bez tworzenia setek sztucznych projektów i pakietów?"
+  - "Jak zorganizować komunikację między modułami: synchroniczne wywołania fasad in-process czy asynchroniczne zdarzenia domenowe (In-Memory Outbox)?"
+  - "Kiedy architektura mikroserwisowa staje się realnie uzasadniona technicznie i biznesowo?"
+  - "Jak zapobiec degradacji granic architektonicznych w trakcie 2 semestrów pracy zespołu?"
+
+procedures:
+  - name: evaluate_and_design_system_architecture
+    trigger:
+      - "definiowanie fundamentów architektury systemu na starcie semestru (Etap 2)"
+      - "dekompozycja funkcjonalności projektu zespołowego na moduły"
+      - "audyt długu architektonicznego i refaktoryzacja monolitu spaghetti"
+    steps:
+      - analyze_team_scale_and_operational_budget
+      - select_macro_architecture_pattern (Modular Monolith default)
+      - identify_bounded_contexts_and_domain_boundaries
+      - isolate_persistence_schemas_per_module
+      - choose_internal_module_style (Ports & Adapters for core, Layered for CRUD)
+      - configure_in_process_integration_events
+      - implement_architectural_fitness_tests (ArchUnit / banned dependencies)
+    anti_patterns:
+      - "wdrażanie mikroserwisów w 3-5 osobowym zespole bez dedykowanego inżyniera DevOps"
+      - "dzielenie tabel bazodanowych przez bezpośrednie relacje klucza obcego między niezależnymi modułami bez koordynacji schematu"
+      - "wyciek klas DbContext / ORM bezpośrednio do kontrolerów prezentacji"
+      - "tworzenie anemicznych serwisów po 2000 linii kodu wykonujących bezpośrednie mutacje struktur danych"
+
+examples:
+  minimal: "Jeden projekt aplikacji z dwoma modułami (Catalog i Orders) komunikującymi się przez publiczny interfejs i zdarzenie in-process"
+  real_world: "Shopify (potężny Modular Monolith w Ruby/Rails ze sztywno egzekwowanymi granicami packwerk) vs Amazon (decentralizacja mikroserwisowa w skali tysięcy inżynierów)"
+  misleading: "Aplikacja podzielona na 8 mikroserwisów w Docker Compose, które współdzielą jedną bazę danych PostgreSQL i padają kaskadowo przy restarcie jednego serwisu (Distributed Monolith)"
+  broken: "Projekt deklarujący Clean Architecture, w którym encja domenowa posiada atrybuty [Table('Orders')] i [ForeignKey], a serwis aplikacyjny wykonuje surowe zapytanie SQL przez bezpośrednie połączenie z bazą"
+
+assessment_ladder:
+  explain: required
+  worked_example: required
+  predict: required
+  complete: optional
+  modify: optional
+  create: required
+  debug: optional
+  transfer: required
+
+sources:
+  normative:
+    - "Alistair Cockburn — Hexagonal Architecture (Ports and Adapters Pattern original paper)"
+    - "Robert C. Martin — Clean Architecture: A Craftsman's Guide to Software Structure and Design"
+    - "Eric Evans — Domain-Driven Design: Tackling Complexity in the Heart of Software (Bounded Contexts)"
+    - "Kamil Grzybek — Modular Monolith: A Primer (Architecture Pattern & Reference Implementation)"
+    - "Neal Ford, Mark Richards — Building Evolutionary Architectures (Architectural Fitness Functions)"
+  pedagogical:
+    - "Carpentries backward design"
+    - "90_Meta/web-engineering-roadmap.md#2.2"
+  counterexample:
+    - "Distributed Monolith latency collapse and cascading failure"
+    - "Missing Foreign Keys and orphaned records across siloed migrations (Kuchnia u Cygana case)"
+    - "Spaghetti SQL joins crossing domain boundaries"
+
+project_spine_link: "1.1 FR/NFR → 2.1 Rendering & Runtimes → 2.2 System Architecture Paradigms → 2.3 Stack Deep-Dives → 2.4 Technology Selection Matrix"
+
+lab:
+  path: "labs/web-engineering/2.2/"
