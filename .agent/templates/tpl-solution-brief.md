@@ -30,8 +30,13 @@ status: proposed
 | Opcja | Kiedy pasuje | Korzyści | Koszty i ryzyka |
 |---|---|---|---|
 
-## Uzasadnienie wyboru
-<!-- Połącz rekomendację z kontekstem i dowodami. Nie przedstawiaj preferencji jako faktu. -->
+## Decyzja i uzasadnienie
+<!-- Jednoznacznie: co wybieramy, w jakich warunkach i dlaczego ta opcja najlepiej odpowiada kryteriom. -->
+
+## Odrzucone alternatywy
+<!-- Nazwij każdą istotną alternatywę i podaj konkretny powód odrzucenia w tym kontekście. Dodaj warunek, przy którym warto ją ponownie rozważyć. Nie wystarczy „gorsza” ani samo zestawienie trade-offów. -->
+| Alternatywa | Dlaczego odrzucona w tym kontekście | Kiedy wrócić do tej opcji |
+|---|---|---|
 
 ## Twierdzenia i dowody
 | Twierdzenie użyte w analizie | Źródło | Lokalizacja (sekcja / strona / wersja) | Co źródło potwierdza | Ograniczenie |

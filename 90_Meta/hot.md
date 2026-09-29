@@ -13,7 +13,8 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek (2026-09-29):** Pierwsza iteracja poprawy UX i researchu Vaultie: `90_Meta/start-here.md`, standard solution brief z dowodami/ograniczeniami, metadane źródeł, lint + CI oraz pilot retry. Szczegóły: [[2026-09-29-1145]].
+- **Aktywny Wątek (2026-09-29):** Druga iteracja UX/researchu: jawna sekcja decyzji i odrzuconych alternatyw; rewizja lekcji 2.2 i jej relacji, źródeł oraz statusu Phase A / human review. Szczegóły: [[2026-09-29-1231]].
+- **Poprzedni Wątek (2026-09-29):** Pierwsza iteracja poprawy UX i researchu Vaultie: `90_Meta/start-here.md`, solution brief, metadane źródeł, lint + CI oraz pilot retry. Szczegóły: [[2026-09-29-1145]].
 - **Poprzedni Aktywny Wątek (2026-09-29):** Opracowanie kompletnego zestawu startowego dla 2-semestralnego projektu inżynierskiego zespołowego 6+ osób (*Project Kickoff Kit*):
   1. Szablon 1-pagera na Discorda i procedura cichej asynchronicznej inkubacji pomysłów (`01-discord-ideation-1pager.md`).
   2. Oficjalny szablon Dokumentu Inicjującego Projekt (DIP) dla Confluence z mapowaniem 6+ Epików na Bounded Contexts Modularnego Monolitu (`02-confluence-dip-template.md`).

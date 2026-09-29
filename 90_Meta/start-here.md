@@ -19,7 +19,7 @@ Opisz problem, kontekst i ograniczenia zwykłym językiem. Możesz użyć takieg
 
 > Przeanalizuj problem: retry do zewnętrznego API może powodować podwójne wykonanie operacji. Kontekst: Node.js, checkout, timeout po wysłaniu żądania. Porównaj rozwiązania, wskaż źródła, założenia i brakujące informacje.
 
-Uruchom `kb-solve-problem` dla otwartego problemu programistycznego lub architektonicznego. Oczekuj rekomendacji kontekstowej, alternatyw, trade-offów, źródeł i następnego kroku. Jeśli odpowiedź zależy od nieznanych danych, agent powinien je ujawnić — nie zgadywać.
+Uruchom `kb-solve-problem` dla otwartego problemu programistycznego lub architektonicznego. Oczekuj jawnej decyzji, dlaczego wybrano tę opcję, dlaczego odrzucono istotne alternatywy i co zmieniłoby wybór — wraz ze źródłami, trade-offami i następnym krokiem. Jeśli odpowiedź zależy od nieznanych danych, agent powinien je ujawnić — nie zgadywać.
 
 ### Znaleźć istniejącą wiedzę
 Użyj `kb-query` i zapytań z [[queries]]. Zaczynaj od słów opisujących **problem i efekt**, nie tylko nazwy technologii. Sprawdź też [[_index|mapę treści]] oraz powiązane linki w znalezionej notatce.

@@ -14,8 +14,8 @@ prerequisites:
 learning_objectives:
   - "wyjaśnić zasadę odwrócenia zależności (DIP) oraz rolę Composition Root w izolacji logiki biznesowej od technologii wejścia/wyjścia"
   - "porównać paradygmaty architektoniczne (Layered N-Tier, Hexagonal / Ports & Adapters, Onion, Clean Architecture) pod kątem kierunku zależności, testowalności i narzutu kodu"
-  - "zaprojektować architekturę Monolitu Modułowego (Modular Monolith) ze ścisłą separacją Bounded Contexts, jawnymi kontraktami publicznymi oraz izolacją schematów bazodanowych"
-  - "dokonać inżynierskiej analizy kosztów mikroserwisów (sieć, transakcje rozproszone Saga, spójność ostateczna, narzut operacyjny) i uzasadnić wyższość Monolitu Modułowego w zespole studenckim"
+  - "zaprojektować granice modułów i własność danych przy użyciu jawnych kontraktów oraz dobrać odpowiedni mechanizm egzekwowania (np. API modułu, osobny schemat, widoczność pakietów i testy architektury)"
+  - "porównać modularny monolit i mikroserwisy pod kątem potrzeby niezależnego wdrażania, skalowania, własności zespołów, kosztu operacyjnego i granic domenowych oraz uzasadnić wybór lub warunki ponownej oceny"
   - "sformułować Kartę Decyzji Architektonicznej (ADR) wyboru stylu architektury oraz wdrożyć automatyczne testy sprawnościowe (Fitness Functions) egzekwujące granice modułów"
 
 critical_competencies:
@@ -30,14 +30,14 @@ critical_competencies:
 mental_models:
   - id: dependency_points_inward
     claim: "Logika biznesowa (Core / Domain) nie wie nic o bazie danych, protokole HTTP czy zewnętrznych API; to infrastruktura i adaptery zależą od abstrakcji zdefiniowanych w rdzeniu"
-  - id: modular_monolith_is_not_spaghetti
-    claim: "Monolit to wyłącznie jednostka wdrożeniowa (jeden proces), a nie styl organizacji kodu. Prawidłowy Monolit Modułowy posiada tak samo bezwzględne granice jak mikroserwisy, ale z zerowym narzutem sieciowym"
-  - id: microservices_are_distributed_systems
-    claim: "Mikroserwis to nie mniejszy monolit, lecz pełnoprawny system rozproszony podlegający awariom sieciowym, problemom partycjonowania CAP i konieczności stosowania spójności ostatecznej"
-  - id: database_schema_per_module
-    claim: "Wspólna przestrzeń tabel w bazie danych natychmiast degeneruje monolit modułowy w Big Ball of Mud poprzez niedozwolone złączenia SQL JOIN między modułami"
+  - id: modular_monolith_requires_enforced_boundaries
+    claim: "Jedna jednostka wdrożeniowa może mieć jawne granice modułów, ale nazwa 'modular monolith' ich nie gwarantuje; trzeba je utrzymać przez ownership, publiczne kontrakty i egzekwowane reguły. Wywołania in-process unikają network hopu, nie wszelkiego kosztu komunikacji."
+  - id: microservices_add_distributed_boundaries
+    claim: "Usługi komunikujące się przez sieć wprowadzają możliwość awarii komunikacji i dodatkowy koszt koordynacji; potrzeba spójności ostatecznej zależy od tego, czy i jak stan jest synchronizowany asynchronicznie."
+  - id: data_ownership_is_explicit
+    claim: "Jasny właściciel zapisu i niezmienników danych pomaga utrzymać granice. Osobny schemat lub zakaz bezpośrednich odczytów są możliwymi politykami egzekwowania, a ich koszt/korzyść trzeba dobrać do kontekstu."
   - id: ports_as_contracts
-    claim: "Port to logiczne gniazdo w domenie określające 'co ma być zrobione'; Adapter to wtyczka infrastruktury określająca 'jak konkretna technologia to realizuje'. Wymiana technologii nie dotyka ani jednej linii use case'u"
+    claim: "Port opisuje potrzebną rozmowę z aplikacją, a adapter mapuje ją na technologię zewnętrzną. Wymiana adaptera może ograniczyć zmiany w use case, jeśli zachowany jest kontrakt i semantyka; nie gwarantuje braku zmian."
 
 misconceptions:
   - "Nowoczesna aplikacja webowa w 2026 roku musi być od razu podzielona na mikroserwisy, żeby była profesjonalna i skalowalna"
@@ -50,8 +50,8 @@ misconceptions:
 decision_points:
   - "Kiedy prosta architektura warstwowa (N-Tier) wystarczy na etap PoC/MVP, a kiedy konieczne jest wdrożenie Ports & Adapters?"
   - "Jak podzielić monolityczny system na Bounded Contexts bez tworzenia setek sztucznych projektów i pakietów?"
-  - "Jak zorganizować komunikację między modułami: synchroniczne wywołania fasad in-process czy asynchroniczne zdarzenia domenowe (In-Memory Outbox)?"
-  - "Kiedy architektura mikroserwisowa staje się realnie uzasadniona technicznie i biznesowo?"
+  - "Jak dobrać komunikację między modułami: synchroniczna fasada in-process, zdarzenie in-process czy trwała kolejka/outbox — według wymagań odpowiedzi, kolejności i niezawodności?"
+  - "Jakie konkretne potrzeby niezależnego wdrażania, skalowania, własności lub izolacji awarii uzasadniałyby usługi sieciowe, i czy zespół może je operować?"
   - "Jak zapobiec degradacji granic architektonicznych w trakcie 2 semestrów pracy zespołu?"
 
 procedures:
@@ -62,22 +62,22 @@ procedures:
       - "audyt długu architektonicznego i refaktoryzacja monolitu spaghetti"
     steps:
       - analyze_team_scale_and_operational_budget
-      - select_macro_architecture_pattern (Modular Monolith default)
-      - identify_bounded_contexts_and_domain_boundaries
-      - isolate_persistence_schemas_per_module
-      - choose_internal_module_style (Ports & Adapters for core, Layered for CRUD)
-      - configure_in_process_integration_events
-      - implement_architectural_fitness_tests (ArchUnit / banned dependencies)
+      - compare_deployment_topologies_against_release_scaling_and_operational_needs
+      - identify_bounded_context_hypotheses_and_domain_boundaries
+      - assign_data_ownership_and_choose_enforcement_mechanisms
+      - choose_internal_module_style_by_change_and_testability_needs
+      - select_communication_semantics (in_process_call, in_process_event, durable_messaging)
+      - implement_fitness_functions_for_explicit_architecture_characteristics
     anti_patterns:
-      - "wdrażanie mikroserwisów w 3-5 osobowym zespole bez dedykowanego inżyniera DevOps"
+      - "wybór mikroserwisów bez wskazania potrzeby niezależnego cyklu życia i bez planu na deployment, obserwowalność oraz ownership usług"
       - "dzielenie tabel bazodanowych przez bezpośrednie relacje klucza obcego między niezależnymi modułami bez koordynacji schematu"
       - "wyciek klas DbContext / ORM bezpośrednio do kontrolerów prezentacji"
       - "tworzenie anemicznych serwisów po 2000 linii kodu wykonujących bezpośrednie mutacje struktur danych"
 
 examples:
   minimal: "Jeden projekt aplikacji z dwoma modułami (Catalog i Orders) komunikującymi się przez publiczny interfejs i zdarzenie in-process"
-  real_world: "Shopify (potężny Modular Monolith w Ruby/Rails ze sztywno egzekwowanymi granicami packwerk) vs Amazon (decentralizacja mikroserwisowa w skali tysięcy inżynierów)"
-  misleading: "Aplikacja podzielona na 8 mikroserwisów w Docker Compose, które współdzielą jedną bazę danych PostgreSQL i padają kaskadowo przy restarcie jednego serwisu (Distributed Monolith)"
+  real_world: "Porównaj argument monolith-first (Fowler) z jednym jawnym modular-monolith reference implementation (Grzybek); traktuj je jako źródła argumentu i wariantów, nie jako benchmark porównawczy firm."
+  misleading: "Aplikacja rozdzielona na procesy, których wydania i zmiany schematu nadal wymagają skoordynowanego release'u; wspólna baza może być jednym z symptomów sprzężenia, ale sama nie wystarcza do rozpoznania distributed monolith"
   broken: "Projekt deklarujący Clean Architecture, w którym encja domenowa posiada atrybuty [Table('Orders')] i [ForeignKey], a serwis aplikacyjny wykonuje surowe zapytanie SQL przez bezpośrednie połączenie z bazą"
 
 assessment_ladder:
@@ -104,6 +104,58 @@ sources:
     - "Distributed Monolith latency collapse and cascading failure"
     - "Missing Foreign Keys and orphaned records across siloed migrations (Kuchnia u Cygana case)"
     - "Spaghetti SQL joins crossing domain boundaries"
+  primary_urls:
+    - id: cockburn-ports-adapters
+      url: "https://alistair.cockburn.us/hexagonal-architecture/"
+      supports: "ports_and_adapters_mechanics"
+      limit: "Pattern intent and examples; not empirical proof that every system benefits from ports."
+    - id: palermo-onion
+      url: "https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/"
+      supports: "onion architecture and inward dependency direction"
+      limit: "Author's description of the style; not a required folder or project layout."
+    - id: martin-clean-architecture
+      url: "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+      supports: "dependency rule and crossing boundaries"
+      limit: "Conceptual architecture essay; not a comparative benchmark."
+    - id: fowler-monolith-first
+      url: "https://martinfowler.com/bliki/MonolithFirst.html"
+      supports: "trade-offs and rationale for monolith-first when service boundaries are uncertain"
+      limit: "Practitioner argument, not a universal law or controlled experiment."
+    - id: fowler-microservices
+      url: "https://martinfowler.com/articles/microservices.html"
+      supports: "costs, benefits, and boundary/operation considerations for microservices"
+      limit: "Practitioner synthesis; context-specific judgment remains necessary."
+    - id: grzybek-modular-monolith
+      url: "https://github.com/kgrzybek/modular-monolith-with-ddd"
+      supports: "one concrete reference implementation of modular monolith and explicit design assumptions"
+      limit: "A chosen implementation variant, not a normative definition."
+    - id: evolutionary-architecture-fitness
+      url: "https://nealford.com/books/buildingevolutionaryarchitectures.html"
+      supports: "fitness functions as objective assessments of selected architecture characteristics"
+      limit: "Does not select the characteristics or thresholds for a particular product."
+
+relations:
+  - type: prerequisite
+    target: "lesson:1.1"
+    rationale: "NFR and project constraints are inputs to architecture choices."
+  - type: prerequisite_context
+    target: "lesson:2.1"
+    rationale: "Rendering/runtime choice is an earlier, distinct architecture dimension."
+  - type: applies
+    target: "concept:project-initiation-fr-nfr"
+    rationale: "Translate requirements and constraints into decision criteria."
+  - type: implements_example
+    target: "lab:web-engineering/2.2"
+    rationale: "One in-process event / ports-and-adapters implementation, not a universal prescription."
+  - type: verifies_example
+    target: "lab:web-engineering/2.2/src/tests/architecture-fitness.test.mjs"
+    rationale: "Tests selected import boundaries and the lab's chosen event flow."
+  - type: continues_to
+    target: "lesson:2.3a"
+    rationale: "Apply architecture constraints during stack deep-dives."
+  - type: continues_to
+    target: "lesson:2.4"
+    rationale: "Apply decision criteria to technology selection."
 
 project_spine_link: "1.1 FR/NFR → 2.1 Rendering & Runtimes → 2.2 System Architecture Paradigms → 2.3 Stack Deep-Dives → 2.4 Technology Selection Matrix"
 

@@ -44,6 +44,12 @@ To scenariusz do analizy, a nie opis potwierdzonego systemu użytkownika. Przed 
 | Retry tylko dla operacji odczytu lub jawnie idempotentnych | Request jest bezpieczny do powtórzenia według kontraktu | Prostsza polityka i mniejsze ryzyko skutków ubocznych | Nadal może zwiększyć obciążenie zależności lub przekroczyć deadline |
 | Kolejka i asynchroniczna obsługa/reconciliation | Operacja może zakończyć się po czasie odpowiedzi użytkownikowi | Rozdziela czas życia żądania od pracy i pozwala ponawiać kontrolowanie | Większa złożoność, eventual consistency i potrzeba widocznego statusu |
 
+## Decyzja i odrzucone alternatywy
+
+**Decyzja:** wybieramy ograniczone retry wyłącznie dla błędów dopuszczonych przez kontrakt API i tylko dla operacji bezpiecznych do ponowienia. W checkoutcie oznacza to najpierw potwierdzenie semantyki klucza idempotencji u konkretnego dostawcy, a potem limit prób i łączny deadline, backoff/jitter oraz status lookup/reconciliation dla niejednoznacznego wyniku.
+
+**Odrzucamy ogólny retry-wrapper**, bo ponawia dowolne wyjątki bez wiedzy o semantyce operacji: timeout może nadejść po wykonaniu płatności, a kolejne żądanie może wykonać drugi skutek uboczny. **Odrzucamy samo „dodanie exponential backoff” jako wystarczającą naprawę**, bo opóźnienie ogranicza tempo prób, ale nie gwarantuje idempotencji ani nie zapobiega retry dla błędu trwałego. **Odrzucamy natychmiastowe przejście na kolejkę** jako domyślną odpowiedź, bo sam asynchronizm nie rozwiązuje duplikatów; dodaje też stan, obsługę statusu i koszty operacyjne. Wrócimy do kolejki, jeśli checkout może być asynchroniczny i system potrzebuje trwałego buforowania / kontrolowanego procesu ponowień. Jeśli API nie ma gwarantowanej idempotencji, odrzucamy automatyczne powtórzenie płatności po nieznanym wyniku i wybieramy status lookup lub reconciliation.
+
 ## Uzasadnienie i dowody
 
 - AWS Builders’ Library opisuje retry jako obciążenie dodatkową pracą zależności i wskazuje, że timeout nie dowodzi braku skutku ubocznego. Omawia backoff, jitter, limity i ostrożne kwalifikowanie błędów. To praktyka opisana przez AWS, nie uniwersalny eksperyment porównujący wszystkie polityki w każdym systemie.

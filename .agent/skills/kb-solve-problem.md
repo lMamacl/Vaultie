@@ -27,8 +27,8 @@ Przeszukanie istniejących implementacji Open Source oraz artykułów techniczny
 Uruchom research, gdy lokalna wiedza nie wystarcza do potwierdzenia istotnego twierdzenia, gdy wersja/API mogły się zmienić lub gdy źródła w Vaultie są sprzeczne. Preferuj w tej kolejności: dokumentację/RFC/specyfikację/źródło pierwotne, badanie lub pomiar opisujący metodę, a następnie techniczne omówienie. Popularność artykułu ani liczba gwiazdek repozytorium nie są same w sobie dowodem jakości rozwiązania.
 
 ### 4. Porównaj rozwiązania
-- Przedstaw rekomendację kontekstową oraz co najmniej jedną sensowną alternatywę.
-- Dla każdej opcji podaj warunki zastosowania, korzyści, koszty, ryzyka i istotne ograniczenia dowodów.
+- Zakończ jednoznaczną decyzją: co wybierasz, dla jakiego kontekstu i na podstawie jakich kryteriów.
+- Dla każdej istotnej odrzuconej alternatywy napisz krótko, dlaczego nie wybrano jej w tym przypadku oraz jaki fakt zmieniłby tę decyzję. Nie pozostawiaj uzasadnienia wyłącznie w tabeli trade-offów.
 - Nie twierdź, że źródło potwierdza więcej, niż faktycznie mówi. Oznacz syntezę agenta jako syntezę.
 - Jeśli materiału dowodowego brakuje, wynik ma to powiedzieć i zaproponować test lub dalsze pytanie badawcze.
 

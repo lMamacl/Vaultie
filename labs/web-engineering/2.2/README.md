@@ -35,11 +35,13 @@ labs/web-engineering/2.2/
 
 ---
 
+> **Zakres przykładu:** to laboratorium demonstruje jeden wariant — zdarzenie in-process dla reakcji `Catalog` na `order.paid`. Nie dowodzi, że zdarzenia są właściwe dla każdej komunikacji modułów, że mechanizm jest trwały jak broker/outbox ani że ten sam podział danych jest obowiązkowy w każdym projekcie. Rozważ synchroniczną fasadę, gdy wywołujący potrzebuje odpowiedzi w tym samym flow; rozważ trwały outbox/broker, gdy utrata zdarzenia po awarii procesu jest niedopuszczalna.
+
 ## 2. Definition of Done (DoD)
 
 - [x] **Izolacja rdzenia (DIP):** Katalog `modules/orders/core/` nie importuje żadnych plików z `infrastructure/` ani `adapters/`.
 - [x] **Szczelność Bounded Context:** Żaden moduł zewnętrzny (`catalog`) nie importuje prywatnych klas z wnętrza modułu `orders`.
-- [x] **Komunikacja asynchroniczna in-process:** Reakcja modułu `catalog` na opłacenie zamówienia następuje wyłącznie poprzez zdarzenie `order.paid` na szynie `InMemoryEventBus`.
+- [x] **Wybrany wariant integracji w tym labie:** moduł `catalog` reaguje na `order.paid` przez `InMemoryEventBus`; to sprawdza działanie przykładu, a nie ustanawia uniwersalnej reguły dla modular monolith.
 - [x] **Hermetyczna testowalność:** Testy logiki biznesowej wykonują się w pamięci RAM bez bazy danych i bez sieci w czasie poniżej 100 ms.
 - [x] **Automatyczna bramka architektoniczna:** Test `architecture-fitness.test.mjs` weryfikuje importy statyczne i blokuje nieautoryzowane powiązania.
 

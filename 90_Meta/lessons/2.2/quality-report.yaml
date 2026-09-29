@@ -1,15 +1,13 @@
 lesson_id: "2.2"
-iteration: 1
+iteration: 2
 max_iterations: 3
 gates:
   structure: pass
-  pedagogy: pass
+  pedagogy: needs-human
   technical: pass
-  language: pass
-  teachback: pass
+  language: review-required
+  teachback: not-implemented
 failures: []
-verdict: certified
-status: certified
-writer_model_family: "gemini-3.8-flash"
-judge_model_family: "gemini-3.8-flash"
-notes: "Pełna weryfikacja jakościowa zakończona sukcesem. Spełniono wszystkie bramki statyczne Phase A (struktura spec.yaml, testy lab w node:test pass 8/8, kanwa canvas, obalenie 6 mitów, worked example z refaktoryzacją, tabela Chain of Action, rurociąg decyzji tydzień 1-4 oraz testy sprawnościowe architektury)."
+verdict: needs-human
+status: needs-human
+notes: "Phase A static certifier PASS on 2026-09-29; lab tests pass 8/8. The lesson was revised to make architectural claims conditional, distinguish internal code organization from deployment topology, add an explicit decision/rejected-alternatives example, source limits, and typed knowledge relations. Status remains needs-human for owner review of pedagogical framing and usability. This is not a student teach-back result: Phase B is not implemented by the available certifier. Previous report dated 2026-08-11 was stale for the lesson updated 2026-09-28."
