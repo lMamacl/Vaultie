@@ -15,9 +15,12 @@ Cykliczne przeszukiwanie zewnętrznych źródeł (GitHub Releases, RSS, wyszukiw
    - `search`: Użyj narzędzia wyszukiwania (np. Tavily, Firecrawl search lub web search) dla fraz kluczowych (`keywords`).
    - `discussions`: Sprawdź wpisy na Hacker News / Reddit posiadające wymaganą liczbę punktów.
 3. **Dedyplikacja (Dedupe):** Odzuć adresy URL oraz tytuły, które istnieją już w `00_Inbox/_clips/` lub w `10_Libraries/` (sprawdź pola `source:` we frontmatterach).
-4. **Względna ocena istotności (Relative Triage):**
-   - Przeanalizuj treść klipu w kontekście obecnego vaulta. Jeśli powiązana biblioteka istnieje w `10_Libraries/` z werdyktem `adopt`, podnieś priorytet (`relevance`).
-   - Odrzuć pozycje poniżej progu `min_relevance`. Uwzględnij limit `max_clips_per_run`.
+4. **Triage trafności i jakości źródła:**
+   - Oceń oddzielnie trafność dla problemu i bezpośredniość źródła (czy to źródło pierwotne, aktualna dokumentacja, standard, badanie z opisaną metodą, techniczne omówienie czy dyskusja społeczności).
+   - Preferuj dokumentację/standardy dla faktów o API i zachowaniu normatywnym; dla porównań skuteczności sprawdź metodę, kontekst i ograniczenia badań. Gwiazdki, popularność i pozycja w wyszukiwarce nie są miarą prawdziwości.
+   - Zweryfikuj kluczowe twierdzenia w treści źródła, nie tylko w snippecie wyniku wyszukiwarki. Zapisz także czego źródło nie rozstrzyga.
+   - Przeanalizuj trafność dla obecnego vaulta; powiązany materiał z werdyktem `adopt` może zwiększać priorytet, ale nie jakość dowodu.
+   - Odrzuć pozycje poniżej `min_relevance`; uwzględnij limit `max_clips_per_run`. Nie generuj wniosku „jednoznacznego”, gdy źródła są sprzeczne lub pośrednie.
 5. **Zapis klipów:**
    - Wywołaj `kb-extract` dla wybranych wartościowych URL-i.
    - Zapisz klipy do `00_Inbox/_clips/YYYY-MM-DD-<slug>.md` przy użyciu szablonu `.agent/templates/tpl-clip.md`.

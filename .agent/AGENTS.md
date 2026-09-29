@@ -29,6 +29,8 @@ Zabronione bezwarunkowo: usuwanie plików z `10_`–`50_`, `git push --force`, n
 
 ## Punkt wejścia
 
+Dla użytkownika nowym ekranem startowym jest `90_Meta/start-here.md` — opisuje wejścia do rozwiązywania problemów, wyszukiwania i nauki. Agent nadal stosuje poniższy punkt wejścia; strona dla użytkownika nie zastępuje tych instrukcji.
+
 NIE czytaj całego vaulta. Zawsze w kolejności:
 
 1. `90_Meta/hot.md` — błyskawiczny bufor aktywnej sesji i ostatnich zadań

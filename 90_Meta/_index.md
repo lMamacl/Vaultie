@@ -28,8 +28,9 @@ up: ""
 
 ---
 
-## ⚡ Szybki Start & Przepływy Wyszukiwania
+## ⚡ Zacznij tutaj & przepływy
 
+- **Pierwsza wizyta:** [[start-here|Zacznij tutaj]] — jak rozwiązywać problemy, szukać wiedzy i czytać rekomendacje.
 - Gotowe zapytania przekrojowe: **[[queries]]**
 - Slownik i pojęcia: **[[glossary]]**
 - Historia zmian i wersji bazy: **[[changelog]]**

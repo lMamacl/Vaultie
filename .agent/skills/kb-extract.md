@@ -14,8 +14,9 @@ Pobieranie zawartości stron internetowych, dokumentacji, changelogów lub plik�
    - Użyj natywnego narzędzia agenta `read_url_content` (najszybsza i bezkosztowa metoda).
    - W przypadku trudności z renderowaniem JS lub blokadą: skorzystaj z API Jina Reader (`r.jina.ai/{url}`) lub Firecrawl scrape API (`/v2/scrape`).
 3. Wyczyść tekst: usuń reklamy, skrypty śledzące, menu nawigacyjne, stopki i banery cookies.
-4. Wygeneruj plik `00_Inbox/_raw/YYYY-MM-DD-<slug>.md` za pomocą szablonu `tpl-raw-extract.md`.
-5. Uruchom `kb-ingest` na zapisanym pliku, aby wygenerować propozycję.
+4. Wygeneruj plik `00_Inbox/_raw/YYYY-MM-DD-<slug>.md` za pomocą szablonu `tpl-raw-extract.md`. Zachowaj URL, tytuł, autora/organizację, datę publikacji (jeśli jest dostępna), datę pobrania i wersję/sekcję źródła, jeśli istotne.
+5. Oddziel wierne streszczenie źródła od syntezy agenta. Zaznacz ograniczenia i nie przypisuj źródłu wniosków, których nie zawiera.
+6. Uruchom `kb-ingest` na zapisanym pliku, aby wygenerować propozycję; nie promuj automatycznie do treści produkcyjnej.
 
 ### Tryb 2: Lista URL-i (batch)
 1. Odczytaj plik z listą adresów URL.

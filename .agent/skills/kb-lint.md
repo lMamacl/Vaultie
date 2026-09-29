@@ -1,48 +1,32 @@
-# kb-lint — automatyczny audyt spójności i walidacja schematów
+# kb-lint — walidacja integralności notatek
 
 ## Cel
-Weryfikacja jakości, kompletności i spójności logicznej notatek w vaultcie w celu wykrywania błędów struktury, pustych sekcji, martwych linków oraz sprzecznych metadanych.
+Wykrywanie błędów strukturalnych i martwych wikilinków w notatkach przed przeglądem lub publikacją zmian.
 
-## Kiedy użyć
-- Gdy użytkownik prosi o: "zrób porządki", "sprawdź vault", "uruchom lintera", "znajdź błędy".
-- Automatycznie jako element weryfikacji przed zakończeniem sesji roboczej.
+## Uruchomienie
 
-## Kroki
-Przeskanuj pliki w folderach `10_Libraries/`, `20_Patterns/`, `30_Decisions/`, `40_Snippets/`, `50_Concepts/` oraz `00_Inbox/` pod kątem następujących reguł:
+```bash
+python3 .agent/scripts/vaultie-lint.py
+python3 .agent/scripts/vaultie-lint.py --json
+python3 .agent/scripts/vaultie-lint.py /ścieżka/do/vaulta
+```
 
-1. **Sieroty (Orphans):**
-   - Notatki z typów `library`, `pattern`, `decision`, `snippet`, `concept` nieposiadające poprawnie zdefiniowanego pola `up:` we frontmatterze AND brak jakichkolwiek linków wchodzących do tej notatki z innych plików.
-2. **Martwe linki (Dead Links):**
-   - Wyszukaj odnośniki typu `[[Nazwa Pliku]]` prowadzące do nieistniejących notatek w vaultcie.
-3. **Brakujący/Niekompletny Frontmatter:**
-   - Porównaj frontmatter każdej notatki z jej schematem (zdefiniowanym w `.agent/AGENTS.md` oraz szablonach). Upewnij się, że kluczowe pola (np. `type`, `title`, `created`, `updated`, `up`) istnieją i mają poprawny format.
-4. **Stale Versions (Przestarzałe wersje bibliotek):**
-   - Dla notatek o typie `library`: zgłoś te, w których pole `updated` jest starsze niż 6 miesięcy. Wymagają one zweryfikowania, czy nie pojawiła się nowa wersja biblioteki.
-5. **Verdict Consistency (Spójność decyzji):**
-   - Zgłoś sytuację, w której `verdict` to `adopt` (rekomendacja produkcyjna), ale `confidence` wynosi `low` (brak wystarczającego doświadczenia).
-6. **Missing Alternatives (Brak alternatyw):**
-   - Notatki typu `library` z pustą listą alternatyw (`alternatives: []`). Każda biblioteka powinna mieć wymienione co najmniej 2 alternatywy.
-7. **Unverified Snippets (Nieweryfikowane snipety):**
-   - Snippety o statusie `verified: false`, które zostały utworzone lub zmodyfikowane dawniej niż 30 dni temu.
-8. **Puste Sekcje (Empty Sections):**
-   - Nagłówki Markdown (np. `## Gotchas` lub `## Model mentalny`), pod którymi nie ma żadnej treści (lub znajduje się tylko placeholder szablonowy typu `<!-- ... -->` albo `- `).
-9. **Zalegający Surowiec (Stale Raw Files):**
-   - Pliki w `00_Inbox/_raw/` starsze niż 14 dni, które nie zostały przetworzone ani usunięte.
+Skrypt jest read-only. Kod wyjścia `0` oznacza brak błędów blokujących; kod `1` oznacza co najmniej jeden błąd. Raport trafia na stdout i nie zapisuje pliku.
 
-### Generowanie raportu:
-Stwórz plik raportu w lokalizacji `90_Meta/sessions/lint-YYYY-MM-DD.md`. Raport powinien zawierać:
-- Podsumowanie liczby sprawdzonych plików i wykrytych naruszeń.
-- Tabelaryczną listę wykrytych problemów (Ścieżka do pliku | Typ błędu | Opis i rekomendacja).
+## Zakres i reguły
+Skrypt skanuje `10_Libraries/`, `20_Patterns/`, `30_Decisions/`, `40_Snippets/`, `50_Concepts/` oraz notatki w `00_Inbox/_clips/` i bezpośrednie propozycje w `00_Inbox/_proposals/`. Surowe ekstrakty `00_Inbox/_raw/` są celowo wyłączone, bo nie są jeszcze znormalizowanymi notatkami.
 
-## Input
-- Brak (skanuje cały vault).
+Automatyczne kontrole:
+- poprawne delimitery frontmatteru i podstawowa struktura pól; w CI PyYAML dodatkowo waliduje składnię YAML;
+- wymagane pola `type`, `title`, `created`, `updated`, `tags`, `up`;
+- dozwolone typy i daty ISO (`YYYY-MM-DD`);
+- lokalne wikilinki, z pominięciem bloków kodu i komentarzy HTML;
+- heurystyczne ostrzeżenia dla braku `aliases` (migracja starszych notatek) i pustych sekcji.
 
-## Output
-- Raport z audytu zapisany w `90_Meta/sessions/lint-YYYY-MM-DD.md`.
-- Wypisanie najważniejszych błędów bezpośrednio w oknie czatu/terminala.
+Błędy blokują CI; ostrzeżenia nie. Linter nie ocenia prawdziwości treści, jakości źródeł ani merytorycznej aktualności.
+
+## Uzupełniający przegląd
+Ręczny lub agentowy audyt może dodatkowo ocenić sieroty, aktualność bibliotek, alternatywy, zgodność verdict/confidence, weryfikację snippetów i wiek surowców. Nie należy przedstawiać tych heurystyk jako wykonanych przez skrypt, dopóki nie mają implementacji i testów.
 
 ## Guardrails
-- Skill jest wyłącznie procesem walidacyjnym (read-only). Nie modyfikuje ani nie usuwa żadnych plików w vaultcie poza zapisaniem raportu.
-
-## Warianty
-- Brak.
+Nie naprawiaj ani nie usuwaj plików automatycznie. Przed zmianami w treści produkcyjnej pokaż diff i uzyskaj akceptację zgodnie z `.agent/AGENTS.md`.

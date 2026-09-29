@@ -28,6 +28,10 @@
 
 ---
 
-## 🚀 Szybki Start dla Agenta
+## 🚀 Zacznij tutaj
 
-Przed przystąpieniem do pracy przeczytaj poleceniem `view_file` plik **[.agent/AGENTS.md](.agent/AGENTS.md)** — jedyne źródło prawdy o zasadach edycji i prawach zapisu.
+Nie musisz znać układu repozytorium, aby zacząć. Otwórz **[Zacznij tutaj](90_Meta/start-here.md)** w Obsidianie — znajdziesz tam wejścia do rozwiązywania problemów, wyszukiwania wiedzy, nauki i przeglądu materiałów.
+
+Szybkie polecenie: „Przeanalizuj problem: [objaw]. Kontekst: [system i ograniczenia]. Porównaj możliwe rozwiązania, wskaż źródła, założenia i brakujące informacje.”
+
+Dla agentów: przed edycją przeczytaj **[.agent/AGENTS.md](.agent/AGENTS.md)** — źródło prawdy o strukturze i prawach zapisu.
