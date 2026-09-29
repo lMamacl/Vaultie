@@ -34,7 +34,6 @@ Commitujemy źródła labu. Ignorujemy: `node_modules/`, `bin/`, `obj/`, `.env`,
 | 1.3 Git Workflow & Monorepo | [web-engineering/1.3](web-engineering/1.3/) | Aktywny |
 | 2.1 Rendering, WASM & Runtimes | [web-engineering/2.1](web-engineering/2.1/) | Aktywny |
 | Fantasy Map Generator | [Fantasy-Map-Generator-experimental](Fantasy-Map-Generator-experimental/) | Submoduł badawczo-eksperymentalny |
-| Poland Statecraft | [poland-statecraft](poland-statecraft/) | Symulator systemowy & Drzewo reform Polski 2026+ |
 | HitTimline | [HitTimline](HitTimline/) | Submoduł gry muzycznej Android (Kotlin, Compose, Ktor, Spotify) |
 | Web Dev For Beginners (Microsoft) | [web-engineering/Web-Dev-For-Beginners](web-engineering/Web-Dev-For-Beginners/) | Submoduł referencyjny kursu inżynierii webowej (24 lekcje JS/HTML/CSS) |
 
