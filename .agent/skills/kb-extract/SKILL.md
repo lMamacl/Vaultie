@@ -1,3 +1,8 @@
+---
+name: kb-extract
+description: "Extracts a webpage, documentation, release note, PDF, or local source into a traceable raw item in the Vaultie Inbox."
+---
+
 # kb-extract — automatyczna ekstrakcja stron internetowych i dokumentacji
 
 ## Cel

@@ -1,3 +1,8 @@
+---
+name: kb-canvas
+description: "Creates or updates Obsidian Canvas diagrams of relationships between Vaultie notes, libraries, patterns, and decisions."
+---
+
 # kb-canvas — generowanie wizualnych tablic Obsidian Canvas (.canvas)
 
 ## Cel

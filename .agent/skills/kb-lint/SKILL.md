@@ -1,3 +1,8 @@
+---
+name: kb-lint
+description: "Checks Vaultie knowledge-note frontmatter, dates, note types, and local wikilinks. Use when auditing repository integrity."
+---
+
 # kb-lint — walidacja integralności notatek
 
 ## Cel

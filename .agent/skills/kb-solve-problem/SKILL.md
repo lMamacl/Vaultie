@@ -1,3 +1,8 @@
+---
+name: kb-solve-problem
+description: "Researches how comparable projects solve an engineering problem, then proposes a context-specific solution with sources and rejected alternatives."
+---
+
 # kb-solve-problem — poszukiwanie wzorców i rozwiązanie problemu X
 
 ## Cel

@@ -1,3 +1,8 @@
+---
+name: kb-compare
+description: "Compares libraries, frameworks, or technologies and prepares a sourced comparison. Use when choosing between two or more engineering options."
+---
+
 # kb-compare — porównanie bibliotek i technologii
 
 ## Cel

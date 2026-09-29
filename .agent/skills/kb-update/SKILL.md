@@ -1,3 +1,8 @@
+---
+name: kb-update
+description: "Updates an existing Vaultie knowledge note using new evidence while preserving its history, links, and accepted context."
+---
+
 # kb-update — aktualizacja istniejących notatek produkcyjnych
 
 ## Cel

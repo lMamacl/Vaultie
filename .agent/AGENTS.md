@@ -65,7 +65,9 @@ up: "[[nadrzędna notatka]]"      # breadcrumb, wymagany poza MOC
 
 ## Skille i Narzędzia
 
-W katalogu `.agent/skills/` znajdują się pełne definicje skilli (`kb-query`, `kb-ingest`, `kb-extract`, `kb-lint`, `kb-compile`, `kb-lib-analyze`, `kb-compare`, `kb-scout`, `kb-update`, `kb-archive`, `kb-merge`, `kb-review`, `kb-pattern-extract`, `kb-canvas`, `kb-blackbox`, `kb-lesson-certify`, `kb-epistemic-solve`).
+Każdy natywny skill znajduje się w `.agent/skills/<skill-name>/SKILL.md` z wymaganym YAML frontmatter (`name`, `description`). W Antigravity wywołuj go jako `/<skill-name>` albo opisz zadanie, aby agent dobrał go automatycznie. Skille są instrukcjami/workflowami dla agenta; nie zakładaj, że każdy z nich odpowiada samodzielnemu CLI.
+
+Dostępne skille: `kb-archive`, `kb-blackbox`, `kb-canvas`, `kb-compare`, `kb-compile`, `kb-deep-dive`, `kb-epistemic-solve`, `kb-extract`, `kb-ingest`, `kb-lesson-certify`, `kb-lib-analyze`, `kb-lint`, `kb-merge`, `kb-pattern-extract`, `kb-query`, `kb-review`, `kb-scout`, `kb-solution-blueprint`, `kb-solve-problem`, `kb-update`.
 
 
 Pomocniczy skrypt integralności i planowania transakcji: `python3 .agent/scripts/vaultie-cli.py`.

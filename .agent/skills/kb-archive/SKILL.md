@@ -1,3 +1,8 @@
+---
+name: kb-archive
+description: "Archives or retires stale Vaultie notes safely. Use when reviewing, archiving, or retiring outdated library, pattern, decision, or snippet notes."
+---
+
 # kb-archive — archiwizacja nieaktualnych lub wycofanych notatek
 
 ## Cel

@@ -1,3 +1,8 @@
+---
+name: kb-deep-dive
+description: "Produces a detailed engineering analysis of how a technology works internally, including architecture, performance limits, and implementation pitfalls."
+---
+
 # kb-deep-dive — głęboka analiza technologii / tematu Y
 
 ## Cel

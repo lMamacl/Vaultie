@@ -52,7 +52,7 @@ up: "[[90_Meta/_index]]"
 
 ## Protokół weryfikacji (2 fazy)
 
-Kontrakt: [[lesson-quality-contract-v1]] · Skill Blackbox: `.agent/skills/kb-blackbox.md` · Propozycja Certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md`
+Kontrakt: [[lesson-quality-contract-v1]] · Skill Blackbox: `.agent/skills/kb-blackbox/SKILL.md` · Propozycja Certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md`
 
 ```mermaid
 flowchart LR
@@ -95,8 +95,8 @@ flowchart LR
 ### Artefakty procesu
 
 - Kontrakt: [[lesson-quality-contract-v1]]
-- Skill Blackbox: `.agent/skills/kb-blackbox.md` (zaakceptowany)
-- Propozycja Certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md` → przyszły `.agent/skills/kb-lesson-certify.md` (tylko na polecenie)
+- Skill Blackbox: `.agent/skills/kb-blackbox/SKILL.md` (zaakceptowany)
+- Propozycja Certify: `00_Inbox/_proposals/skill-kb-lesson-certify.md` → przyszły `.agent/skills/kb-lesson-certify/SKILL.md` (tylko na polecenie)
 - Labs: `labs/web-engineering/<lesson-id>/`
 - Spec per lekcja: `90_Meta/lessons/<id>/spec.yaml`
 

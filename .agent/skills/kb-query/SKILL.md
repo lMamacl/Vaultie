@@ -1,3 +1,8 @@
+---
+name: kb-query
+description: "Searches existing Vaultie knowledge for libraries, patterns, architecture decisions, concepts, lessons, and related evidence."
+---
+
 # kb-query — inteligentne przeszukiwanie wiedzy w vaultcie
 
 ## Cel

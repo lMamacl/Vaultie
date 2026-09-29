@@ -1,3 +1,8 @@
+---
+name: kb-blackbox
+description: "Runs a closed-book teach-back quiz for a Vaultie lesson. Use when checking understanding of a lesson or preparing to accept a lesson artifact."
+---
+
 # kb-blackbox — Guard-Rail Verification Protocol
 
 ## Cel

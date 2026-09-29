@@ -1,3 +1,8 @@
+---
+name: kb-pattern-extract
+description: "Extracts a reusable engineering pattern from multiple implementations, libraries, or snippets and records its trade-offs."
+---
+
 # kb-pattern-extract — ekstrakcja wzorca z grupy snippetów lub bibliotek
 
 ## Cel

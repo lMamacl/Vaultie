@@ -19,10 +19,10 @@ Opisz problem, kontekst i ograniczenia zwykłym językiem. Możesz użyć takieg
 
 > Przeanalizuj problem: retry do zewnętrznego API może powodować podwójne wykonanie operacji. Kontekst: Node.js, checkout, timeout po wysłaniu żądania. Porównaj rozwiązania, wskaż źródła, założenia i brakujące informacje.
 
-Uruchom `kb-solve-problem` dla otwartego problemu programistycznego lub architektonicznego. Oczekuj jawnej decyzji, dlaczego wybrano tę opcję, dlaczego odrzucono istotne alternatywy i co zmieniłoby wybór — wraz ze źródłami, trade-offami i następnym krokiem. Jeśli odpowiedź zależy od nieznanych danych, agent powinien je ujawnić — nie zgadywać.
+W Antigravity wpisz `/kb-solve-problem` (albo wybierz skill po wpisaniu `/`) dla otwartego problemu programistycznego lub architektonicznego. Oczekuj jawnej decyzji, dlaczego wybrano tę opcję, dlaczego odrzucono istotne alternatywy i co zmieniłoby wybór — wraz ze źródłami, trade-offami i następnym krokiem. Jeśli odpowiedź zależy od nieznanych danych, agent powinien je ujawnić — nie zgadywać.
 
 ### Znaleźć istniejącą wiedzę
-Użyj `kb-query` i zapytań z [[queries]]. Zaczynaj od słów opisujących **problem i efekt**, nie tylko nazwy technologii. Sprawdź też [[_index|mapę treści]] oraz powiązane linki w znalezionej notatce.
+W Antigravity użyj `/kb-query` lub wybierz go po wpisaniu `/`; możesz też po prostu poprosić agenta o wyszukanie w Vaultie. Korzystaj z zapytań z [[queries]]. Zaczynaj od słów opisujących **problem i efekt**, nie tylko nazwy technologii. Sprawdź też [[_index|mapę treści]] oraz powiązane linki w znalezionej notatce.
 
 ### Zbadać nowe źródła
 Użyj `kb-scout` do odkrywania materiałów z watchlisty albo `kb-extract` do zebrania konkretnej strony. Nowe materiały trafiają do `00_Inbox/` — są surowcem do oceny, nie zatwierdzoną wiedzą ani automatyczną rekomendacją.

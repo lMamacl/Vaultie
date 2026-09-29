@@ -1,3 +1,8 @@
+---
+name: kb-lib-analyze
+description: "Analyzes a software library or developer tool, its current API, trade-offs, pitfalls, and fit, then prepares a Vaultie proposal."
+---
+
 # kb-lib-analyze — szczegółowa analiza biblioteki programistycznej
 
 ## Cel

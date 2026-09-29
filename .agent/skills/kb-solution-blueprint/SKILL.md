@@ -1,3 +1,8 @@
+---
+name: kb-solution-blueprint
+description: "Designs a solution architecture for a stated engineering problem, compares options and risks, and prepares a decision brief or ADR proposal."
+---
+
 # kb-solution-blueprint — projektowanie rozwiązania Z, komponentów i decyzji ADR
 
 ## Cel

@@ -1,3 +1,8 @@
+---
+name: kb-ingest
+description: "Triages and converts raw Inbox material into a sourced, structured proposal or clip for Vaultie."
+---
+
 # kb-ingest — kategoryzacja i przetwarzanie surowca z Inboxu
 
 ## Cel

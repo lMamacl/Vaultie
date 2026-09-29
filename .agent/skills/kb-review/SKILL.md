@@ -1,3 +1,8 @@
+---
+name: kb-review
+description: "Creates a weekly review of Vaultie changes, Inbox items, proposed decisions, and snippets awaiting verification."
+---
+
 # kb-review — generowanie tygodniowego przeglądu wiedzy (Weekly Review)
 
 ## Cel

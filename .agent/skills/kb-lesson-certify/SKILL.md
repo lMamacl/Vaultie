@@ -1,3 +1,8 @@
+---
+name: kb-lesson-certify
+description: "Runs the available static quality gates for a Vaultie masterclass lesson and reports whether human review or teach-back remains."
+---
+
 # kb-lesson-certify — Faza A Quality Gate (przed Blackbox)
 
 ## Cel

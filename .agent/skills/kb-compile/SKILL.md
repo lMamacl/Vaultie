@@ -1,3 +1,8 @@
+---
+name: kb-compile
+description: "Rebuilds Vaultie indexes, maps of content, navigation, and context buffers after approved knowledge changes."
+---
+
 # kb-compile — kompilacja indeksów, nawigacji i bufora kontekstu
 
 ## Cel

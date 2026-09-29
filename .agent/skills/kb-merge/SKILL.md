@@ -1,3 +1,8 @@
+---
+name: kb-merge
+description: "Merges duplicate Vaultie notes or source clips while preserving evidence, useful context, and backlinks."
+---
+
 # kb-merge — scalanie duplikatów notatek i klipów
 
 ## Cel

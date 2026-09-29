@@ -1,3 +1,8 @@
+---
+name: kb-scout
+description: "Finds relevant new releases, documentation, engineering articles, and research for topics on the Vaultie watchlist."
+---
+
 # kb-scout — automatyczny przwiad i odkrywanie nowych materiałów
 
 ## Cel
