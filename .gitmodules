@@ -7,3 +7,6 @@
 [submodule "labs/web-engineering/Web-Dev-For-Beginners"]
 	path = labs/web-engineering/Web-Dev-For-Beginners
 	url = https://github.com/microsoft/Web-Dev-For-Beginners.git
+[submodule "labs/web-engineering/JS"]
+	path = labs/web-engineering/JS
+	url = https://github.com/lMamacl/web-engineering-js.git

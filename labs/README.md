@@ -37,5 +37,6 @@ Commitujemy źródła labu. Ignorujemy: `node_modules/`, `bin/`, `obj/`, `.env`,
 | Poland Statecraft | [poland-statecraft](poland-statecraft/) | Symulator systemowy & Drzewo reform Polski 2026+ |
 | HitTimline | [HitTimline](HitTimline/) | Submoduł gry muzycznej Android (Kotlin, Compose, Ktor, Spotify) |
 | Web Dev For Beginners (Microsoft) | [web-engineering/Web-Dev-For-Beginners](web-engineering/Web-Dev-For-Beginners/) | Submoduł referencyjny kursu inżynierii webowej (24 lekcje JS/HTML/CSS) |
+| Web Engineering JS (Angular & React) | [web-engineering/JS](web-engineering/JS/) | Submoduł zadań semestralnych (Angular 22, React 19) |
 
 Mapa lekcji: [`90_Meta/web-engineering-roadmap.md`](../90_Meta/web-engineering-roadmap.md)
