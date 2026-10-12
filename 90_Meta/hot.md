@@ -2,7 +2,7 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-09-09
+updated: 2026-10-12
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
@@ -13,7 +13,9 @@ up: "[[90_Meta/_index]]"
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek (2026-09-29):** Rejestracja 20 natywnych skills Antigravity: kanoniczne foldery `SKILL.md`, opisy wyzwalające, walidator i aktualizacja adapterów. Szczegóły: [[2026-09-29-1252]].
+- **Aktywny Wątek (2026-10-12):** Redakcja językowa, strukturalna i typograficzna zestawu dokumentów startowych w `90_Meta/project-kickoff-kit/` (`tematy przykłądowe.md`, `instrukcje.md`, `wymagania uczelniane.md`). Wprowadzono standaryzację Markdown (nagłówki `#`, `##`, `###`, alerty, tabele, linki), usunięto liczne błędy ortograficzne i fleksyjne ze źródeł uczelnianych, zachowując 100% pierwotnej treści merytorycznej, wymagań sylabusowych i reguł oceniania.
+- **Poprzedni Wątek (2026-09-29):** Opracowanie kompleksowego aneksu inżynieryjnego [[appendix-system-architecture-kuchnia-cygana|Appendix 2.2 (Architektura Systemowa i Analiza Przepływów Wielomodułowych „Kuchnia u Cygana”)]]: dogłębny audyt architektury, odwrócenie zależności (DIP), analiza brakujących FK, blokady pesymistyczne UPDLOCK, pełne studium przepływu orkiestracji M1-M2-M3 (Generowanie Planu Produkcji i Rozchód FEFO), rekonstrukcja w 4 alternatywnych paradygmatach, macierz trade-offów i rozszerzone tematy badawcze.
+- **Poprzedni Wątek (2026-09-29):** Rejestracja 20 natywnych skills Antigravity: kanoniczne foldery `SKILL.md`, opisy wyzwalające, walidator i aktualizacja adapterów. Szczegóły: [[2026-09-29-1252]].
 - **Poprzedni Wątek (2026-09-29):** Druga iteracja UX/researchu: jawna sekcja decyzji i odrzuconych alternatyw; rewizja lekcji 2.2 i jej relacji, źródeł oraz statusu Phase A / human review. Szczegóły: [[2026-09-29-1231]].
 - **Poprzedni Wątek (2026-09-29):** Pierwsza iteracja poprawy UX i researchu Vaultie: `90_Meta/start-here.md`, solution brief, metadane źródeł, lint + CI oraz pilot retry. Szczegóły: [[2026-09-29-1145]].
 - **Poprzedni Aktywny Wątek (2026-09-29):** Opracowanie kompletnego zestawu startowego dla 2-semestralnego projektu inżynierskiego zespołowego 6+ osób (*Project Kickoff Kit*):
@@ -22,7 +24,7 @@ up: "[[90_Meta/_index]]"
   3. Podręcznik operacyjny rotującego Product Ownera i Dewelopera w Jira/Confluence/Bitbucket z procedurą obronną przed zrzucaniem winy za niedowiezione zadania, szablonami Daily, Review z użytkownikiem końcowym oraz Retro z analizą delty i burndown (`03-scrum-po-developer-handbook.md`).
 - **Poprzedni Wątek (2026-09-28):** Wdrożenie i pełna certyfikacja jakościowa lekcji 2.2 Masterclass (*Paradygmaty Architektoniczne Systemów: Architektura Warstwowa, Hexagonalna / Ports & Adapters, Onion, Clean Architecture, Modular Monolith vs Mikroserwisy*).
 - **Poprzedni Wątek (2026-09-28):** Opracowanie kompleksowego aneksu inżynieryjnego [[appendix-aspnet-mvc-kuchnia-cygana|Appendix 2.1 (ASP.NET Core MVC, HTMX i Studium Projektu „Kuchnia u Cygana”)]].
-- **Bieżące artefakty:** `90_Meta/project-kickoff-kit/`, `90_Meta/lessons/2.2/2.2-system-architecture-paradigms.md`, `labs/web-engineering/2.2/`, `90_Meta/lessons/2.1/appendix-aspnet-mvc-kuchnia-cygana.md`
+- **Bieżące artefakty:** `90_Meta/lessons/2.2/appendix-system-architecture-kuchnia-cygana.md`, `90_Meta/project-kickoff-kit/`, `90_Meta/lessons/2.2/2.2-system-architecture-paradigms.md`, `labs/web-engineering/2.2/`, `90_Meta/lessons/2.1/appendix-aspnet-mvc-kuchnia-cygana.md`
 - **Zrealizowane Zadania:**
   1. **Weryfikacja stanu:** potwierdzono naprawy P0 z audytu 2026-09-01 (Ekman, skala wiatru w km, jedna stała 55, Barnes Priority-Flood, izolacja `flAero`, delegacja temp/opadu, `precipMm` w biomach); podzbiór krytyczny 12 plików / 69 testów przechodzi w 100%.
   2. **Dokumenty i Analizy Modułowe:** Skompletowano i zaktualizowano wszystkie 6 analiz modułowych (`00_Inbox/aero-hydro-analizy/`), tworząc pełną specyfikację techniczną dla agentów i bazę do audytu kodu źródłowego.
@@ -108,6 +110,7 @@ up: "[[90_Meta/_index]]"
      - Zmiany zatwierdzone commitem `6f423328` w repozytorium `labs/Fantasy-Map-Generator-experimental`.
 
 ## Ostatnio Modyfikowane Notatki i Pliki
+- `90_Meta/lessons/2.2/appendix-system-architecture-kuchnia-cygana.md` (kompleksowy aneks inżynieryjny: audyt architektury, studium przepływu M1-M2-M3 i rekonstrukcja paradygmatów)
 - `90_Meta/project-kickoff-kit/01-discord-ideation-1pager.md` (szablon 1-pagera na Discorda i procedura cichej inkubacji pomysłów)
 - `90_Meta/project-kickoff-kit/02-confluence-dip-template.md` (szablon Dokumentu Inicjującego Projekt DIP dla Confluence pod 6+ Epików)
 - `90_Meta/project-kickoff-kit/03-scrum-po-developer-handbook.md` (podręcznik operacyjny rotującego PO i dewelopera w Jira/Bitbucket/Confluence)
