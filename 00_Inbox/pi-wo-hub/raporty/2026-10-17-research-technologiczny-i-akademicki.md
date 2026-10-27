@@ -1,0 +1,41 @@
+# Raport Technologiczno-Akademicki: Projekt „Pi-Wo” (Poker Texas Hold'em)
+
+**Data analizy:** 2026-10-17  
+**Rola:** Researcher Technologiczny i Akademicki  
+**Kontekst akademicki:** Pracownia Specjalistyczna, Politechnika Białostocka (PB)  
+**Zespół:** 5-osobowy (Michał Pączkowski, Michał Małecki, Miłosz Szymczuk, Miłosz Pawlaczyk, Maciej Cyuńczyk — Lider)  
+**Stan repozytorium (`labs/projects/pi-wo`):** Inicjalny szkielet (`server.js` Express 5.3, `package.json`, `README.md` z linkiem do Figmy)  
+**Baza analityczna:** `00_Inbox/pi-wo-hub/docs/` (pliki 00, 01, 02, 03, 04) oraz `zalozenia-pracownia-specjalistyczna.md`
+
+---
+
+## 1. Mapowanie 1:1 na sylabus i etapy zaliczenia PB
+
+| Etap PB | Wymóg sylabusa PB | Punkty | Co dokładnie dowodzi zespół w projekcie „Pi-Wo” | Status w repo (`labs/projects/pi-wo`) | Główny wykonawca (zespół 5 os.) | Kryterium akceptacji (DoD / Demo) |
+| :--- | :--- | :---: | :--- | :--- | :---: | :--- |
+| **Etap 1** | **Koncepcja i projekt aplikacji**<br>• MVP, encje i relacje<br>• Wstępne API<br>• Makiety i mapa nawigacji<br>• Repozytorium Git | *Bazowy* | • Zakres MVP: No-Limit Texas Hold'em, 2–6 graczy, wariant *Cap & Refund*<br>• Schemat encji: `users`, `tables`, `seats`, `hands`, `hand_players`, `hand_actions`, `ledger`<br>• Wykaz endpointów REST (`/api/auth`, `/api/tables`, `/api/hands`, `/api/users`)<br>• Makiety w Figmie (link w README) + mapa routingu Vue (Lobby, Stół, Profil, Replay) | **Częściowo gotowe:**<br>Repo istnieje, README zawiera skład i link do Figmy. Brakuje sformalizowanego schematu encji i specyfikacji API wewnątrz repo. | **Wszyscy**<br>(Koordynacja: Lider Maciej Cyuńczyk) | Zatwierdzony dokument założeń w `docs/`, klikalna makieta w Figmie, zdefiniowany podział na 5 ról. |
+| **Etap 2** | **Podstawowe API**<br>• Node.js + Express<br>• Routing i middleware<br>• REST w pamięci/plikach<br>• Walidacja i obsługa błędów<br>• Testy HTTP | **10 pkt** | • Express 5.3 z modularnym routingiem (`/api/tables`, `/api/health`)<br>• Middleware: `cors`, `helmet`, `express.json`, `errorHandler`<br>• Przechowywanie stołów i użytkowników w pamięci (`Map<id, Table>`)<br>• Walidacja wejścia biblioteką `zod`<br>• Plik testowy `server/api.http` (VS Code REST Client) do odpalenia na żywo | **Szkielet:**<br>`server.js` ma tylko `app.get('/')` i `/about`. Wymaga rozbicia na strukturę `src/routes`, `src/middleware` i dodania `api.http`. | **Osoba A**<br>(Backend Core / Lider) | Prowadzący odpala `server/api.http` w VS Code: zapytania GET/POST działają, błędy 400/404 zwracają ustandaryzowany JSON `{ error: ... }`. |
+| **Etap 3** | **Baza danych i kompletne API**<br>• SQLite (baza relacyjna)<br>• Trwały CRUD i logika biznesowa<br>• Filtrowanie, sortowanie, paginacja<br>• Walidacja i obsługa błędów | **10 pkt** | • SQLite (`PRAGMA foreign_keys = ON`, `journal_mode = WAL`)<br>• Repozytoria: `tablesRepo`, `usersRepo`, `ledgerRepo`<br>• Filtrowanie stołów w `GET /api/tables` (`q`, `blindMax`, `hasSeat`, `status`, sortowanie wg stawek/daty, paginacja `page`/`limit`)<br>• *Izolowany silnik gry:* czyste funkcje w `engine/` (`deck.js`, `evaluator.js`, `betting.js`) + 30+ testów w Vitest | **Do zrobienia:**<br>Konieczny wybór sterownika SQLite, migracje SQL i implementacja zapytań z klauzulami `WHERE`, `ORDER BY`, `LIMIT/OFFSET`. | **Osoba C** (DB) + **Osoba B** (Silnik gry) | `npm test` uruchamia testy silnika z zielonym wynikiem; zapytanie z filtrami w `api.http` zwraca przefiltrowaną, spaginowaną listę stołów z bazy SQLite. |
+| **Etap 4** | **Auth i finalizacja backendu**<br>• Rejestracja i logowanie<br>• Hashe (`bcrypt`) i tokeny (`JWT`)<br>• Role i uprawnienia (`user`, `admin`)<br>• Testy API i dokumentacja API<br>• DoD: Kompletny backend MVP | **10 pkt** | • Endpointy `/api/auth/register`, `/login`, `/me`<br>• Haszowanie haseł `bcryptjs` (salt 10), tokeny JWT (access + refresh w cookie)<br>• Role: `user` (gra, tworzenie stołu) vs `admin` (zamykanie stołów, podgląd statystyk)<br>• Ochrona tras przez middleware `authenticate` i `authorize('admin')`<br>• Dokumentacja API w Swagger/OpenAPI lub kompletnym `api.http` + testy `supertest` | **Do zrobienia** | **Osoba C** (Auth) + **Osoba A** (Middleware/Swagger) | Próba wejścia na chroniony endpoint bez tokena zwraca 401; zwykły user w `/api/admin` dostaje 403; testy automatyczne przechodzą bezbłędnie. |
+| **Etap 5** | **Frontend i integracja z API**<br>• Inicjalizacja Vue 3 (Vite)<br>• Komponenty i Vue Router<br>• Komunikacja z API (REST)<br>• Formularze, loading, obsługa błędów<br>• Scenariusze E2E | **10 pkt** | • Aplikacja `client/` na Vue 3 + Vite + Vue Router<br>• Widoki: `LoginView`, `RegisterView`, `LobbyView`, `ProfileView`<br>• Formularze z walidacją inline, blokadą podwójnego kliknięcia i komunikatami błędów z backendu<br>• Komponenty `common/`: `BaseInput`, `BaseButton`, `Toast`, `Loader`/skeleton<br>• Dynamiczne filtrowanie i paginacja stołów w lobby | **Do zrobienia:**<br>Frontend nie został jeszcze zainicjalizowany w repozytorium. | **Osoba E**<br>(Frontend App / Router) | Prowadzący rejestruje konto w przeglądarce, loguje się, widzi listę stołów pobraną z backendu, zakłada nowy stół przez modal z obsługą błędów. |
+| **Etap 6** | **Kompletna aplikacja i rozszerzenie techniczne**<br>• Pinia (zarządzanie stanem)<br>• Responsywność i UX<br>• Rozszerzenie techniczne (min. 1 uzasadnione)<br>• Testy i poprawki | **10 pkt** | • Store Pinii: `auth.js`, `tables.js`, `game.js`, `ui.js`<br>• Responsywność stołu: 3 układy (Classic, Hero, Compact)<br>• **Rozszerzenie techniczne 1 (Główne): WebSocket** — autorytatywny serwer, synchronizacja stanu gry w czasie rzeczywistym, licznik tury<br>• **Rozszerzenie techniczne 2 (Wspierające): Web Worker** — kalkulator equity/outsów (Monte Carlo) poza głównym wątkiem UI | **Do zrobienia** | **Osoba D** (Stół) + **Osoba A** (WS) + **Osoba E** (Worker) | Dwa okna przeglądarki grają przy jednym stole: karty rozdawane po WS, licytacja w czasie rzeczywistym, Worker liczy % szans bez zamrażania timera tury. |
+| **Etap 7** | **Finalizacja i obrona (50 pkt)**<br>1. Działanie MVP (10)<br>2. Jakość kodu (10)<br>3. Bezpieczeństwo (5)<br>4. UI/UX (5)<br>5. Rozszerzenie (10)<br>6. Dokumentacja i obrona (10) | **50 pkt** | • **Działanie (10):** Płynna gra 3 graczy live, brak zawieszeń przy rozłączeniu.<br>• **Jakość (10):** Moduł `engine/` bez zależności zewnętrznych, 40+ testów w Vitest, Conventional Commits w gicie.<br>• **Bezpieczeństwo (5):** Karty przeciwników NIE są wysyłane w WS przed showdownem (pokazane w DevTools Network), hasła w bcrypt, transakcje SQL.<br>• **UI/UX (5):** Obsługa 4 stanów (loading/empty/error/success), układ Hero na mobile, animacje CSS 3D.<br>• **Rozszerzenie (10):** Obrona architektury WS (snapshot + stateVersion) oraz Web Workera.<br>• **Dokumentacja i obrona (10):** `README.md`, `PROBLEMY.md` z historią decyzji, indywidualna prezentacja kodu każdego z 5 studentów. | **Do zrobienia** | **Cały zespół** (indywidualne wystąpienia 60–90 s na osobę) | Udane demo na żywo na rzutniku/dwóch ekranach + obrona kodu bez zacięć. |
+
+---
+
+## 2. Faktyczna wykonalność (Feasibility) dla studentów
+
+### 2.1. Czy zespół 5 studentów pisząc kod SAMODZIELNIE dowiezie to w 13 tygodni?
+
+**Diagnoza:** **TAK, pod warunkiem bezwzględnej dyscypliny zakresu (Scope Control) i wczesnej separacji architektonicznej.**
+
+Pięcioosobowy zespół studencki to ok. 400–500 roboczogodzin w semestrze (5 osób × 6–8 h/tydz. × 13 tygodni). To wystarcza z nawiązką na aplikację w czystym JS/Vue pod warunkiem:
+- Kontrakty API i WS są zamrożone na Etapie 1.
+- Frontend pracuje na mockach, zanim backend połączy się z bazą.
+- Zespół nie wprowadza niepotrzebnych frameworków 3D ani skomplikowanych bibliotek pokerowych.
+
+### 2.2. Rekomendacje biblioteczne:
+- **Express 5.3:** Pozostać przy Express 5.3 (obsługa async bez boilerplate).
+- **SQLite:** Użyć wbudowanego `node:sqlite` (Node 22+) lub `better-sqlite3` z zachowaniem jednolitej wersji Node na Windows.
+- **Styling:** Czysty Vue Scoped CSS ze zmiennymi CSS zamiast Tailwind CSS (dla unikalnej geometrii stołu i żetonów).
+- **Komunikacja WS:** Własny protokół na `ws` (wzorcowy), z możliwością awaryjnego przejścia na `socket.io` w razie trudności z reconnectem.

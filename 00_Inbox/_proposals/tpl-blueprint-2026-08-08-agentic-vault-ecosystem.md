@@ -33,7 +33,7 @@ Dokument odpowiada na pytania:
 |---|---|---|
 | **Daniel Miessler's Fabric** | Wersjonowane, tekstowe wzorce (*Patterns*) czytane ze standardowego wejścia i składane w łańcuchy (*pipelines*). | Skille w `.agent/skills/` działają jako czyste skrypty Prompt-as-Code. Wynik wywołania jednego skilla (`kb-scout`) może stanowić surowiec dla kolejnego (`kb-lib-analyze`). |
 | **Model Context Protocol (MCP)** | Standaryzowany interfejs połączeniowy z dyskiem, GitHubem, wyszukiwarkami i przeglądarką. | Konfiguracja `.agent/mcp.json` z obsługą serwerów `github`, `tavily` oraz `fetch`. |
-| **Self-Improving Heartbeat Loop** | Cykliczny agent działający w tle (cron), który skanuje surowe wpisy, deduplikuje notatki i aktualizuje graf połączeń. | Skill [kb-scout.md](file:///c:/Users/cyunc/Documents/Projects/Vaultie/.agent/skills/kb-scout.md) oraz dedykowany skrypt integralności `python3 .agent/scripts/vaultie-cli.py lint`. |
+| **Self-Improving Heartbeat Loop** | Cykliczny agent działający w tle (cron), który skanuje surowe wpisy, deduplikuje notatki i aktualizuje graf połączeń. | Skill [kb-scout.md](file:///c:/Users/cyunc/Documents/Projects/Vaultie/.agent/skills/kb-scout/SKILL.md) oraz dedykowany skrypt integralności `python3 .agent/scripts/vaultie-cli.py lint`. |
 | **Nygard ADR & Y-Statement** | Ustrukturyzowane notatki decyzji architektonicznych zawierające uzasadnienie i negatywne konsekwencje. | Szablony `tpl-comparison.md` i `tpl-decision.md` wspierane przez skill `kb-solution-blueprint`. |
 
 ---
@@ -158,7 +158,7 @@ Notatka **Musi Odpowiadać** na pytania: *„Co to jest?”, „Jak to działa p
 ## 8. Rekomendowany Plan Adopcji i Następne Kroki
 
 1. **Zatwierdzenie niniejszego Blueprinta:** Przeniesienie wniosków do struktury vaulta.
-2. **Przetestowanie Skilli na Realnym Problemie:** Uruchomienie skilla [kb-solve-problem.md](file:///c:/Users/cyunc/Documents/Projects/Vaultie/.agent/skills/kb-solve-problem.md) dla konkretnego wyzwania architektonicznego.
+2. **Przetestowanie Skilli na Realnym Problemie:** Uruchomienie skilla [kb-solve-problem.md](file:///c:/Users/cyunc/Documents/Projects/Vaultie/.agent/skills/kb-solve-problem/SKILL.md) dla konkretnego wyzwania architektonicznego.
 3. **Utrzymanie Czystości Vaulta:** Wykorzystanie `python3 .agent/scripts/vaultie-cli.py lint` po każdym zbiorczym przetwarzaniu materiałów.
 
 ---

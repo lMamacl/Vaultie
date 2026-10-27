@@ -1,9 +1,10 @@
-[submodule "labs/Fantasy-Map-Generator-experimental"]
-	path = labs/Fantasy-Map-Generator-experimental
-	url = https://github.com/lMamacl/Fantasy-Map-Generator-experimental.git
-[submodule "labs/HitTimline"]
-	path = labs/HitTimline
-	url = https://github.com/cyunczykg/HitTimline.git
 [submodule "labs/web-engineering/Web-Dev-For-Beginners"]
 	path = labs/web-engineering/Web-Dev-For-Beginners
 	url = https://github.com/microsoft/Web-Dev-For-Beginners.git
+[submodule "labs/web-engineering/JS"]
+	path = labs/web-engineering/JS
+	url = https://github.com/lMamacl/web-engineering-js.git
+[submodule "labs/projects/pi-wo"]
+	path = labs/projects/pi-wo
+	url = https://github.com/pawjjs/pi-wo.git
+	branch = develop

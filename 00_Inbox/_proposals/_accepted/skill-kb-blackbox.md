@@ -9,13 +9,13 @@ status: accepted
 accepted: 2026-08-07
 ---
 
-# Propozycja ACCEPTED → `.agent/skills/kb-blackbox.md`
+# Propozycja ACCEPTED → `.agent/skills/kb-blackbox/SKILL.md`
 
 ## Cel
 Ustandaryzować Guard-Rail Verification Protocol z [[web-engineering-roadmap]]: brief → **nowa instancja czata** → draft ze źródeł → quiz otwarty → brama zaliczenia → propozycja do `10_`–`50_`.
 
 ## Docelowa lokalizacja
-- Definicja: `.agent/skills/kb-blackbox.md` (**tylko po wyraźnym poleceniu właściciela** — `.agent/` jest chronione)
+- Definicja: `.agent/skills/kb-blackbox/SKILL.md` (**tylko po wyraźnym poleceniu właściciela** — `.agent/` jest chronione)
 - Wywołanie: „uruchom kb-blackbox dla \<ID lekcji\>” (np. `1.1`)
 
 ## Zachowanie skillu (szkic)

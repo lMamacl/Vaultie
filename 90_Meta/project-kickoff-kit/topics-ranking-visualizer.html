@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audyt i Ranking 13 Tematów Projektu Zespołowego PB | Vaultie Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #090c10;
+      --bg-surface: rgba(18, 22, 31, 0.75);
+      --bg-surface-elevated: rgba(28, 35, 51, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(0, 240, 255, 0.3);
+      
+      --accent-cyan: #00f0ff;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #a855f7;
+      --accent-blue: #3b82f6;
+
+      --tier-1: #10b981;
+      --tier-2: #f59e0b;
+      --tier-3: #f97316;
+      --tier-4: #f43f5e;
+
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    #webgl-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+    }
+
+    /* Glassmorphism helpers */
+    .glass-card {
+      background: var(--bg-surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      box-shadow: 0 16px 48px 0 rgba(0, 240, 255, 0.08);
+    }
+
+    /* Header & Hero Section */
+    .header-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding: 2rem 2.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .header-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-title-group h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin-bottom: 1.25rem;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--accent-cyan);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* AI Avatar Card */
+    .avatar-widget {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 20px;
+      padding: 1.25rem 1.75rem;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.12);
+      max-width: 480px;
+      position: relative;
+    }
+
+    .avatar-svg-container {
+      width: 90px;
+      height: 90px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .avatar-bubble {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      position: relative;
+    }
+
+    .avatar-bubble strong {
+      color: var(--accent-cyan);
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+      font-family: var(--font-display);
+    }
+
+    /* Live pulse indicator */
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent-emerald);
+      display: inline-block;
+      animation: pulseAnim 2s infinite;
+    }
+
+    @keyframes pulseAnim {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* Control Tabs & Bar */
+    .dashboard-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1.25rem 1.75rem;
+    }
+
+    .view-tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-cyan);
+      color: #050b14;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+    }
+
+    .filter-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-pill:hover, .filter-pill.active {
+      border-color: var(--accent-cyan);
+      color: #fff;
+      background: rgba(0, 240, 255, 0.12);
+    }
+
+    .filter-pill[data-tier="tier-1"].active {
+      border-color: var(--tier-1);
+      color: var(--tier-1);
+      background: rgba(16, 185, 129, 0.15);
+    }
+    .filter-pill[data-tier="tier-2"].active {
+      border-color: var(--tier-2);
+      color: var(--tier-2);
+      background: rgba(245, 158, 11, 0.15);
+    }
+    .filter-pill[data-tier="tier-3"].active {
+      border-color: var(--tier-3);
+      color: var(--tier-3);
+      background: rgba(249, 115, 22, 0.15);
+    }
+    .filter-pill[data-tier="tier-4"].active {
+      border-color: var(--tier-4);
+      color: var(--tier-4);
+      background: rgba(244, 63, 94, 0.15);
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .topic-card {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-left: 4px solid var(--border-subtle);
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .topic-card[data-tier="tier-1"] { border-left-color: var(--tier-1); }
+    .topic-card[data-tier="tier-2"] { border-left-color: var(--tier-2); }
+    .topic-card[data-tier="tier-3"] { border-left-color: var(--tier-3); }
+    .topic-card[data-tier="tier-4"] { border-left-color: var(--tier-4); }
+
+    .card-rank-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .card-rank-badge.top-1 { color: #ffd700; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+    .card-rank-badge.top-2 { color: #e2e8f0; text-shadow: 0 0 15px rgba(226, 232, 240, 0.4); }
+    .card-rank-badge.top-3 { color: #f59e0b; text-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+
+    .card-header {
+      margin-bottom: 1rem;
+      padding-right: 3.5rem;
+    }
+
+    .card-tier-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+
+    .topic-card[data-tier="tier-1"] .card-tier-label { color: var(--tier-1); }
+    .topic-card[data-tier="tier-2"] .card-tier-label { color: var(--tier-2); }
+    .topic-card[data-tier="tier-3"] .card-tier-label { color: var(--tier-3); }
+    .topic-card[data-tier="tier-4"] .card-tier-label { color: var(--tier-4); }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Score Matrix Bars in Card */
+    .metric-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.85rem;
+      border-radius: 10px;
+    }
+
+    .metric-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+
+    .metric-label {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .metric-bar-container {
+      width: 120px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .metric-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .card-score-box {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .score-number {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .score-total {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .btn-details {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .btn-details:hover {
+      background: var(--accent-cyan);
+      color: #050b14;
+      border-color: var(--accent-cyan);
+    }
+
+    /* Radar Comparison & Simulator View */
+    .comparison-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 992px) {
+      .comparison-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .radar-box {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .radar-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .radar-selects {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .select-styled {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.6rem 0.85rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      flex: 1;
+      outline: none;
+    }
+
+    .select-styled:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    #radarCanvas {
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1;
+    }
+
+    /* Simulator Sliders */
+    .simulator-box {
+      padding: 2rem;
+    }
+
+    .slider-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .slider-styled {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      outline: none;
+    }
+
+    .slider-styled::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    /* Table View */
+    .table-container {
+      overflow-x: auto;
+      margin-bottom: 3rem;
+    }
+
+    .ranking-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .ranking-table th {
+      background: rgba(10, 15, 25, 0.9);
+      padding: 1rem;
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border-subtle);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .ranking-table th:hover {
+      color: var(--accent-cyan);
+    }
+
+    .ranking-table td {
+      padding: 1.1rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .ranking-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Modal Deep Dive */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #0f141f;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 960px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.8);
+      animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.95) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--accent-rose);
+      border-color: var(--accent-rose);
+    }
+
+    .modal-section-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      margin: 1.75rem 0 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .epics-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .epic-card-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .epic-card-item strong {
+      color: #fff;
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .epic-card-item p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Red flag callout box */
+    .danger-box {
+      background: rgba(244, 63, 94, 0.1);
+      border-left: 4px solid var(--accent-rose);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .success-box {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid var(--accent-emerald);
+      padding: 1rem 1.25rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WebGL 3D Canvas Background -->
+  <canvas id="webgl-bg"></canvas>
+
+  <div class="app-container">
+    
+    <!-- Hero & AI Mentor Header -->
+    <header class="header-hero glass-card">
+      <div class="hero-title-group">
+        <div class="badge-pill">
+          <span class="pulse-dot"></span> Politechnika Białostocka • SCRUM Engineering Audit
+        </div>
+        <h1>Ranking 13 Tematów Projektowych</h1>
+        <p class="hero-subtitle">
+          Wielokryterialna analiza wykonalności dla zespołu 6+ studentów. Oceniono zgodność z efektami EU1–EU6, dostępność użytkownika końcowego, dekompozycję na 6 niezależnych Epików oraz zabezpieczenie rotującego PO przed karami regulaminowymi.
+        </p>
+      </div>
+
+      <!-- Animated SVG Avatar -->
+      <div class="avatar-widget" id="avatarWidget">
+        <div class="avatar-svg-container">
+          <svg viewBox="0 0 100 100" width="100%" height="100%" id="aiAvatarSvg">
+            <!-- Glow background -->
+            <circle cx="50" cy="50" r="45" fill="url(#avatarGlow)" opacity="0.3" />
+            <!-- Cyber Helmet Outer -->
+            <path d="M 25,45 C 25,25 75,25 75,45 C 75,70 50,85 50,85 C 50,85 25,70 25,45 Z" fill="#0f172a" stroke="#00f0ff" stroke-width="2.5" />
+            <!-- Visor -->
+            <path id="avatarVisor" d="M 32,42 Q 50,38 68,42 Q 50,56 32,42 Z" fill="#00f0ff" opacity="0.85">
+              <animate attributeName="opacity" values="0.85;0.4;0.85" dur="3s" repeatCount="indefinite" />
+            </path>
+            <!-- Eyes / HUD lines -->
+            <circle id="eyeL" cx="42" cy="45" r="2.5" fill="#ffffff" />
+            <circle id="eyeR" cx="58" cy="45" r="2.5" fill="#ffffff" />
+            <!-- Antenna / Neuro Link -->
+            <line x1="50" y1="25" x2="50" y2="12" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" />
+            <circle cx="50" cy="11" r="3.5" fill="#10b981" />
+            <!-- Accents -->
+            <path d="M 30,58 L 40,68 L 60,68 L 70,58" fill="none" stroke="#64748b" stroke-width="1.5" />
+            
+            <defs>
+              <radialGradient id="avatarGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="avatar-bubble">
+          <strong>Architekt Vaultie (Doradca AI)</strong>
+          <span id="avatarQuote">„Bierzcie Oceny Pracownicze (#4) lub Prace Dyplomowe (#13)! Prowadzący i studenci są na miejscu, 6 Epików dzieli się jak po sznurku, a PO śpi spokojnie.”</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Toolbar: Tabs & Filters -->
+    <div class="dashboard-toolbar glass-card">
+      <div class="view-tabs">
+        <button class="tab-btn active" onclick="switchView('grid')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          Karty Projektów
+        </button>
+        <button class="tab-btn" onclick="switchView('table')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+          Tabela Porównawcza
+        </button>
+        <button class="tab-btn" onclick="switchView('simulator')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          Symulator Wag Zespołu
+        </button>
+      </div>
+
+      <div class="filter-tags">
+        <span class="filter-pill active" data-tier="all" onclick="filterByTier('all')">Wszystkie (13)</span>
+        <span class="filter-pill" data-tier="tier-1" onclick="filterByTier('tier-1')">🟢 Złoty Standard (3)</span>
+        <span class="filter-pill" data-tier="tier-2" onclick="filterByTier('tier-2')">🟡 Solidne (4)</span>
+        <span class="filter-pill" data-tier="tier-3" onclick="filterByTier('tier-3')">🟠 Ryzykowne (3)</span>
+        <span class="filter-pill" data-tier="tier-4" onclick="filterByTier('tier-4')">🔴 Pułapki / Czerwone Flagi (3)</span>
+      </div>
+    </div>
+
+    <!-- MAIN VIEW 1: Cards Grid -->
+    <main id="view-grid" class="cards-grid">
+      <!-- Dynamic rendering via JS -->
+    </main>
+
+    <!-- MAIN VIEW 2: Comparison & Simulator -->
+    <div id="view-simulator" class="comparison-container" style="display: none;">
+      <!-- Radar Chart Card -->
+      <div class="glass-card radar-box">
+        <div class="radar-header">
+          <div>
+            <h3 style="font-family: var(--font-display); color: #fff;">Wykres Radarowy</h3>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Porównaj profile 2 dowolnych projektów</p>
+          </div>
+          <span class="badge-pill" style="font-size: 0.7rem;">Multi-Axis Metric</span>
+        </div>
+
+        <div class="radar-selects">
+          <select id="radarSelect1" class="select-styled" onchange="updateRadarChart()"></select>
+          <select id="radarSelect2" class="select-styled" onchange="updateRadarChart()"></select>
+        </div>
+
+        <canvas id="radarCanvas" width="440" height="440"></canvas>
+      </div>
+
+      <!-- Simulator Weights Sliders Card -->
+      <div class="glass-card simulator-box">
+        <div style="margin-bottom: 1.5rem;">
+          <h3 style="font-family: var(--font-display); color: #fff;">Kalkulator Preferencji Zespołu</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Dostosuj priorytety swojego 6-osobowego zespołu – ranking przeliczy się na żywo!</p>
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Dostępność Użytkownika Końcowego (EU1/EU2)</span>
+            <strong id="val-wUser" style="color: var(--accent-cyan);">25%</strong>
+          </div>
+          <input type="range" class="slider-styled" id="slider-wUser" min="5" max="50" value="25" oninput="recalculateRanking()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Podział na 6 Niezależnych Epików (EU1)</span>
+            <strong id="val-wEpics" style="color: var(--accent-cyan);">20%</strong>
+          </div>
+          <input type="range" class="slider-styled" id="slider-wEpics" min="5" max="40" value="20" oninput="recalculateRanking()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Wykonalność Techniczna (Brak płatnych API/Blockchain)</span>
+            <strong id="val-wFeas" style="color: var(--accent-cyan);">20%</strong>
+          </div>
+          <input type="range" class="slider-styled" id="slider-wFeas" min="5" max="40" value="20" oninput="recalculateRanking()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Ochrona Rotującego PO przed Karami (Scrum Safety)</span>
+            <strong id="val-wPO" style="color: var(--accent-cyan);">15%</strong>
+          </div>
+          <input type="range" class="slider-styled" id="slider-wPO" min="5" max="30" value="15" oninput="recalculateRanking()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Ciekawa Architektura i Wzorce (Logika domenowa)</span>
+            <strong id="val-wLogic" style="color: var(--accent-cyan);">10%</strong>
+          </div>
+          <input type="range" class="slider-styled" id="slider-wLogic" min="0" max="30" value="10" oninput="recalculateRanking()">
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-header">
+            <span>Wartość do CV i Portfolio (Hype/Nowoczesność)</span>
+            <strong id="val-wCV" style="color: var(--accent-cyan);">10%</strong>
+          </div>
+          <input type="range" class="slider-styled" id="slider-wCV" min="0" max="30" value="10" oninput="recalculateRanking()">
+        </div>
+
+        <button class="btn-details" style="width: 100%; justify-content: center; margin-top: 1rem;" onclick="resetWeights()">
+          Przywróć Domyślne Wagi Sylabusa PB
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN VIEW 3: Table View -->
+    <div id="view-table" class="table-container glass-card" style="display: none; padding: 1.5rem;">
+      <table class="ranking-table" id="rankingTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable('rank')">Msc ↕</th>
+            <th onclick="sortTable('title')">Temat Projektu ↕</th>
+            <th onclick="sortTable('tier')">Kategoria ↕</th>
+            <th onclick="sortTable('user')">User (EU1) ↕</th>
+            <th onclick="sortTable('epics')">6 Epików ↕</th>
+            <th onclick="sortTable('feas')">Feasibility ↕</th>
+            <th onclick="sortTable('po')">PO Safety ↕</th>
+            <th onclick="sortTable('score')">Wynik Końcowy ↕</th>
+            <th>Akcja</th>
+          </tr>
+        </thead>
+        <tbody id="rankingTableBody">
+          <!-- Rendered via JS -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- Deep Dive Modal -->
+  <div class="modal-backdrop" id="deepDiveModal" onclick="closeModalOnBg(event)">
+    <div class="modal-content" id="modalCard">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalBody">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    /* =========================================================================
+       DATASET: 13 PROJECT TOPICS AUDITED AGAINST PB SCRUM SYLLABUS
+       ========================================================================= */
+    const TOPICS_DATA = [
+      {
+        id: 4,
+        rank: 1,
+        title: "System ocen pracowniczych Politechniki Białostockiej",
+        shortDesc: "Kompleksowa ewidencja i ocena osiągnięć nauczycieli akademickich (naukowa, dydaktyczna, organizacyjna) z dwuetapową weryfikacją (przełożony -> komisja) i minimami punktowymi.",
+        tier: "tier-1",
+        tierLabel: "Złoty Standard (Top 1)",
+        scores: { user: 98, epics: 95, feas: 95, po: 92, logic: 90, cv: 85 },
+        endUser: "Prowadzący projekt, Dziekanat, Pracownicy Katedr PB (100% dostępność na korytarzu wydziału)",
+        techStack: "Modular Monolith (C# .NET 8 lub Node/TS) + PostgreSQL + React/Angular",
+        whyOptimal: "Prowadzący sam podlega tej ocenie z art. 115 Ustawy! Każdy wykładowca nienawidzi ręcznego wypełniania arkuszy punktowych. Będzie zachwycony projektem, a feedback dostaniecie od ręki.",
+        pitfalls: "Ścisłe trzymanie się regulaminu uczelni. Należy unikać twardego kodowania punktacji – silnik wag musi być parametryzowany.",
+        epics: [
+          { name: "Epik 1: Struktura Uczelni & RBAC", desc: "Zarządzanie wydziałami, katedrami, profilami pracowników i rolami uprawnień." },
+          { name: "Epik 2: Silnik Parametryzacji Minimów", desc: "Definiowanie kryteriów i wag punktowych dla 3 filarów (nauka, dydaktyka, organizacja)." },
+          { name: "Epik 3: Kreator Wniosku z Kalkulatorem", desc: "Hierarchiczne drzewo osiągnięć, auto-uzupełnianie danych i kalkulator punktów na żywo." },
+          { name: "Epik 4: Dwuetapowy Workflow Akceptacji", desc: "Kierownik bezpośredni -> Wydziałowa Komisja Oceniająca z uwagami i korektami." },
+          { name: "Epik 5: Moduł Odwołań i Wersjonowania", desc: "Ścieżka odwoławcza pracownika, archiwum i analiza delty z poprzednich okresów." },
+          { name: "Epik 6: Raporty i Protokoły Kadr", desc: "Rankingi wydziałowe, statystyki spełnienia minimów, generowanie urzędowych PDF." }
+        ]
+      },
+      {
+        id: 13,
+        rank: 2,
+        title: "System wybierania tematów prac dyplomowych",
+        shortDesc: "Rejestracja, wieloetapowa akceptacja (promotor -> katedra -> dziekan), rezerwacja tematów inżynierskich i magisterskich przez studentów oraz eksport do USOS.",
+        tier: "tier-1",
+        tierLabel: "Złoty Standard (Top 2)",
+        scores: { user: 96, epics: 95, feas: 92, po: 90, logic: 88, cv: 85 },
+        endUser: "Studenci PB (koledzy z roku), Promotorzy, Kierownicy Katedr, Dziekanat",
+        techStack: "Next.js / React + Node/TS lub Spring Boot + PostgreSQL",
+        whyOptimal: "Wszyscy w zespole jesteście studentami i dokładnie czujecie ten ból! Interesariusze są pod ręką. Piękne, naturalne maszyny stanów wniosków.",
+        pitfalls: "Obsługa rezerwacji zespołowych (gdy 2-3 studentów zgłasza się do jednego tematu naraz) wymaga spójności transakcyjnej.",
+        epics: [
+          { name: "Epik 1: Katalog Tematów Promotora", desc: "Formularz dodawania tematów, drafty, słowa kluczowe, wymagania kompetencyjne." },
+          { name: "Epik 2: Workflow Zatwierdzania Tematów", desc: "Ścieżka akceptacji: Promotor -> Kierownik Katedry -> Dziekan z historią uwag." },
+          { name: "Epik 3: Portal Aplikacyjny Studenta", desc: "Wyszukiwarka z filtrami, rezerwacje indywidualne i zespołowe, priorytetyzacja." },
+          { name: "Epik 4: Panel Zarządzania & Limity Pensum", desc: "Kwalifikacja studentów przez promotora, automatyczne pilnowanie limitów dyplomantów." },
+          { name: "Epik 5: Czat & Terminarz Deadlinów", desc: "Wewnętrzny komunikator promotor-student, odliczanie do terminów i alerty e-mail." },
+          { name: "Epik 6: Integracja USOS & Statystyki", desc: "Eksport zatwierdzonych tematów do CSV/XML USOS, generowanie uchwał PDF." }
+        ]
+      },
+      {
+        id: 8,
+        rank: 3,
+        title: "Rozliczanie delegacji zagranicznych",
+        shortDesc: "Wnioski, kalkulator diet per kraj, limity hoteli, wielowalutowe zaliczki, integracja z darmowym API kursów walut NBP oraz rozliczanie kilometrówki.",
+        tier: "tier-1",
+        tierLabel: "Złoty Standard (Top 3)",
+        scores: { user: 88, epics: 90, feas: 90, po: 85, logic: 92, cv: 82 },
+        endUser: "Pracownicy naukowi PB wyjeżdżający na konferencje/Erasmus, Dział Współpracy Międzynarodowej, Kwestura PB",
+        techStack: "Modular Monolith (TS/Node lub .NET 8) + API NBP + PostgreSQL + React",
+        whyOptimal: "Zarządzenie Rektora PB nr 61/2024 daje gotową, precyzyjną specyfikację! NBP API jest w 100% darmowe i niezawodne. Niezwykle bezpieczne zaliczenie.",
+        pitfalls: "Prawidłowe odliczanie częściowych posiłków zapewnionych przez organizatora (śniadanie 15%, obiad 30%, kolacja 30%).",
+        epics: [
+          { name: "Epik 1: Wnioskowanie i Plan Podróży", desc: "Formularz wyjazdu zagranicznego, środek transportu, wnioskowanie o zaliczki." },
+          { name: "Epik 2: Integrator Kursów Walut NBP", desc: "Pobieranie tabel A i C kursów walut NBP, przeliczanie transakcji wielowalutowych." },
+          { name: "Epik 3: Kalkulator Diet i Limitów Noclegów", desc: "Baza stawek diet MPiPS dla każdego kraju świata, reguły potrąceń za wyżywienie." },
+          { name: "Epik 4: Wieloszczeblowy Workflow Zgód", desc: "Przełożony -> Dziekan -> Dział Współpracy -> Kwestura. Potwierdzenie wypłaty zaliczki." },
+          { name: "Epik 5: Rozliczenie Końcowe i Koszty", desc: "Wprowadzanie rachunków, kilometrówka zagraniczna, wyliczenie bilansu (zwrot/dopłata)." },
+          { name: "Epik 6: Moduł Księgowy & Eksport PDF", desc: "Przypisanie do grantów badawczych, raporty budżetowe, urzędowy druk rozliczenia." }
+        ]
+      },
+      {
+        id: 7,
+        rank: 4,
+        title: "Obsługa delegacji krajowych",
+        shortDesc: "Obsługa podróży służbowych na terenie kraju: diety krajowe, limity hoteli, zaliczki, kilometrówka prywatnego samochodu oraz ocena jakości bazy noclegowej.",
+        tier: "tier-2",
+        tierLabel: "Bardzo Bezpieczny",
+        scores: { user: 88, epics: 85, feas: 92, po: 88, logic: 78, cv: 75 },
+        endUser: "Pracownicy PB jeżdżący po Polsce, Kwestura PB",
+        techStack: "ASP.NET Core MVC / Next.js + PostgreSQL",
+        whyOptimal: "Bardzo bezpieczny i stabilny, brak ryzyk integracyjnych. Przegrywa z delegacjami zagranicznymi mniejszą atrakcyjnością techniczną (brak NBP API i walut).",
+        pitfalls: "Może wydać się nieco monotonny dla ambitnych programistów.",
+        epics: [
+          { name: "Epik 1: Wnioski o Delegację Krajową", desc: "Definiowanie celu, trasy i zaliczki krajowej." },
+          { name: "Epik 2: Workflow Akceptacji", desc: "Zatwierdzanie przez przełożonego i dział finansowy." },
+          { name: "Epik 3: Ewidencja Przebiegu Pojazdu", desc: "Kalkulator kilometrówki samochodu prywatnego wg stawek." },
+          { name: "Epik 4: Kalkulator Diet Krajowych", desc: "Naliczanie diet i ryczałtów za dojazdy i noclegi." },
+          { name: "Epik 5: Rozliczenie Finansowe", desc: "Załączanie faktur i rozliczanie zaliczek." },
+          { name: "Epik 6: Baza Ocen Hoteli & Raporty", desc: "Opinie o obiektach noclegowych i zestawienia kosztów." }
+        ]
+      },
+      {
+        id: 12,
+        rank: 5,
+        title: "System układania obciążeń nauczycieli (Pensum)",
+        shortDesc: "Bilansowanie pensum dydaktycznego, wagi zajęć, podział przedmiotów między prowadzących, integracja z USOS i system zastępstw.",
+        tier: "tier-2",
+        tierLabel: "Silny Inżyniersko",
+        scores: { user: 85, epics: 85, feas: 75, po: 78, logic: 95, cv: 85 },
+        endUser: "Kierownicy Katedr PB, Dziekani ds. Studenckich, Nauczyciele akademiccy",
+        techStack: "Java/Spring lub .NET + React + PostgreSQL",
+        whyOptimal: "Ogromna realna wartość biznesowa dla wydziału. Ciekawa matryca obliczeniowa (nadgodziny, pensum roczne).",
+        pitfalls: "UWAGA NA PUŁAPKĘ SOLVERA: Nie deklarujcie automatycznego algorytmu układania całego planu zajęć (problem NP-trudny)! Skupcie się na ewidencji i ręcznym bilansowaniu.",
+        epics: [
+          { name: "Epik 1: Struktura Katedr i Kadra", desc: "Ewidencja wymiarów etatów, pensum bazowego i stawek." },
+          { name: "Epik 2: Kartoteka Przedmiotów i Wagi", desc: "Definiowanie godzin wykładów, laboratoriów i przeliczników." },
+          { name: "Epik 3: Macierz Przydziału Obciążeń", desc: "Interaktywny panel przydzielania grup do wykładowców." },
+          { name: "Epik 4: Monitor Pensum & Alerty", desc: "Śledzenie niedoborów i nadgodzin w czasie rzeczywistym." },
+          { name: "Epik 5: Moduł Zastępstw Dydaktycznych", desc: "Rejestracja zastępstw i rekalkulacja godzin." },
+          { name: "Epik 6: Raporty Dziekańskie & USOS", desc: "Zestawienia obciążeń katedr i eksport danych." }
+        ]
+      },
+      {
+        id: 11,
+        rank: 6,
+        title: "Zarządzanie hospitacjami nauczycieli akademickich",
+        shortDesc: "Harmonogramowanie obserwacji zajęć, mobilne formularze ocen, raporty zgodności, identyfikacja potrzeb szkoleniowych i baza dobrych praktyk.",
+        tier: "tier-2",
+        tierLabel: "Solidny i Prosty",
+        scores: { user: 85, epics: 80, feas: 88, po: 85, logic: 75, cv: 75 },
+        endUser: "Dziekani, Kierownicy Katedr, Hospitujący i Hospitowani wykładowcy PB",
+        techStack: "Web Responsive (React/Vue) + Node/TS + SQLite/Postgres",
+        whyOptimal: "Wykładowcy mają obowiązek hospitacji co 2 lata. Prowadzący doskonale zna ten proces.",
+        pitfalls: "Domena jest dość wąska. Przy 6 osobach w zespole zakres może być zbyt szybko wyczerpany na 2 semestry.",
+        epics: [
+          { name: "Epik 1: Zarządzanie Użytkownikami", desc: "Role: Dziekan, Hospitujący, Hospitowany, Administrator." },
+          { name: "Epik 2: Harmonogram Hospitacji", desc: "Planowanie wizytacji w oparciu o siatkę zajęć." },
+          { name: "Epik 3: Mobilny Formularz Oceny", desc: "Cyfrowy arkusz hospitacyjny z kryteriami dydaktycznymi." },
+          { name: "Epik 4: Baza Materiałów & Feedback", desc: "Wymiana uwag i rekomendacje dobrych praktyk." },
+          { name: "Epik 5: Moduł Rekomendacji Szkoleń", desc: "Automatyczne sugestie kursów na bazie ocen." },
+          { name: "Epik 6: Raporty Jakości Kształcenia", desc: "Zbiorcze statystyki dla Wydziałowej Komisji Jakości." }
+        ]
+      },
+      {
+        id: 5,
+        rank: 7,
+        title: "Platforma dla organizacji NGO do zarządzania wolontariatem",
+        shortDesc: "Aplikacja mobilna i webowa do koordynacji akcji wolontariackich: sloty czasowe, lista rezerwowa, push notyfikacje i kalendarz.",
+        tier: "tier-2",
+        tierLabel: "Solidny Społecznie (Mobile)",
+        scores: { user: 82, epics: 75, feas: 78, po: 78, logic: 72, cv: 80 },
+        endUser: "Lokalne fundacje w Białymstoku, Samorząd Studentów, Wolontariusze",
+        techStack: "Mobile (React Native / Flutter) + Web Admin (React) + Supabase / Node",
+        whyOptimal: "Bardzo sympatyczna domena, łatwo znaleźć użytkownika (np. schronisko, koło naukowe).",
+        pitfalls: "Wymaga deploymentu mobilnego na smartfony wszystkich członków zespołu (push powiadomienia, kalendarz telefonu).",
+        epics: [
+          { name: "Epik 1: Rejestracja i Weryfikacja", desc: "Onboarding wolontariuszy i zatwierdzanie przez koordynatora." },
+          { name: "Epik 2: Zarządzanie Akcjami & Sloty", desc: "Tworzenie wydarzeń, sloty godzinowe, limity miejsc." },
+          { name: "Epik 3: Lista Rezerwowa & Zapisy", desc: "Automatyczne przesuwanie z rezerwy na listę główną." },
+          { name: "Epik 4: Powiadomienia Push & SMS", desc: "Komunikacja grupowa i przypomnienia o akcjach." },
+          { name: "Epik 5: Kalendarz Smartfona", desc: "Integracja ze standardem iCal i kalendarzem telefonu." },
+          { name: "Epik 6: Raporty Zaangażowania", desc: "Certyfikaty wolontariusza, godziny społeczne." }
+        ]
+      },
+      {
+        id: 1,
+        rank: 8,
+        title: "Platforma oceny jakości danych dla AI (AI Act)",
+        shortDesc: "Inwentaryzacja zbiorów danych, data lineage, automatyczna ocena jakości (completeness, accuracy) oraz workflow zatwierdzania pod kątem regulacji EU AI Act i RODO.",
+        tier: "tier-3",
+        tierLabel: "Ambitny / Ryzykowny EU1",
+        scores: { user: 55, epics: 85, feas: 70, po: 65, logic: 90, cv: 98 },
+        endUser: "Data Stewards, Compliance Officers w korporacjach (TRUDNY DOSTĘP DLA STUDENTA)",
+        techStack: "FastAPI / Python (Data Analysis) + React + PostgreSQL + Docker",
+        whyOptimal: "Bezapelacyjnie najlepszy temat do CV pod kątem kariery Data/AI Governance w 2026 roku.",
+        pitfalls: "KRYTYCZNA PUŁAPKA EU1: Brak realnego użytkownika w zasięgu ręki! Kto będzie Wam odbierał sprinty co 2 tygodnie? Prowadzący obetnie ocenę za brak wywiadów z użytkownikiem.",
+        epics: [
+          { name: "Epik 1: Katalog Danych & Data Lineage", desc: "Rejestracja zbiorów, śledzenie pochodzenia danych." },
+          { name: "Epik 2: Metryki Jakości Danych", desc: "Kalkulator kompletności, unikalności, poprawności." },
+          { name: "Epik 3: Kwestionariusz Ryzyka AI Act", desc: "Klasyfikacja systemów (niskie vs wysokie ryzyko)." },
+          { name: "Epik 4: Walidator Biasu i RODO", desc: "Wykrywanie zaburzeń reprezentacji próby treningowej." },
+          { name: "Epik 5: Wieloetapowy Workflow Zgód", desc: "Weryfikacja przez Data Stewarda, DPO i Compliance." },
+          { name: "Epik 6: Dashboard Zgodności & Audyt", desc: "Alerty o spadku jakości, raporty audytowe dla organów." }
+        ]
+      },
+      {
+        id: 9,
+        rank: 9,
+        title: "Nowy w firmie – Platforma onboardingowa",
+        shortDesc: "Optymalizacja wdrażania pracowników: zadania dla 'nowego', system mentorów, grywalizacja (odznaki, punkty) oraz ścieżki kompetencji.",
+        tier: "tier-3",
+        tierLabel: "Płytka Logika (Ryzyko Trello)",
+        scores: { user: 70, epics: 70, feas: 85, po: 75, logic: 60, cv: 70 },
+        endUser: "Działy HR, Nowo zatrudnieni pracownicy, Mentorzy",
+        techStack: "Next.js + NestJS + PostgreSQL",
+        whyOptimal: "Prosty start, intuicyjna tematyka grywalizacji.",
+        pitfalls: "Ryzyko sprowadzenia do 'kolejnego Trello z odznakami'. Trudno obronić głębię inżynierską projektu 2-semestralnego.",
+        epics: [
+          { name: "Epik 1: Zarządzanie Ścieżką Wdrożenia", desc: "Harmonogram zadań w pierwszych 30 dniach." },
+          { name: "Epik 2: Moduł Przydziału Mentorów", desc: "Łączenie nowego pracownika z opiekunem." },
+          { name: "Epik 3: Silnik Grywalizacji & Odznak", desc: "Przyznawanie punktów, poleceń i odznaczeń." },
+          { name: "Epik 4: Baza Wiedzy & Checklisty", desc: "Zasoby organizacyjne, dostępowe i szkoleniowe." },
+          { name: "Epik 5: Testy & Badanie Satysfakcji", desc: "Ankiety pulsu po 1. tygodniu i 1. miesiącu." },
+          { name: "Epik 6: Dashboard Analityczny HR", desc: "Wskaźnik Time-to-Productivity i raporty." }
+        ]
+      },
+      {
+        id: 2,
+        rank: 10,
+        title: "Aplikacja 'car pooling' / 'ridesharing'",
+        shortDesc: "Podwózki aglomeracyjne w Białymstoku: współdzielenie kosztów, wirtualna waluta, korzyści z Urzędu Miasta, oceny kierowców i pasażerów.",
+        tier: "tier-3",
+        tierLabel: "Ryzyko Płatnych API Map",
+        scores: { user: 78, epics: 65, feas: 62, po: 62, logic: 75, cv: 82 },
+        endUser: "Studenci dojeżdżający na PB, Pracownicy firm w aglomeracji",
+        techStack: "Mobile (React Native) + Leaflet / Mapbox + Node/TS",
+        whyOptimal: "Użytkownikami mogą być koledzy ze studiów. Fajna prezentacja.",
+        pitfalls: "Płatne Google Maps API lub trudny w konfiguracji OpenStreetMap/OSRM. Ciężko wydzielić 6 równoważnych, dużych Epików bez sztucznego rozdmuchiwania.",
+        epics: [
+          { name: "Epik 1: Profile & Weryfikacja Aut", desc: "Zarządzanie pojazdami i weryfikacja prawa jazdy." },
+          { name: "Epik 2: Publikacja i Wyszukiwanie Tras", desc: "Geolokalizacja, punkty pośrednie, promień zbieżności." },
+          { name: "Epik 3: System Rezerwacji Miejsc", desc: "Akceptacja pasażera, zarządzanie wolnymi miejscami." },
+          { name: "Epik 4: Wirtualny Portfel & Rozliczenia", desc: "Wewnętrzne żetony na paliwo, podział kosztów." },
+          { name: "Epik 5: Integracja Miejska (Bonusy UM)", desc: "Punkty parkingowe za podwózki dla miasta." },
+          { name: "Epik 6: Dwustronny System Ocen", desc: "Recenzje kierowca <-> pasażer, moderacja zgłoszeń." }
+        ]
+      },
+      {
+        id: 6,
+        rank: 11,
+        title: "Platforma ESG dla budownictwa (LLM / GenAI)",
+        shortDesc: "Wykorzystanie modeli LLM (GPT-4) do ekstrakcji danych z plików PDF/Excel, interpretacji regulacji ESG (GRI, SASB) i automatyzacji raportowania.",
+        tier: "tier-4",
+        tierLabel: "Wysokie Koszty & Niedeterminizm",
+        scores: { user: 45, epics: 75, feas: 55, po: 55, logic: 80, cv: 92 },
+        endUser: "Dyrektorzy ESG w firmach budowlanych (BARDZO TRUDNO DOSTĘPNI)",
+        techStack: "Python (LangChain / LlamaIndex) + OpenAI API + React",
+        whyOptimal: "Na czasie, świetne hasła GenAI w CV.",
+        pitfalls: "PŁATNE TOKENY OPENAI DLA 6 OSÓB! Niedeterminizm testów w Bitbucket CI. Brak realnego użytkownika.",
+        epics: [
+          { name: "Epik 1: Ekstraktor Danych PDF/Excel", desc: "Parsowanie nieustrukturyzowanych sprawozdań." },
+          { name: "Epik 2: Integracja z Modelem LLM", desc: "Inżynieria promptów, RAG, podsumowania semantyczne." },
+          { name: "Epik 3: Wektorowa Baza Wiedzy ESG", desc: "Standardy GRI, SASB, TCFD w bazie wektorowej." },
+          { name: "Epik 4: Generator Wersji Roboczych", desc: "Składanie rozdziałów raportu z asystą AI." },
+          { name: "Epik 5: Edytor i Ślad Źródłowy", desc: "Weryfikacja halucynacji AI, linki do źródeł." },
+          { name: "Epik 6: Eksport Standardów & Metryki", desc: "Zestawienia emisji CO2, zużycia wody, odpadów." }
+        ]
+      },
+      {
+        id: 10,
+        rank: 12,
+        title: "Zero Waste - Świat z mniejszą ilością odpadów",
+        shortDesc: "Platforma do wymiany niepotrzebnych przedmiotów dla osób prywatnych i nadwyżek materiałów dla przedsiębiorstw.",
+        tier: "tier-4",
+        tierLabel: "Rozmyte Wymagania (Brak Klienta)",
+        scores: { user: 60, epics: 55, feas: 68, po: 60, logic: 50, cv: 65 },
+        endUser: "Hipotetyczni obywatele, firmy z nadwyżkami",
+        techStack: "React + Node + MongoDB / Postgres",
+        whyOptimal: "Ekologia, szczytny cel.",
+        pitfalls: "ZBYT ROZMYTE WYMAGANIA. Temat brzmi jak wypracowanie, a nie specyfikacja inżynierska. Spędzicie 6 tygodni na sporach czym właściwie jest ten system (drugi OLX czy giełda palet?).",
+        epics: [
+          { name: "Epik 1: Katalog Przedmiotów Używanych", desc: "Wystawianie ogłoszeń ze zdjęciami i stanem." },
+          { name: "Epik 2: Moduł Wymiany B2B", desc: "Giełda nadwyżek surowców dla przedsiębiorstw." },
+          { name: "Epik 3: Czat i Umawianie Odbioru", desc: "Komunikacja między oddającym a odbierającym." },
+          { name: "Epik 4: Mapa Punktów Odbioru", desc: "Lokalizacje punktów zbiórki odpadów i mebli." },
+          { name: "Epik 5: Grywalizacja Ekologiczna", desc: "Licznik zaoszczędzonego CO2 i śmieci." },
+          { name: "Epik 6: Moderacja i Bezpieczeństwo", desc: "Weryfikacja ogłoszeń, zgłaszanie spamu." }
+        ]
+      },
+      {
+        id: 3,
+        rank: 13,
+        title: "Certyfikacja żywności w łańcuchu (Blockchain)",
+        shortDesc: "Śledzenie certyfikatów BIO/EKO 'od pola do stołu', smart-kontrakty, rejestr blockchain, kody QR dla konsumentów i jednostek GIJHARS.",
+        tier: "tier-4",
+        tierLabel: "Czerwona Flaga (Overengineering)",
+        scores: { user: 35, epics: 70, feas: 35, po: 40, logic: 85, cv: 88 },
+        endUser: "Rolnicy ekologiczni, przetwórcy, GIJHARS (ZEROWA DOSTĘPNOŚĆ DLA STUDENTA)",
+        techStack: "Solidity / Ethereum / Polygon + Ethers.js + React + Node",
+        whyOptimal: "Brzmi imponująco w teorii.",
+        pitfalls: "CZERWONA FLAGA: Przerost formy nad treścią. Konfiguracja sieci blockchain, smart contractów i portfeli Web3 pochłonie Wasz czas. Gdy ktoś utknie na gas fee lub deployu, posypią się oceny w sprincie i PO zapłaci karę.",
+        epics: [
+          { name: "Epik 1: Rejestr Certyfikatów Blockchain", desc: "Smart-kontrakty potwierdzające certyfikaty BIO/EKO." },
+          { name: "Epik 2: Śledzenie Partii (Track & Trace)", desc: "Rejestracja etapów producent -> przetwórca -> sklep." },
+          { name: "Epik 3: Detekcja Nieprawidłowości", desc: "Wykrywanie utraty ważności certyfikatu w łańcuchu." },
+          { name: "Epik 4: Interfejs Konsumenta (QR)", desc: "Skanowanie kodu QR i interaktywna mapa historii." },
+          { name: "Epik 5: Panel Jednostek Certyfikujących", desc: "Cyfrowe podpisy i unieważnianie certyfikatów." },
+          { name: "Epik 6: Audyt i Smart Contracty Kontrolne", desc: "Automatyczne egzekwowanie warunków dostaw." }
+        ]
+      }
+    ];
+
+    /* Default Weights matching PB Syllabus Constraints */
+    let WEIGHTS = {
+      wUser: 0.25,
+      wEpics: 0.20,
+      wFeas: 0.20,
+      wPO: 0.15,
+      wLogic: 0.10,
+      wCV: 0.10
+    };
+
+    let currentFilter = 'all';
+    let currentSort = { field: 'score', asc: false };
+
+    /* Calculate dynamic weighted score */
+    function calcScore(item) {
+      const s = item.scores;
+      const raw = (s.user * WEIGHTS.wUser) +
+                  (s.epics * WEIGHTS.wEpics) +
+                  (s.feas * WEIGHTS.wFeas) +
+                  (s.po * WEIGHTS.wPO) +
+                  (s.logic * WEIGHTS.wLogic) +
+                  (s.cv * WEIGHTS.wCV);
+      return Math.round(raw * 10) / 10;
+    }
+
+    /* Render Cards View */
+    function renderCards() {
+      const container = document.getElementById('view-grid');
+      container.innerHTML = '';
+
+      let list = [...TOPICS_DATA];
+      list.forEach(item => item.dynamicScore = calcScore(item));
+      list.sort((a, b) => b.dynamicScore - a.dynamicScore);
+
+      list.forEach((item, index) => {
+        if (currentFilter !== 'all' && item.tier !== currentFilter) return;
+
+        const card = document.createElement('div');
+        card.className = 'topic-card glass-card';
+        card.setAttribute('data-tier', item.tier);
+        card.onclick = () => openModal(item.id);
+
+        let rankBadgeClass = '';
+        if (index === 0) rankBadgeClass = 'top-1';
+        else if (index === 1) rankBadgeClass = 'top-2';
+        else if (index === 2) rankBadgeClass = 'top-3';
+
+        card.innerHTML = `
+          <div>
+            <div class="card-rank-badge ${rankBadgeClass}">#${index + 1}</div>
+            <div class="card-header">
+              <div class="card-tier-label">${item.tierLabel}</div>
+              <h3 class="card-title">${item.title}</h3>
+            </div>
+            <p class="card-desc">${item.shortDesc}</p>
+
+            <div class="metric-bars">
+              <div class="metric-row">
+                <span class="metric-label">👤 Dostępność Użytkownika</span>
+                <div class="metric-bar-container">
+                  <div class="metric-bar-fill" style="width: ${item.scores.user}%; background: ${getBarColor(item.scores.user)};"></div>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">🧩 Dekompozycja na 6 Epików</span>
+                <div class="metric-bar-container">
+                  <div class="metric-bar-fill" style="width: ${item.scores.epics}%; background: ${getBarColor(item.scores.epics)};"></div>
+                </div>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">🛡️ Bezpieczeństwo Terminu (PO)</span>
+                <div class="metric-bar-container">
+                  <div class="metric-bar-fill" style="width: ${item.scores.po}%; background: ${getBarColor(item.scores.po)};"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="card-score-box">
+              <span class="score-number">${item.dynamicScore.toFixed(1)}</span>
+              <span class="score-total">/ 100</span>
+            </div>
+            <button class="btn-details">
+              Szczegóły & Epiki &rarr;
+            </button>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function getBarColor(score) {
+      if (score >= 85) return 'var(--tier-1)';
+      if (score >= 70) return 'var(--tier-2)';
+      if (score >= 50) return 'var(--tier-3)';
+      return 'var(--tier-4)';
+    }
+
+    /* Render Table View */
+    function renderTable() {
+      const tbody = document.getElementById('rankingTableBody');
+      tbody.innerHTML = '';
+
+      let list = [...TOPICS_DATA];
+      list.forEach(item => item.dynamicScore = calcScore(item));
+
+      // Sorting
+      list.sort((a, b) => {
+        let valA, valB;
+        if (currentSort.field === 'score') { valA = a.dynamicScore; valB = b.dynamicScore; }
+        else if (currentSort.field === 'title') { valA = a.title; valB = b.title; }
+        else if (currentSort.field === 'user') { valA = a.scores.user; valB = b.scores.user; }
+        else if (currentSort.field === 'epics') { valA = a.scores.epics; valB = b.scores.epics; }
+        else if (currentSort.field === 'feas') { valA = a.scores.feas; valB = b.scores.feas; }
+        else if (currentSort.field === 'po') { valA = a.scores.po; valB = b.scores.po; }
+        else { valA = a.id; valB = b.id; }
+
+        if (valA < valB) return currentSort.asc ? -1 : 1;
+        if (valA > valB) return currentSort.asc ? 1 : -1;
+        return 0;
+      });
+
+      list.forEach((item, index) => {
+        if (currentFilter !== 'all' && item.tier !== currentFilter) return;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td style="font-weight: 700; font-family: var(--font-mono);">#${index + 1}</td>
+          <td style="font-weight: 600; color: #fff;">${item.title}</td>
+          <td><span class="card-tier-label" style="display: inline-block;">${item.tierLabel}</span></td>
+          <td style="font-family: var(--font-mono); color: ${getBarColor(item.scores.user)};">${item.scores.user}</td>
+          <td style="font-family: var(--font-mono); color: ${getBarColor(item.scores.epics)};">${item.scores.epics}</td>
+          <td style="font-family: var(--font-mono); color: ${getBarColor(item.scores.feas)};">${item.scores.feas}</td>
+          <td style="font-family: var(--font-mono); color: ${getBarColor(item.scores.po)};">${item.scores.po}</td>
+          <td style="font-weight: 800; font-family: var(--font-display); font-size: 1.15rem; color: var(--accent-cyan);">${item.dynamicScore.toFixed(1)}</td>
+          <td>
+            <button class="btn-details" style="padding: 0.35rem 0.75rem; font-size: 0.78rem;" onclick="openModal(${item.id})">Otwórz</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function sortTable(field) {
+      if (currentSort.field === field) {
+        currentSort.asc = !currentSort.asc;
+      } else {
+        currentSort.field = field;
+        currentSort.asc = (field === 'title');
+      }
+      renderTable();
+    }
+
+    /* Modal handler */
+    function openModal(topicId) {
+      const item = TOPICS_DATA.find(t => t.id === topicId);
+      if (!item) return;
+
+      const modalBody = document.getElementById('modalBody');
+      const score = calcScore(item).toFixed(1);
+
+      modalBody.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <span class="card-tier-label">${item.tierLabel} • Pozycja w rankingu: #${item.rank}</span>
+            <h2 style="font-family: var(--font-display); font-size: 1.75rem; color: #fff; margin-top: 0.25rem;">${item.title}</h2>
+          </div>
+          <div class="card-score-box" style="text-align: right;">
+            <span class="score-number" style="font-size: 2.2rem; color: var(--accent-cyan);">${score}</span>
+            <span class="score-total">/ 100</span>
+          </div>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">${item.shortDesc}</p>
+
+        <div class="success-box">
+          <strong style="color: var(--accent-emerald); display: block; margin-bottom: 0.25rem;">✨ Dlaczego ten temat jest korzystny dla zespołu?</strong>
+          ${item.whyOptimal}
+        </div>
+
+        <div class="danger-box">
+          <strong style="color: var(--accent-rose); display: block; margin-bottom: 0.25rem;">⚠️ Pułapki regulaminowe i ryzyka (Scrum / PO hazard):</strong>
+          ${item.pitfalls}
+        </div>
+
+        <h3 class="modal-section-title">
+          <span>👥</span> Użytkownik Końcowy (Klucz do EU1 & EU2)
+        </h3>
+        <p style="font-size: 0.9rem; color: #cbd5e1; background: rgba(0,0,0,0.3); padding: 0.85rem 1.25rem; border-radius: 8px;">
+          ${item.endUser}
+        </p>
+
+        <h3 class="modal-section-title">
+          <span>🧩</span> Gotowy Podział na 6 Epików (Dla każdego studenta w DIP)
+        </h3>
+        <div class="epics-list">
+          ${item.epics.map((ep, i) => `
+            <div class="epic-card-item">
+              <strong>Student ${i+1}: ${ep.name}</strong>
+              <p>${ep.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+
+        <h3 class="modal-section-title">
+          <span>🛠️</span> Rekomendowany Stos Technologiczny
+        </h3>
+        <p style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--accent-cyan); background: rgba(0,240,255,0.06); padding: 0.85rem 1.25rem; border-radius: 8px; border: 1px solid rgba(0,240,255,0.2);">
+          ${item.techStack}
+        </p>
+      `;
+
+      // Update avatar commentary dynamically
+      const avatarQuote = document.getElementById('avatarQuote');
+      avatarQuote.innerHTML = `„Analizujesz <strong>${item.title}</strong>! ${item.scores.user >= 90 ? 'Świetny dostęp do użytkownika!' : 'Uwaga na dostępność użytkownika!'} Wynik to ${score}/100.”`;
+
+      document.getElementById('deepDiveModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('deepDiveModal').classList.remove('active');
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'deepDiveModal') closeModal();
+    }
+
+    /* Tab Switching */
+    function switchView(viewName) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      document.getElementById('view-grid').style.display = (viewName === 'grid') ? 'grid' : 'none';
+      document.getElementById('view-table').style.display = (viewName === 'table') ? 'block' : 'none';
+      document.getElementById('view-simulator').style.display = (viewName === 'simulator') ? 'grid' : 'none';
+
+      if (viewName === 'table') renderTable();
+      if (viewName === 'simulator') updateRadarChart();
+    }
+
+    /* Filter by Tier */
+    function filterByTier(tier) {
+      currentFilter = tier;
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      renderCards();
+      renderTable();
+    }
+
+    /* Dynamic recalculation based on sliders */
+    function recalculateRanking() {
+      const wU = parseInt(document.getElementById('slider-wUser').value);
+      const wE = parseInt(document.getElementById('slider-wEpics').value);
+      const wF = parseInt(document.getElementById('slider-wFeas').value);
+      const wP = parseInt(document.getElementById('slider-wPO').value);
+      const wL = parseInt(document.getElementById('slider-wLogic').value);
+      const wC = parseInt(document.getElementById('slider-wCV').value);
+
+      const total = wU + wE + wF + wP + wL + wC;
+
+      WEIGHTS.wUser = wU / total;
+      WEIGHTS.wEpics = wE / total;
+      WEIGHTS.wFeas = wF / total;
+      WEIGHTS.wPO = wP / total;
+      WEIGHTS.wLogic = wL / total;
+      WEIGHTS.wCV = wC / total;
+
+      document.getElementById('val-wUser').innerText = Math.round(WEIGHTS.wUser * 100) + '%';
+      document.getElementById('val-wEpics').innerText = Math.round(WEIGHTS.wEpics * 100) + '%';
+      document.getElementById('val-wFeas').innerText = Math.round(WEIGHTS.wFeas * 100) + '%';
+      document.getElementById('val-wPO').innerText = Math.round(WEIGHTS.wPO * 100) + '%';
+      document.getElementById('val-wLogic').innerText = Math.round(WEIGHTS.wLogic * 100) + '%';
+      document.getElementById('val-wCV').innerText = Math.round(WEIGHTS.wCV * 100) + '%';
+
+      renderCards();
+      renderTable();
+    }
+
+    function resetWeights() {
+      document.getElementById('slider-wUser').value = 25;
+      document.getElementById('slider-wEpics').value = 20;
+      document.getElementById('slider-wFeas').value = 20;
+      document.getElementById('slider-wPO').value = 15;
+      document.getElementById('slider-wLogic').value = 10;
+      document.getElementById('slider-wCV').value = 10;
+      recalculateRanking();
+    }
+
+    /* Radar Chart implementation (Native HTML5 Canvas) */
+    function initRadarSelects() {
+      const sel1 = document.getElementById('radarSelect1');
+      const sel2 = document.getElementById('radarSelect2');
+      sel1.innerHTML = '';
+      sel2.innerHTML = '';
+
+      TOPICS_DATA.forEach((t, i) => {
+        const opt1 = document.createElement('option');
+        opt1.value = t.id;
+        opt1.text = `#${t.id}: ${t.title.substring(0, 32)}...`;
+        if (t.id === 4) opt1.selected = true; // Oceny pracownicze default
+        sel1.appendChild(opt1);
+
+        const opt2 = document.createElement('option');
+        opt2.value = t.id;
+        opt2.text = `#${t.id}: ${t.title.substring(0, 32)}...`;
+        if (t.id === 3) opt2.selected = true; // Blockchain default comparison
+        sel2.appendChild(opt2);
+      });
+    }
+
+    function updateRadarChart() {
+      const canvas = document.getElementById('radarCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const cx = w / 2;
+      const cy = h / 2;
+      const radius = Math.min(cx, cy) - 50;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const id1 = parseInt(document.getElementById('radarSelect1').value);
+      const id2 = parseInt(document.getElementById('radarSelect2').value);
+      const t1 = TOPICS_DATA.find(t => t.id === id1) || TOPICS_DATA[0];
+      const t2 = TOPICS_DATA.find(t => t.id === id2) || TOPICS_DATA[1];
+
+      const axes = [
+        { label: "Użytkownik (EU1)", key: "user" },
+        { label: "6 Epików (EU1)", key: "epics" },
+        { label: "Feasibility", key: "feas" },
+        { label: "PO Safety", key: "po" },
+        { label: "Logika/Arch", key: "logic" },
+        { label: "Wartość CV", key: "cv" }
+      ];
+
+      const totalAxes = axes.length;
+      const angleStep = (Math.PI * 2) / totalAxes;
+
+      // Draw spider grid
+      const gridLevels = 5;
+      for (let l = 1; l <= gridLevels; l++) {
+        const r = (radius / gridLevels) * l;
+        ctx.beginPath();
+        for (let i = 0; i < totalAxes; i++) {
+          const angle = i * angleStep - Math.PI / 2;
+          const x = cx + Math.cos(angle) * r;
+          const y = cy + Math.sin(angle) * r;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Draw axis lines and labels
+      ctx.font = "11px 'JetBrains Mono', monospace";
+      ctx.fillStyle = "#94a3b8";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      for (let i = 0; i < totalAxes; i++) {
+        const angle = i * angleStep - Math.PI / 2;
+        const x = cx + Math.cos(angle) * radius;
+        const y = cy + Math.sin(angle) * radius;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.stroke();
+
+        const lx = cx + Math.cos(angle) * (radius + 24);
+        const ly = cy + Math.sin(angle) * (radius + 24);
+        ctx.fillText(axes[i].label, lx, ly);
+      }
+
+      // Draw polygon for Topic 1
+      drawRadarPolygon(ctx, cx, cy, radius, axes, t1.scores, "rgba(0, 240, 255, 0.35)", "#00f0ff");
+      // Draw polygon for Topic 2
+      drawRadarPolygon(ctx, cx, cy, radius, axes, t2.scores, "rgba(244, 63, 94, 0.3)", "#f43f5e");
+    }
+
+    function drawRadarPolygon(ctx, cx, cy, radius, axes, scores, fillColor, strokeColor) {
+      const totalAxes = axes.length;
+      const angleStep = (Math.PI * 2) / totalAxes;
+
+      ctx.beginPath();
+      for (let i = 0; i < totalAxes; i++) {
+        const val = scores[axes[i].key] / 100;
+        const r = radius * val;
+        const angle = i * angleStep - Math.PI / 2;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+      ctx.strokeStyle = strokeColor;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Points
+      for (let i = 0; i < totalAxes; i++) {
+        const val = scores[axes[i].key] / 100;
+        const r = radius * val;
+        const angle = i * angleStep - Math.PI / 2;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = strokeColor;
+        ctx.fill();
+      }
+    }
+
+    /* =========================================================================
+       THREE.JS 3D CONSTELLATION WEBGL BACKGROUND
+       ========================================================================= */
+    function initThreeJsBackground() {
+      const canvas = document.getElementById('webgl-bg');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 220;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Create Constellation Nodes
+      const particleCount = 130;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const velocities = [];
+
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 450;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 450;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.25,
+          y: (Math.random() - 0.5) * 0.25,
+          z: (Math.random() - 0.5) * 0.25
+        });
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      const pMaterial = new THREE.PointsMaterial({
+        color: 0x00f0ff,
+        size: 3.5,
+        transparent: true,
+        opacity: 0.75,
+        blending: THREE.AdditiveBlending
+      });
+
+      const particleSystem = new THREE.Points(geometry, pMaterial);
+      scene.add(particleSystem);
+
+      // Connecting lines
+      const lineMaterial = new THREE.LineBasicMaterial({
+        color: 0x00f0ff,
+        transparent: true,
+        opacity: 0.15,
+        blending: THREE.AdditiveBlending
+      });
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.05;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.05;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const pos = geometry.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          pos[i * 3] += velocities[i].x;
+          pos[i * 3 + 1] += velocities[i].y;
+          pos[i * 3 + 2] += velocities[i].z;
+
+          // Bounce boundaries
+          if (pos[i * 3] < -250 || pos[i * 3] > 250) velocities[i].x *= -1;
+          if (pos[i * 3 + 1] < -250 || pos[i * 3 + 1] > 250) velocities[i].y *= -1;
+          if (pos[i * 3 + 2] < -200 || pos[i * 3 + 2] > 200) velocities[i].z *= -1;
+        }
+        geometry.attributes.position.needsUpdate = true;
+
+        particleSystem.rotation.y += 0.001;
+        particleSystem.rotation.x += 0.0005;
+
+        camera.position.x += (mouseX - camera.position.x) * 0.02;
+        camera.position.y += (-mouseY - camera.position.y) * 0.02;
+        camera.lookAt(scene.position);
+
+        renderer.render(scene, camera);
+      }
+
+      animate();
+    }
+
+    /* Initialize everything on load */
+    window.onload = () => {
+      renderCards();
+      initRadarSelects();
+      initThreeJsBackground();
+    };
+  </script>
+</body>
+</html>

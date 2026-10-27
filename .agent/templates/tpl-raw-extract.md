@@ -2,9 +2,13 @@
 type: raw-extract
 title: "<% tp.file.title %>"
 source: ""
+source_title: ""
+author: ""
+published: ""
 extracted: <% tp.file.creation_date("YYYY-MM-DD") %>
-extractor: jina | web-search | crawl4ai | manual
-content_type: documentation | article | repository | release-notes | other
+extractor: "" # jina | web-search | crawl4ai | manual
+content_type: "" # documentation | article | repository | release-notes | other
+source_version: ""
 language: en
 word_count: 0
 created: <% tp.file.creation_date("YYYY-MM-DD") %>
