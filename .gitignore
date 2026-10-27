@@ -23,3 +23,8 @@ labs/**/*.user
 
 # Duże extrakty (odkomentuj jeśli raw extracts zajmują zbyt dużo miejsca)
 # 00_Inbox/_raw/docs-*/
+
+# Prywatne notatki i rozważania (poza repozytorium)
+00_Inbox/_private/
+_scratchpad/
+

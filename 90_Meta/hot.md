@@ -2,18 +2,26 @@
 type: meta
 title: "Hot Context Buffer — Aktywny Kontekst Sesji"
 created: 2026-08-06
-updated: 2026-10-12
+updated: 2026-10-17
 tags: [meta, context, hot-buffer]
 up: "[[90_Meta/_index]]"
 ---
 
 # Hot Context Buffer
 
+## Najnowsza sesja (2026-10-23)
+- **Pi Wo (`labs/projects/pi-wo`):** Zrealizowano przepływ Home → `/lobby` → `/table/:id` z pobieraniem danych przez `tablesApi.js` i proxy Vite do Expressa. Widoki są prostym prototypem tabelarycznym. Opis i scenariusz testowy są w `labs/projects/pi-wo/README.md`; dokument architektury prototypu: `labs/projects/pi-wo/OPIS_PROTOTYPU.md`. Szczegóły: [[sessions/2026-10-23-1025]].
+
 > [!NOTE]
 > Plik czytany automatycznie na początku każdej nowej sesji przez agenta w celu błyskawicznego podjęcia kontekstu bez konieczności odczytywania całej historii logów.
 
 ## Bieżący Punkt Skupienia
-- **Aktywny Wątek (2026-10-12):** Redakcja językowa, strukturalna i typograficzna zestawu dokumentów startowych w `90_Meta/project-kickoff-kit/` (`tematy przykłądowe.md`, `instrukcje.md`, `wymagania uczelniane.md`). Wprowadzono standaryzację Markdown (nagłówki `#`, `##`, `###`, alerty, tabele, linki), usunięto liczne błędy ortograficzne i fleksyjne ze źródeł uczelnianych, zachowując 100% pierwotnej treści merytorycznej, wymagań sylabusowych i reguł oceniania.
+- **Aktywny Wątek (2026-10-17):** Koordynacja analizy modernizacji gry karcianej „Rejoltance” (CardGame) w oparciu o [[appendix-react-dotnet-cardgame|Appendix 2.3]] oraz audyt techniczny (`AUDYT_TECHNICZNY_REJOLTANCE.md`). We współpracy z `project-architect` i `project-researcher` przygotowano i zapisano w `00_Inbox/_agent_bus/reports/2026-10-17-cardgame-rejoltance-rework-report.md`: (1) readiness & gap analysis zespołu i fundamenty przedkodowe, (2) pełną matrycę technologiczną (.NET 10 LTS, React 19, Tailwind v4, Zustand, SignalR, EF Core) z odrzuconymi alternatywami i analizą prawną JSA PB, (3) specyfikację Lekcji 2.3 i sandboxu w `labs/web-engineering/2.3/` z testami fitness i Definition of Done, (4) workflow deweloperski Scrum na 10 tygodni do Świąt z procedurą testowania 1v1 i Radą Graczy Testowych pod kryteria EU1/EU2.
+- **Poprzedni Wątek (2026-10-16):** Opracowanie pełnej karty tematu oraz inżynierskiego brainstormu modernizacji gry karcianej w `90_Meta/project-kickoff-kit/brainstorm-cardgame-rejoltance-rework.md` (Temat 15: Rework Rejoltance) oraz aktualizacja katalogu w `tematy aktualne.md`. Połączono audyt techniczny, Appendix 2.3 (React + .NET SignalR) oraz wymagania sylabusowe PB (6 niezależnych Epików, weryfikacja EU1/EU2 na uczelnianym turnieju i kołach naukowych).
+- **Poprzedni Wątek (2026-10-16):** Analiza techniczna audytu projektu strategicznego „CardGame” (Rejoltance) w kontekście Masterclass Inżynierii Webowej. Opracowano [[appendix-react-dotnet-cardgame|Appendix 2.3 (Integracja Frontendu React z Backendem C# na Przykładzie Gry Karcianej „Rejoltance”)]]: analiza środowisk wytwórczych (.NET SpaProxy, .NET Aspire, Monorepo), matryca wizualizacji kart (CSS 3D / Framer Motion vs React Three Fiber vs Canvas 2D) oraz kompletny przepływ end-to-end z autorytatywnym serwerem SignalR Hub w ASP.NET Core i maskowaniem Fog-of-War.
+- **Poprzedni Wątek (2026-10-16):** Odłączenie modułów Fantasy-Map-Generator, HitTimline oraz Poland Statecraft z `labs/`. Repozytoria FMG i HitTimline przeniesiono do niezależnych projektów w `c:\Users\cyunc\Documents\Projects\` z pełnym zachowaniem lokalnych zmian roboczych i historii Git. Poland Statecraft wyczyszczono z repozytorium Vaultie zgodnie z dyspozycją użytkownika. Zaktualizowano `.gitmodules`, konfigurację Git oraz tabelę startową w `labs/README.md`.
+- **Poprzedni Wątek (2026-10-12):** Opracowanie kompleksowego inżynierskiego brainstormu i architektury dla **Tematu 1 (Platforma Konferencyjna i Smart Business Matching)** w `90_Meta/project-kickoff-kit/brainstorm-temat-1-konferencje.md`: redefinicja biznesowa z "randkowego Tindera" na EventTech/Slush, 7 obszarów funkcjonalnych (profile z matrycą kompetencji, silnik rekomendacji pgvector/tagi, czat 1:1 i pokoje sesyjne, interaktywny plan 3D Three.js z indoor wayfinding, bilety dynamiczny QR, obrona przed przeciążeniem i pikami ruchu), 4 decyzje ADR oraz czysta dekompozycja na 6 niezależnych Epików pod kryteria zaliczenia i DIP na PB.
+- **Poprzedni Wątek (2026-10-12):** Redakcja językowa, strukturalna i typograficzna zestawu dokumentów startowych w `90_Meta/project-kickoff-kit/` (`tematy przykłądowe.md`, `instrukcje.md`, `wymagania uczelniane.md`). Wprowadzono standaryzację Markdown (nagłówki `#`, `##`, `###`, alerty, tabele, linki), usunięto liczne błędy ortograficzne i fleksyjne ze źródeł uczelnianych, zachowując 100% pierwotnej treści merytorycznej, wymagań sylabusowych i reguł oceniania.
 - **Poprzedni Wątek (2026-09-29):** Opracowanie kompleksowego aneksu inżynieryjnego [[appendix-system-architecture-kuchnia-cygana|Appendix 2.2 (Architektura Systemowa i Analiza Przepływów Wielomodułowych „Kuchnia u Cygana”)]]: dogłębny audyt architektury, odwrócenie zależności (DIP), analiza brakujących FK, blokady pesymistyczne UPDLOCK, pełne studium przepływu orkiestracji M1-M2-M3 (Generowanie Planu Produkcji i Rozchód FEFO), rekonstrukcja w 4 alternatywnych paradygmatach, macierz trade-offów i rozszerzone tematy badawcze.
 - **Poprzedni Wątek (2026-09-29):** Rejestracja 20 natywnych skills Antigravity: kanoniczne foldery `SKILL.md`, opisy wyzwalające, walidator i aktualizacja adapterów. Szczegóły: [[2026-09-29-1252]].
 - **Poprzedni Wątek (2026-09-29):** Druga iteracja UX/researchu: jawna sekcja decyzji i odrzuconych alternatyw; rewizja lekcji 2.2 i jej relacji, źródeł oraz statusu Phase A / human review. Szczegóły: [[2026-09-29-1231]].
@@ -24,7 +32,7 @@ up: "[[90_Meta/_index]]"
   3. Podręcznik operacyjny rotującego Product Ownera i Dewelopera w Jira/Confluence/Bitbucket z procedurą obronną przed zrzucaniem winy za niedowiezione zadania, szablonami Daily, Review z użytkownikiem końcowym oraz Retro z analizą delty i burndown (`03-scrum-po-developer-handbook.md`).
 - **Poprzedni Wątek (2026-09-28):** Wdrożenie i pełna certyfikacja jakościowa lekcji 2.2 Masterclass (*Paradygmaty Architektoniczne Systemów: Architektura Warstwowa, Hexagonalna / Ports & Adapters, Onion, Clean Architecture, Modular Monolith vs Mikroserwisy*).
 - **Poprzedni Wątek (2026-09-28):** Opracowanie kompleksowego aneksu inżynieryjnego [[appendix-aspnet-mvc-kuchnia-cygana|Appendix 2.1 (ASP.NET Core MVC, HTMX i Studium Projektu „Kuchnia u Cygana”)]].
-- **Bieżące artefakty:** `90_Meta/lessons/2.2/appendix-system-architecture-kuchnia-cygana.md`, `90_Meta/project-kickoff-kit/`, `90_Meta/lessons/2.2/2.2-system-architecture-paradigms.md`, `labs/web-engineering/2.2/`, `90_Meta/lessons/2.1/appendix-aspnet-mvc-kuchnia-cygana.md`
+- **Bieżące artefakty:** `00_Inbox/_agent_bus/reports/2026-10-17-cardgame-rejoltance-rework-report.md`, `90_Meta/project-kickoff-kit/brainstorm-cardgame-rejoltance-rework.md`, `90_Meta/project-kickoff-kit/tematy aktualne.md`, `90_Meta/lessons/2.3/appendix-react-dotnet-cardgame.md`, `90_Meta/lessons/2.2/appendix-system-architecture-kuchnia-cygana.md`, `90_Meta/project-kickoff-kit/`, `90_Meta/lessons/2.2/2.2-system-architecture-paradigms.md`, `labs/web-engineering/2.2/`, `90_Meta/lessons/2.1/appendix-aspnet-mvc-kuchnia-cygana.md`
 - **Zrealizowane Zadania:**
   1. **Weryfikacja stanu:** potwierdzono naprawy P0 z audytu 2026-09-01 (Ekman, skala wiatru w km, jedna stała 55, Barnes Priority-Flood, izolacja `flAero`, delegacja temp/opadu, `precipMm` w biomach); podzbiór krytyczny 12 plików / 69 testów przechodzi w 100%.
   2. **Dokumenty i Analizy Modułowe:** Skompletowano i zaktualizowano wszystkie 6 analiz modułowych (`00_Inbox/aero-hydro-analizy/`), tworząc pełną specyfikację techniczną dla agentów i bazę do audytu kodu źródłowego.
@@ -110,6 +118,9 @@ up: "[[90_Meta/_index]]"
      - Zmiany zatwierdzone commitem `6f423328` w repozytorium `labs/Fantasy-Map-Generator-experimental`.
 
 ## Ostatnio Modyfikowane Notatki i Pliki
+- `00_Inbox/_agent_bus/reports/2026-10-17-cardgame-rejoltance-rework-report.md` (raport koordynacyjny reworku Rejoltance: architektura, biblioteki, lekcja 2.3 i workflow)
+- `90_Meta/lessons/2.3/appendix-react-dotnet-cardgame.md` (kompleksowy aneks inżynieryjny: integracja React + Kestrel SignalR)
+- `90_Meta/project-kickoff-kit/brainstorm-cardgame-rejoltance-rework.md` (brainstorm modernizacji Rejoltance / Temat 15 pod PB)
 - `90_Meta/lessons/2.2/appendix-system-architecture-kuchnia-cygana.md` (kompleksowy aneks inżynieryjny: audyt architektury, studium przepływu M1-M2-M3 i rekonstrukcja paradygmatów)
 - `90_Meta/project-kickoff-kit/01-discord-ideation-1pager.md` (szablon 1-pagera na Discorda i procedura cichej inkubacji pomysłów)
 - `90_Meta/project-kickoff-kit/02-confluence-dip-template.md` (szablon Dokumentu Inicjującego Projekt DIP dla Confluence pod 6+ Epików)
@@ -117,17 +128,10 @@ up: "[[90_Meta/_index]]"
 - `90_Meta/lessons/2.2/2.2-system-architecture-paradigms.md` (kompletna lekcja 2.2: paradygmaty, notional machine, DIP, pipeline decyzyjny)
 - `90_Meta/lessons/2.2/spec.yaml` (pełny Knowledge Spec lekcji 2.2)
 - `90_Meta/lessons/2.2/quality-report.yaml` (raport walidacji certyfikacyjnej: status certified)
-- `90_Meta/lessons/2.1/appendix-aspnet-mvc-kuchnia-cygana.md` (kompleksowy aneks architektoniczny i studium przypadku Kuchnia u Cygana)
-- `90_Meta/canvases/lesson-2.2-system-architecture.canvas` (wizualna kanwa architektoniczna z rurociągiem decyzji)
 - `labs/web-engineering/2.2/` (referencyjny kod: moduły orders/catalog, ports & adapters, testy reguł architektonicznych)
-- `90_Meta/_index.md` (rejestracja lekcji 2.2 w mapie bazy wiedzy)
-- `90_Meta/web-engineering-roadmap.md` (rejestracja lekcji 2.2 jako certified w roadmapie)
 - `90_Meta/hot.md`
 
 ## Następne Kroki
-- [ ] Zastosowanie zestawu startowego (`project-kickoff-kit`) przy tworzeniu serwera Discord i zbieraniu 1-pagerów pomysłów w zespole.
-- [ ] Przed startem semestru: przeprowadzenie cichej inkubacji, głosowanie matrycą scoringową i obsadzenie 6 Epików w szablonie DIP.
-- [ ] Po starcie semestru: wklejenie DIP do Confluence, konfiguracja tablicy Jira i odpalenie procedury pierwszego sprintu wg podręcznika PO.
-
-
-
+- [ ] Utworzenie struktury Lekcji 2.3 (`2.3-react-dotnet-fullstack-architecture.md`, `spec.yaml`) w `90_Meta/lessons/2.3/`.
+- [ ] Implementacja minimalnego sandboxu referencyjnego w `labs/web-engineering/2.3/` (pionowy wycinek: C# Kestrel SignalR Hub + React 19 Framer Motion CSS 3D Tilt).
+- [ ] Spotkanie kick-off zespołu 6-osobowego: zamrożenie kontraktów DTO (`contracts.d.ts`), podział zadań na Sprint 0 i uruchomienie mocków UI.
